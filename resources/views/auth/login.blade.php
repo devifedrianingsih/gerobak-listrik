@@ -10,7 +10,7 @@
                     class="col-12 col-xl-7 col-xxl-7 auth-cover-left align-items-center justify-content-center d-none d-xl-flex border-end bg-transparent">
                     <div class="card rounded-0 mb-0 border-0 shadow-none bg-transparent bg-none">
                         <div class="card-body">
-                            <img src="{{ URL::asset('build/images/auth/login1.png') }}" class="img-fluid auth-img-cover-login"
+                            <img src="{{ URL::asset('assets/images/gerobak.png') }}" class="img-fluid auth-img-cover-login"
                                 width="500" alt="">
                         </div>
                     </div>
@@ -24,6 +24,7 @@
                             <h4 class="fw-bold">Selamat Datang di Gerobak Listrik</h4>
                             <p class="mb-0">Selamat datang di Dashboard Admin</p>
                             <div class="form-body mt-4">
+                                
                                 <form method="POST" action="{{ route('login') }}" class="row g-3">
                                     @csrf
 

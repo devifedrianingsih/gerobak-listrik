@@ -13,7 +13,7 @@
 
           <div class="card rounded-0 mb-0 border-0 shadow-none bg-transparent bg-none">
             <div class="card-body">
-              <img src="{{ URL::asset('build/images/auth/login1.png') }}" class="img-fluid auth-img-cover-login" width="650" alt="">
+              <img src="{{ URL::asset('assets/images/gerobak.png') }}" class="img-fluid auth-img-cover-login" width="650" alt="">
             </div>
           </div>
 
