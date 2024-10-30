@@ -33,3 +33,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 // Rute fallback untuk menangkap semua route yang tidak didefinisikan (Opsional)
 Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
 
+// Rute calonMitra, terimaMitra dan tolakMitra
+Route::get('/ecommerce-potential-partners', [MitraController::class, 'index'])->name('calon-mitra.index');
+Route::post('/ecommerce-potential-partners/{id}/terima', [MitraController::class, 'terima'])->name('calon-mitra.terima');
+Route::post('/ecommerce-potential-partners/{id}/tolak', [MitraController::class, 'tolak'])->name('calon-mitra.tolak');

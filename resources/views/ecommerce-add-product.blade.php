@@ -6,7 +6,7 @@
     <link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
 @endpush
 @section('content')
-    <x-page-title title="Ecommerce" subtitle="Tambah Produk" />
+    <x-page-title title="Produk" subtitle="Tambah Produk" />
 
     @if (session('success'))
         <div class="alert alert-success">

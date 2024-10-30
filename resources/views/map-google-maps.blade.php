@@ -3,7 +3,7 @@
     Peta Sebaran Cabang
 @endsection
 @section('content')
-    <x-page-title title="Components" subtitle="Peta Sebaran Cabang" />
+    <x-page-title title="Peta" subtitle="Peta Sebaran Cabang" />
     <h5 class="fw-bold mb-4">Peta Sebaran Cabang Franchise</h5>
 
     <div class="row">

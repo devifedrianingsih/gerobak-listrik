@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Str; // Tambahkan ini
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,8 +24,11 @@ class DatabaseSeeder extends Seeder
 
         // Memanggil seeder untuk model Customer
         $this->call(CustomerSeeder::class);
-        
-        // Tambahkan pemanggilan seeder untuk Category
+
+        // Memanggil seeder untuk model Category
         $this->call(CategorySeeder::class); // Pastikan CategorySeeder sudah ada
+        
+        // Memanggil seeder untuk model Mitra
+        $this->call(MitraSeeder::class); // Pastikan MitraSeeder sudah ada
     }
 }

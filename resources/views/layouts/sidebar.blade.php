@@ -76,10 +76,12 @@
             <a href="javascript:;" class="has-arrow">
               <div class="material-icons-outlined"> <i class="lni lni-users"></i>
               </div>
-              <div class="menu-title">Pelanggan</div>
+              <div class="menu-title">Mitra</div>
             </a>
             <ul>
-              <li><a href="{{ url('/ecommerce-customers') }}"><i class="material-icons-outlined">arrow_right</i>Pelanggan</a>
+              <li><a href="{{ url('/ecommerce-customers') }}"><i class="material-icons-outlined">arrow_right</i>Mitra</a>
+              </li>
+              <li><a href="{{ url('/ecommerce-potential-partners') }}"><i class="material-icons-outlined">arrow_right</i>Calon Mitra</a>
               </li>
               <li><a href="{{ url('/ecommerce-customer-details') }}"><i class="material-icons-outlined">arrow_right</i>Detail Pelanggan</a>
               </li>
@@ -109,7 +111,7 @@
           </li>
 
           <li>
-            <a href="{{ url('/table-datatable') }}">
+            <a href="{{ url('/sales-report') }}">
               <div class="material-icons-outlined"> <i class="lni lni-printer"></i>
               </div>
               <div class="menu-title">Laporan Penjualan</div>

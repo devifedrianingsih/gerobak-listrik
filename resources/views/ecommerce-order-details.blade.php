@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <x-page-title title="Ecommerce" subtitle="Detail Pesanan" />
+    <x-page-title title="Pesanan" subtitle="Detail Pesanan" />
     <h5 class="fw-bold mb-4">Detail Pembelian</h5>
     <div class="card">
         <div class="card-body">

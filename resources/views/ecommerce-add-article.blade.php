@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
 @endpush
 @section('content')
-    <x-page-title title="Ecommerce" subtitle="Tambah Artikel" />
+    <x-page-title title="Artikel" subtitle="Tambah Artikel" />
 
     <div class="row">
         <div class="col-12 col-lg-8">
