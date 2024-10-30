@@ -79,9 +79,9 @@
               <div class="menu-title">Mitra</div>
             </a>
             <ul>
-              <li><a href="{{ url('/ecommerce-customers') }}"><i class="material-icons-outlined">arrow_right</i>Mitra</a>
-              </li>
               <li><a href="{{ url('/ecommerce-potential-partners') }}"><i class="material-icons-outlined">arrow_right</i>Calon Mitra</a>
+              </li>
+              <li><a href="{{ url('/ecommerce-customers') }}"><i class="material-icons-outlined">arrow_right</i>Mitra</a>
               </li>
               <li><a href="{{ url('/ecommerce-customer-details') }}"><i class="material-icons-outlined">arrow_right</i>Detail Pelanggan</a>
               </li>
