@@ -1,0 +1,330 @@
+/* General Styles 
+header {
+    background-color: #ffffff;
+    color: #987540;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header h3 {
+    margin: 0;
+    font-size: 24px;
+} */
+
+/*Navbar Styles*/
+header nav {
+    justify-content: center;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 15px;
+}
+
+header nav ul li {
+    position: relative;
+}
+
+header nav ul li a {
+    color: #987540;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: #b99b727c;
+}
+
+/* Dropdown Menu Styles */
+.dropdown-content {
+    display: none; /* Sembunyikan dropdown pada awalnya */
+    position: absolute;
+    background-color: #b98e6e; /* Warna latar dropdown */
+    min-width: 180px; /* Sedikit diperbesar agar teks muat dengan lebih baik */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    z-index: 1;
+    border-radius: 8px; /* Menambah sudut melingkar agar lebih halus */
+    padding: 10px 0; /* Jarak di dalam dropdown */
+}
+
+.dropdown-content li {
+    display: block; /* Setiap item tampil sebagai blok */
+    margin: 0; /* Hilangkan margin untuk tampilan rapi */
+}
+
+.dropdown-content li a {
+    padding: 10px 20px; /* Menambah ruang antar teks dan tepi */
+    color: #ffffff; /* Ubah warna teks menjadi putih agar kontras dengan latar */
+    text-decoration: none; /* Hilangkan garis bawah */
+    font-size: 14px; /* Sedikit perbesar font agar lebih mudah dibaca */
+    white-space: nowrap; /* Hindari teks terpotong */
+    transition: background-color 0.3s ease; /* Tambahkan transisi untuk hover */
+}
+
+.dropdown-content li a:hover {
+    background-color: #8e674d; /* Warna hover lebih gelap untuk kontras */
+    border-radius: 5px; /* Tambahkan sudut melingkar saat dihover */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; /* Tampilkan dropdown saat elemen utama di-hover */
+}
+
+/* Dropdown Menu Styles */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffffa5;
+    min-width: 120px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 2px;
+    padding: 10px 0;
+    top: 100%; /* Posisi dropdown di bawah trigger menu */
+    left: 0; /* Tetap berada sejajar dengan elemen dropdown */
+}
+
+.dropdown-content li {
+    display: block;
+    margin: 0; /* Hilangkan margin agar list item tidak berdempetan */
+    padding: 5px 0; /* Tambahkan padding antar item */
+}
+
+.dropdown-content li a {
+    padding: 10px 20px; /* Menambah jarak agar lebih nyaman di-klik */
+    color: #8e674d;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+    display: block; /* Memastikan seluruh area a bisa di-hover */
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content li a:hover {
+    background-color: #8e674d; /* Warna hover */
+    border-radius: 5px; /* Tambah sudut melingkar untuk hover */
+    color: white;
+}
+
+/* Icons Styles */
+.container .icons {
+    display: flex;
+    gap: 10px;
+}
+
+.container .icons a {
+    color: #909090;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.container .icons a:hover {
+    color: #987540;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .container .icons {
+        margin-top: 10px;
+    }
+}
+/* General styles */
+.title {
+    text-align: center;
+    color: #3e2723; /* Warna teks coklat tua untuk kontras */
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 60px;
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 1px; /* Menambah spasi huruf untuk estetika */
+}
+
+.title p {
+    font-weight: lighter;
+    font-size: 1.2rem; /* Ukuran lebih kecil untuk subteks */
+    color: #6d4c41; /* Warna coklat muda */
+}
+
+/* Produk Styling */
+.products {
+    display: flex;
+    flex-wrap: wrap; /* Produk membungkus ke baris berikutnya */
+    justify-content: space-between; /* Penyebaran antar produk */
+    gap: 30px; /* Jarak antar produk lebih seimbang */
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.product {
+    flex: 0 0 calc(33.33% - 30px); /* Agar tiga produk tampil per baris */
+    box-sizing: border-box; /* Mencegah elemen lebih besar */
+    text-align: center;
+    color: #3e2723;
+    background-color: #f9f9f9; /* Warna background produk */
+    padding: 20px;
+    border-radius: 10px; /* Menambah sudut melingkar */
+    transition: box-shadow 0.3s ease; /* Efek hover */
+}
+
+.product:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Efek bayangan saat hover */
+}
+
+.product img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.product img:hover {
+    transform: scale(1.05); /* Efek hover memperbesar gambar */
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #5d4037;
+    font-weight: bold;
+}
+
+.product p {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: small;
+    margin-bottom: 10px;
+    color: #6d4c41;
+}
+
+h4 {
+    font-family: monospace;
+    color: red;
+    font-size: 1rem; /* Memperbaiki ukuran */
+}
+
+/* Tombol Tambah ke Keranjang */
+.add-to-cart {
+    background-color: #af9a92; /* Warna coklat medium */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 30px; /* Sudut melingkar */
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #6d4c41; /* Warna lebih gelap saat hover */
+}
+
+/* Keranjang Styling */
+.cart {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #5d4037;
+}
+
+.cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #e0e0e0; /* Batas di atas */
+    padding-top: 20px;
+}
+
+.cart-items li {
+    margin: 10px 0;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    color: #5d4037;
+    border-bottom: 1px solid #e0e0e0; /* Garis pembatas antar item */
+}
+
+.cart-summary {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #3e2723;
+}
+
+.cart-total {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #4e342e;
+}
+
+/* Tombol Checkout */
+.checkout-btn {
+    background-color: #5d4037;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #4e342e; /* Warna lebih gelap saat hover */
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px 0;
+    background-color: #a1887f; /* Warna coklat terang */
+    color: white;
+    font-size: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+footer p {
+    margin: 0;
+    padding: 5px;
+    font-size: 0.9rem;
+}
+

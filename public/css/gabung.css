@@ -1,0 +1,63 @@
+
+.container{
+    display: block;
+}
+.title{
+    text-align: center;
+    display: block;
+    padding: 50px;
+    color: #625252;
+
+}
+.title h2{
+    font-weight: bold;
+    font-size: 32px;
+}
+.data-title{
+    text-align: center;
+    font-size:17px;
+    color: #5A5454;
+
+}
+.data-title h3{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: 600;
+}
+.data {
+    display: flex;
+   margin: 50px;
+   word-spacing: 5px;
+   
+}
+
+.data-kiri, .data-kanan {
+    flex: 3;
+}
+.data-kiri{
+    margin-left: 20px;
+}
+table {
+    width: 100%;
+}
+
+.button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button input[type="submit"] {
+    width: 90%; /* Lebar tombol */
+    padding: 5px; /* Tambahan ruang di dalam tombol */
+    background-color: #625252; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol */
+    font-size: 15px; /* Ukuran teks tombol */
+    border: none; /* Hilangkan border */
+    border-radius: 5px; /* Ujung tombol melengkung */
+    cursor: pointer; /* Ubah kursor menjadi pointer saat di-hover */
+    transition: background-color 0.3s ease; /* Efek transisi warna */
+}
+
+/* Efek hover */
+.button input[type="submit"]:hover {
+    background-color: #4e4141; /* Warna saat di-hover */
+}

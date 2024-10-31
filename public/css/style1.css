@@ -1,0 +1,482 @@
+/* General Styles */
+body {
+    background-color: #ffffff;
+    color: #987540;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+/* navbar */
+header {
+    background-color: #ffffff;
+    color:#987540;
+    padding: 20px 0;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header h3 {
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    gap: 15px;
+}
+
+header nav a {
+    color:#987540;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+header .login-button {
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: rgb(255, 255, 255) solid 2px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: small;
+}
+.container .icons .fa-cart-shopping {
+    padding: 14px;
+    color: #909090
+}
+
+.container .icons .fa-user {
+    padding: 14px;
+    color: #909090;
+}
+.container .icons{
+    text-decoration: none;
+}
+
+/*  */
+/* Home Section */
+section .container-home {
+    background-color: #fff;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+section .text {
+    color: #987540;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+section .image {
+    max-width: 100%;
+    height: auto;
+}
+
+section .join-mitra {
+    display: inline-block;
+    background-color: #604723;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+section .join-mitra:hover {
+    background-color: #a98b6d;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*  Menu  */
+.menu{
+    background-color: white;
+    padding: 50px;
+    margin: 30px;
+}
+.container-menu{
+    display: flex;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+.menu img {
+    width: 250px; /* Lebar tetap untuk konsistensi */
+    height: 250px; /* Tinggi tetap untuk konsistensi */
+    object-fit: cover; /* Memastikan gambar mengisi kontainer tanpa distorsi */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan untuk efek 3D */
+}
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+.menu1{
+    display: inline-block;
+    color: black;
+    font-size: medium;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+.title-menu{
+    margin-left: 35px;
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.menu2{
+    display: inline-block;
+    color: black;
+    font-size: medium;
+    justify-content: center;
+    text-align: center;
+}
+
+.menu3{
+    display: inline-block;
+    color: black;
+    font-size: medium;
+    justify-content: center;
+    text-align: center;
+}
+
+.menu4 {
+    display: inline-block;
+    color: black;
+    font-size: medium;
+    justify-content: center;
+    text-align: center;
+}
+/* Paket Franchise*/
+.polaroid-paket{
+    padding: 20px;
+    margin:75px; 
+    display: flex;
+}
+.judul h2{
+    color: #987540;
+    text-align: center;
+    font-size: 35px;
+}
+.judul{
+    display:block;
+    justify-content: center;
+    margin-top: 80px;
+    margin-right: 50px;
+    padding: 20px;
+    flex-direction: column; 
+    align-items: center; 
+
+}
+.judul p{
+    color: #6e6c6c;
+    text-align: center;
+    font-size: 18px;
+}
+.img-pol{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+.polaroid {
+    width: 25%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+}
+  
+.container {
+    display: block;
+    text-align: justify;
+    padding: 10px 20px;
+    color: #604723;
+}
+
+/* */
+/* Berita Terkini */
+.container-berita{
+    display: flex;
+    max-width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(238, 236, 236, 0.855);
+}
+
+.berita-terkini{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title-berita{
+    color: rgba(21, 21, 21, 0.879);
+    text-align: left;
+    font-size: 24px;
+}
+
+.text-berita p{
+    color: rgba(21, 21, 21, 0.879);
+    font-size: 17px;
+    padding-right: 80px;
+    font-weight: 100;
+}
+
+.berita-more{
+    text-align: left;
+    color: rgb(192, 0, 0);
+}
+
+.berita-img img{
+    width: 700px;
+    margin-right: 50px;
+    padding: none;
+}
+
+/* Produk */
+.container-product{
+    display: flex;
+}
+
+.container-product h2{
+    color: #987540;
+}
+
+.container-product .pilihan-paket{
+    display: block;
+    flex: 1;
+    color: #704E1C;
+}
+
+.container-product .pilihan-paket img{
+    width: 240px;
+    height: auto;
+
+}
+
+.container-product2{
+    display: flex;
+}
+
+.container-product2 h2{
+    color: #987540;
+}
+
+.container-product2 .pilihan-paket{
+    display: block;
+    flex: 1;
+    color: #704E1C;
+}
+
+.container-product2 .pilihan-paket img{
+    width: 240px;
+    height: auto;
+
+}
+
+
+/* FAQ Section */
+.faq {
+    display: flex;
+    gap: 20px;
+    padding: 50px;
+    margin: 50px;
+}
+.faq-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.faq .text {
+    color: red;
+    flex: 1;
+    max-width: 400px;
+    padding: 40px;
+    margin-left: 8%;
+    margin-top: 10%;
+}
+.text h2{
+    text-align: center ;
+    font-size: 40px;
+}
+
+.faq .box {
+    flex: 3;
+    margin: 0;
+    padding: 0;
+}
+.box{
+    margin: 0;
+    padding: 0;
+    font-family:'Poppins', sans-serif; 
+    box-sizing: border-box;
+ }
+ .content p{
+    color: white;
+ }
+ .accordion{
+    margin: 60px auto;
+    width: 600px;
+ }
+ .accordion li{
+    list-style: none;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #927F63;
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+ }
+ 
+ .accordion li label{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #927F63;
+    color: #fff;
+ }
+ 
+ label::before{
+    content: '+';
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+ }
+ 
+ input[type="radio"]{
+    display: none;
+ }
+ 
+ .accordion .content{
+    color: #555;
+    padding: 0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+ }
+ 
+ .accordion input[type="radio"]:checked + label + .content{
+    max-height: 400px;
+    padding: 10px 10px 20px;
+ }
+ 
+ .accordion input[type="radio"]:checked + label::before{
+    content:'-';
+ }
+
+/* Footer
+footer {
+    background-color: #b09d8c;
+    color: white;
+    padding: 20px 0;
+}
+
+footer .container {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer h3 {
+    margin-top: 0;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+footer .footer-info {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+} */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    section .container-produk {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+
+    .faq {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    header nav {
+        font-size: 12px;
+    }
+
+    section .produk1, 
+    section .produk2, 
+    section .produk3 {
+        width: 100%;
+        height: auto;
+    }
+
+    section .container-home {
+        padding: 20px;
+    }
+
+    .accordion {
+        width: 100%;
+    }
+
+    footer {
+        text-align: center;
+    }
+}
+

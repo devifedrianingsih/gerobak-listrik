@@ -1,0 +1,68 @@
+/* Tombol Back */
+.back-button {
+    position: absolute;
+    top: 70px;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    color: black;
+    background-color: #fff;
+    border: 1px rgb(218, 218, 218);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.back-button:hover {
+    color: #5d4037; /* Warna yang sedikit lebih gelap saat hover */
+}
+
+/* Container dan Konten Artikel */
+.container {
+    width: 90%;
+    margin: 80px auto 20px; /* Tambah margin top untuk ruang di bawah tombol */
+    background-color: #fff;
+    padding: 30px;
+}
+
+
+/* Header */
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color:#5d4037;
+}
+
+header .author {
+    font-size: 1em;
+    color: #888;
+}
+
+/* Article Content */
+.content {
+    margin-top: 20px;
+}
+
+.content .featured-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.content p {
+    margin-bottom: 15px;
+    font-size: 23px;
+}
+
+.content h2 {
+    font-size: 1.5em;
+    color: #007bff;
+    margin-top: 20px;
+}
+
+.content ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.content ul li {
+    margin-bottom: 8px;
+}
