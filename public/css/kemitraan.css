@@ -1,0 +1,87 @@
+/* navbar */
+header {
+    background-color: #ffffff;
+    color:#987540;
+    padding: 20px 0;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header h3 {
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    gap: 15px;
+}
+
+header nav a {
+    color:#987540;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+header .login-button {
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: rgb(255, 255, 255) solid 2px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: small;
+}
+.container .icons .fa-cart-shopping {
+    padding: 14px;
+    color: #909090
+}
+
+.container .icons .fa-user {
+    padding: 14px;
+    color: #909090;
+}
+.container .icons{
+    text-decoration: none;
+}
+
+/*  */
+
+/* Isi Kemitraan */
+.kemitraan{
+    display: flex;
+    padding: 80px;
+    background-color:#debf9179;
+}
+.content-left{
+   color: #5A3D25;
+   font-size: 20px;
+   font-weight: 500;
+   text-align: justify;
+   margin: 80px ;
+}
+.kemitraan-img{
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.struktur{
+    display: flex;
+    justify-content: center; /* Memusatkan secara horizontal */
+    align-items: center; /* Memusatkan secara vertikal */
+    height: 100vh; /* Kontainer harus memiliki tinggi yang cukup */
+}
+
+.struktur-img {
+    width: auto;
+    height: 700px;
+}

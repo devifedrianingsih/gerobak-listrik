@@ -1,0 +1,107 @@
+.register-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+}
+
+.login-left, .login-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.login-right {
+    flex-direction: column;
+    max-width: 50%;
+    padding: 60px;
+}
+
+.login-right h1 {
+    color: #161616;
+    font-size: 36px;
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.welcome-text {
+    white-space: nowrap;
+    font-size: 30px; /* Adjust the font size as needed */
+}
+
+.welcome-text span {
+    color: #8B5E34;
+}
+
+.login-right p {
+    margin-bottom: 20px;
+    width: 100%;
+    color: #888;
+}
+
+.login-right form {
+    width: 100%;
+}
+
+.login-right .form-group {
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+.login-right .form-group label {
+    display: block;
+    color: #161616;
+    margin-bottom: 5px;
+}
+
+.login-right .form-group input[type="text"],
+.login-right .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-right .form-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.save-me-group .pw .forgot-password {
+    color: #888;
+    text-decoration: none;
+}
+
+.login-right .form-group .forgot-password:hover {
+    color: #555;
+}
+
+.login-right .login-button {
+    background-color: #8B5E34;
+    color: rgb(249, 249, 249);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 70%;
+}
+
+.login-right .login-button:hover {
+    background-color: #7a512e;
+}
+
+.login-left {
+    margin: 0;
+    padding: 0;
+    border-right: 1px solid #ccc;
+}
+
+.login-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
