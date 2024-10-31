@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('title')
-    Pelanggan
+    Mitra
 @endsection
 @section('content')
 
-    <x-page-title title="Ecommerce" subtitle="Pelanggan" />
+    <x-page-title title="Mitra" subtitle="Daftar Mitra" />
 
     <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-bold flex-wrap font-text1">
         <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">({{ $customers->count() }})</span></a>

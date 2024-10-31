@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title')
-    Detail Pelanggan
+    Detail Mitra
 @endsection
 @section('content')
-    <x-page-title title="Ecommerce" subtitle="Detail Pelanggan" />
+    <x-page-title title="Mitra" subtitle="Detail Mitra" />
 
     <div class="row">
         <div class="col-12 col-lg-4 d-flex">

@@ -6,7 +6,7 @@
     <link href="{{ URL::asset('build/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 @endpush
 @section('content')
-    <x-page-title title="Components" subtitle="Laporan Penjualan" />
+    <x-page-title title="Laporan" subtitle="Laporan Penjualan" />
 
     <h5 class="mb-0 text-uppercase">Laporan Penjualan</h5>
     <br>

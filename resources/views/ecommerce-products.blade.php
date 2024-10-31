@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-page-title title="eCommerce" subtitle="Produk" />
+    <x-page-title title="Produk" subtitle="Daftar Produk" />
 
     <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1">
         <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">({{ $products->count() }})</span></a>
@@ -118,3 +118,15 @@
     </div>
 
 @endsection
+
+@push('script')
+    <!--bootstrap js-->
+    <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!--plugins-->
+    <script src="{{ URL::asset('build/js/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ URL::asset('build/js/main.js') }}"></script>
+@endpush

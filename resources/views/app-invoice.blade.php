@@ -3,7 +3,7 @@
     Faktur
 @endsection
 @section('content')
-    <x-page-title title="Apps" subtitle="Invoice" />
+    <x-page-title title="Faktur" subtitle="Faktur" />
 
     <div class="card radius-10">
         <div class="card-header py-3">

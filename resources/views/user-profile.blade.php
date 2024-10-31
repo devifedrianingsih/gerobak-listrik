@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <x-page-title title="Components" subtitle="Profil Admin" />
+    <x-page-title title="Profil" subtitle="Profil Admin" />
 
     <div class="card rounded-4">
         <div class="card-body p-4">
