@@ -3,7 +3,8 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\DashboardController; // Import DashboardController
+use App\Http\Controllers\MitraController;
+use App\Http\Controllers\DashboardController; // Import DashboardControllergit 
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
@@ -33,8 +34,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 // Rute fallback untuk menangkap semua route yang tidak didefinisikan (Opsional)
 // Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
 
-Route::get('/', function () {
+
+Route::get('/beranda', function () {
     return view('beranda');
 });
 Route::get('/produk', function () {
