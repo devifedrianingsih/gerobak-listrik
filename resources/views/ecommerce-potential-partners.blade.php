@@ -3,7 +3,7 @@
 @section('title', 'Daftar Calon Mitra')
 
 @section('content')
-    <h1>Daftar Calon Mitra 2</h1>
+    <h1>Daftar Calon Mitra</h1>
     <div class="table-responsive mt-4">
         <table class="table align-middle">
             <thead>

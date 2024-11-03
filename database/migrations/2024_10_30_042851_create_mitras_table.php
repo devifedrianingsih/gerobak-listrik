@@ -11,8 +11,15 @@ class CreateMitrasTable extends Migration
      */
     public function up()
     {
-        Schema::table('mitras', function (Blueprint $table) {
+        Schema::create('mitras', function (Blueprint $table) {
+            $table->id();
+            $table->string('nomor')->unique();
+            $table->string('nama');
+            $table->string('no_hp');
+            $table->text('alamat');
+            $table->string('berkas')->nullable(); // Untuk menyimpan file berkas mitra
             $table->enum('status', ['terima', 'tolak', 'belum_diproses'])->default('belum_diproses');
+            $table->timestamps();
         });
     }
     
