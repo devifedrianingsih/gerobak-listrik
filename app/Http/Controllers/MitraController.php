@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 class MitraController extends Controller
 {
     // Fungsi untuk menampilkan daftar calon mitra
-    public function index()
+    public function indexCalonMitra()
     {
-        $mitras = Mitra::all(); // Ambil semua calon mitra dari database
+        dd("test");
+        $mitras = Mitra::all(); // Ambil semua data calon mitra
+        dd($mitras); // Ini akan menghentikan eksekusi dan menampilkan data
         return view('ecommerce-potential-partners', compact('mitras')); // Kirim data ke view
     }
 
