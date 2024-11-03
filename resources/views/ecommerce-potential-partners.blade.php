@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach($mitras as $mitra)
+                @foreach($mitras as $mitra)
                     <tr>
                         <td>{{ $mitra->nomor }}</td>
                         <td>{{ $mitra->nama }}</td>
@@ -25,11 +25,17 @@
                         <td>{{ $mitra->alamat }}</td>
                         <td>{{ $mitra->berkas }}</td>
                         <td>
-                            <a href="{{ route('calon-mitra.terima', $mitra->id) }}" class="btn btn-success">Terima</a>
-                            <a href="{{ route('calon-mitra.tolak', $mitra->id) }}" class="btn btn-danger">Tolak</a>
+                        <form action="{{ route('calon-mitra.terima', $mitra->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-success">Terima</button>
+                        </form>
+                        <form action="{{ route('calon-mitra.tolak', $mitra->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Tolak</button>
+                        </form>
                         </td>
                     </tr>
-                @endforeach --}}
+                @endforeach
             </tbody>            
         </table>
     </div>

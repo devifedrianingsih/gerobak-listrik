@@ -22,7 +22,7 @@ class MitraSeeder extends Seeder
                 'no_hp' => '081234567890',
                 'alamat' => 'Jl. Merpati No. 3, Jakarta',
                 'berkas' => 'berkas_ahmad.pdf',
-                'status' => 'terima', // status default
+                'status' => 'belum_diproses', // status default
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -32,7 +32,7 @@ class MitraSeeder extends Seeder
                 'no_hp' => '081987654321',
                 'alamat' => 'Jl. Kenanga No. 10, Bandung',
                 'berkas' => 'berkas_siti.pdf',
-                'status' => 'tolak',
+                'status' => 'belum_diproses',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -42,7 +42,7 @@ class MitraSeeder extends Seeder
                 'no_hp' => '082345678912',
                 'alamat' => 'Jl. Melati No. 5, Surabaya',
                 'berkas' => 'berkas_budi.pdf',
-                'status' => 'terima',
+                'status' => 'belum_diproses',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

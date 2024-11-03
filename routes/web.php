@@ -35,7 +35,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 // Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
+// Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
 
 
 Route::get('/beranda', function () {
