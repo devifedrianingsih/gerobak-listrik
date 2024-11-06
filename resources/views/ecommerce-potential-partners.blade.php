@@ -13,6 +13,7 @@
                     <th>No HP</th>
                     <th>Alamat</th>
                     <th>Berkas</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                         <td>{{ $mitra->no_hp }}</td>
                         <td>{{ $mitra->alamat }}</td>
                         <td>{{ $mitra->berkas }}</td>
+                        <td><button>{{ $mitra->status }}</button></td>
                         <td>
                         <form action="{{ route('calon-mitra.terima', $mitra->id) }}" method="POST" style="display:inline;">
                             @csrf

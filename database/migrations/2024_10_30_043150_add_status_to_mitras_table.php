@@ -11,9 +11,9 @@ class AddStatusToMitrasTable extends Migration
      */
     public function up()
     {
-        Schema::table('mitras', function (Blueprint $table) {
-            $table->enum('status', ['terima', 'tolak'])->default('tolak')->after('berkas');
-        });
+        // Schema::table('mitras', function (Blueprint $table) {
+        //     $table->enum('status', ['terima', 'tolak'])->default('tolak')->after('berkas');
+        // });
     }
 
     /**

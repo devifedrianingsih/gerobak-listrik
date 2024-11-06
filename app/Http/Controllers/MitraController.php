@@ -11,13 +11,16 @@ class MitraController extends Controller
     // Fungsi untuk menampilkan daftar calon mitra
     public function indexCalonMitra()
     {
+        
         $mitras = Mitra::all(); // Ambil semua data calon mitra
+      
         return view('ecommerce-potential-partners', compact('mitras')); // Kirim data ke view
     }
 
     // Fungsi untuk menerima calon mitra dan mengubahnya menjadi customer
     public function terima($id)
     {
+        // /dd("test");
         // Temukan calon mitra berdasarkan ID
         $mitra = Mitra::findOrFail($id);
         
@@ -31,10 +34,12 @@ class MitraController extends Controller
 
         // Tambahkan calon mitra ke daftar customer
         Customer::create([
-            'nomor' => $mitra->nomor,
-            'nama' => $mitra->nama,
-            'no_hp' => $mitra->no_hp,
-            'alamat' => $mitra->alamat,
+            'CustomerID' => $mitra->nomor,
+            'CustomerName' => $mitra->nama,
+            'CustomerEmail' => $mitra->email,
+            'CustomerPhone' => $mitra->no_hp,
+            'CustomerAddresst' => $mitra->alamat,
+            'ProfileDetails' => '.....'
         ]);
 
         // Redirect ke halaman calon mitra dengan pesan sukses
