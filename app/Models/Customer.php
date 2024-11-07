@@ -24,7 +24,7 @@ class Customer extends Model
         'ProfileDetails'
     ];
 
-    // Jika ada relasi ke tabel lain, misalnya relasi ke `Order`
+    // Jika ada relasi ke tabel lain, misalnya relasi ke Order
     public function orders()
     {
         return $this->hasMany(Order::class, 'CustomerID', 'CustomerID');

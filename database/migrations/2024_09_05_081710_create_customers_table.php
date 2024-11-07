@@ -9,7 +9,7 @@ class CreateCustomersTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return
      */
     public function up()
     {
