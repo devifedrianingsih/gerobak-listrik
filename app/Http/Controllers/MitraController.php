@@ -20,7 +20,6 @@ class MitraController extends Controller
     // Fungsi untuk menerima calon mitra dan mengubahnya menjadi customer
     public function terima($id)
     {
-        // /dd("test");
         // Temukan calon mitra berdasarkan ID
         $mitra = Mitra::findOrFail($id);
         
@@ -34,16 +33,16 @@ class MitraController extends Controller
 
         // Tambahkan calon mitra ke daftar customer
         Customer::create([
-            'CustomerID' => $mitra->nomor,
             'CustomerName' => $mitra->nama,
             'CustomerEmail' => $mitra->email,
             'CustomerPhone' => $mitra->no_hp,
-            'CustomerAddresst' => $mitra->alamat,
-            'ProfileDetails' => '.....'
+            'CustomerAddress' => $mitra->alamat,
+            'ProfileDetails' => 'Data dari calon mitra', // Contoh untuk mengisi kolom tambahan
+            'status' => 'aktif', // Set status customer menjadi aktif
         ]);
 
         // Redirect ke halaman calon mitra dengan pesan sukses
-        return redirect()->route('calon-mitra.index')->with('success', 'Mitra diterima dan ditambahkan sebagai customer.');
+        return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra diterima dan ditambahkan sebagai Mitra.');
     }
 
     // Fungsi untuk menolak calon mitra
@@ -56,6 +55,6 @@ class MitraController extends Controller
         $mitra->update(['status' => 'tolak']);
 
         // Redirect ke halaman calon mitra dengan pesan sukses
-        return redirect()->route('calon-mitra.index')->with('success', 'Mitra telah ditolak.');
+        return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra ditolak.');
     }
 }

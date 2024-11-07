@@ -4,19 +4,17 @@
 @endsection
 @section('content')
 
-    <x-page-title title="Mitra" subtitle="Daftar Mitra" />
+    <x-page-title title="Customer" subtitle="Daftar Customer" />
 
     <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-bold flex-wrap font-text1">
         <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">({{ $customers->count() }})</span></a>
-        <a href="javascript:;"><span class="me-1">Baru</span><span class="text-secondary">(145)</span></a>
-        <a href="javascript:;"><span class="me-1">Dibeli</span><span class="text-secondary">(89)</span></a>
     </div>
 
     <div class="row g-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
             <!-- Search input di kiri -->
             <div class="position-relative">
-                <input id="searchInput" class="form-control px-5" type="search" placeholder="Cari Pelanggan">
+                <input id="searchInput" class="form-control px-5" type="search" placeholder="Cari Customer">
                 <span class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
             </div>
             <!-- Dropdown Show entries di kanan -->
@@ -40,40 +38,26 @@
                     <table class="table align-middle" id="customerTable">
                         <thead class="table-light">
                             <tr>
-                                <th onclick="sortTable(0)">Pelanggan</th>
-                                <th onclick="sortTable(1)">Email</th>
-                                <th onclick="sortTable(2)">Pesanan</th>
-                                <th onclick="sortTable(3)">Total</th>
-                                <th onclick="sortTable(4)">Lokasi</th>
-                                <th onclick="sortTable(5)">Terakhir Terlihat</th>
-                                <th onclick="sortTable(6)">Terakhir Membeli</th>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Lokasi</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($customers as $customer)
                                 <tr>
-                                    <td>
-                                        <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                            <div class="customer-pic">
-                                                <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                    width="40" height="40" alt="Customer Image">
-                                            </div>
-                                            <p class="mb-0 customer-name fw-bold">{{ $customer->CustomerName }}</p>
-                                        </a>
-                                    </td>
+                                    <td>{{ $customer->id }}</td>
+                                    <td>{{ $customer->CustomerName }}</td>
                                     <td>
                                         <a href="mailto:{{ $customer->CustomerEmail }}" class="font-text1">{{ $customer->CustomerEmail }}</a>
                                     </td>
-                                    <td>{{ $customer->orders->count() }}</td>
-                                    <td>{{ number_format($customer->orders->sum('total'), 0, ',', '.') }}k</td>
-                                    <td>{{ $customer->CustomerAddress }}</td>
-                                    <td>{{ $customer->updated_at->diffForHumans() }}</td>
+                                    <td>{{ $customer->CustomerLocation }}</td>
                                     <td>
-                                        @if($customer->orders->isNotEmpty())
-                                            {{ $customer->orders->last()->created_at->format('M d, H:i T') }}
-                                        @else
-                                            -
-                                        @endif
+                                        <span class="badge {{ $customer->status == 'aktif' ? 'bg-success' : 'bg-secondary' }}">
+                                            {{ ucfirst($customer->status) }}
+                                        </span>
                                     </td>
                                 </tr>
                             @endforeach

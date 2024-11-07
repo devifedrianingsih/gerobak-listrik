@@ -9,12 +9,12 @@ class CustomerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // Membuat 10 data customer menggunakan factory
-        Customer::factory()->count(10)->create();
+        // Jika Anda ingin menghapus semua data di tabel customers setiap kali seeder dijalankan, Anda bisa menambahkan:
+        // Customer::truncate(); // Hapus semua data di tabel customers
+
+        // Tidak ada data baru yang ditambahkan karena data customer berasal dari calon mitra
     }
 }

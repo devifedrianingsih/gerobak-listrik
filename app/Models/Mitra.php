@@ -13,5 +13,3 @@ class Mitra extends Model
         'nomor', 'nama', 'no_hp', 'alamat', 'berkas', 'status'
     ];
 }
-
-
