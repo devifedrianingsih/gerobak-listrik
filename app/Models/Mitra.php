@@ -8,8 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Mitra extends Model
 {
     use HasFactory;
-    protected $table = 'mitras'; // Pastikan nama tabel benar
+
+    protected $table = 'mitra';
+
     protected $fillable = [
-        'nomor', 'nama', 'no_hp', 'alamat', 'berkas', 'status'
+        'id_mitra', 'nama_mitra', 'alamat_mitra', 'email_mitra', 
+        'no_hp_mitra', 'status'
     ];
+
+    public function petaFranchise()
+    {
+        return $this->hasOne(PetaFranchise::class, 'id_mitra', 'id_mitra');
+    }
+
+    public $timestamps = true;
+
+    
 }

@@ -4,17 +4,17 @@
 @endsection
 @section('content')
 
-    <x-page-title title="Customer" subtitle="Daftar Customer" />
+    <x-page-title title="Mitra" subtitle="Daftar Mitra" />
 
     <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-bold flex-wrap font-text1">
-        <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">({{ $customers->count() }})</span></a>
+        <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">({{ $mitras->count() }})</span></a>
     </div>
 
     <div class="row g-3">
         <div class="col-12 d-flex justify-content-between align-items-center">
             <!-- Search input di kiri -->
             <div class="position-relative">
-                <input id="searchInput" class="form-control px-5" type="search" placeholder="Cari Customer">
+                <input id="searchInput" class="form-control px-5" type="search" placeholder="Cari Mitra">
                 <span class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
             </div>
             <!-- Dropdown Show entries di kanan -->
@@ -35,30 +35,26 @@
         <div class="card-body">
             <div class="customer-table">
                 <div class="table-responsive white-space-nowrap">
-                    <table class="table align-middle" id="customerTable">
+                    <table class="table align-middle" id="mitraTable">
                         <thead class="table-light">
                             <tr>
-                                <th>ID</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Lokasi</th>
+                                <th>ID Mitra</th>
+                                <th>Nama Mitra</th>
+                                <th>Alamat Mitra</th>
+                                <th>Email Mitra</th>
+                                <th>No HP Mitra</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($customers as $customer)
+                            @foreach($mitras as $mitra)
                                 <tr>
-                                    <td>{{ $customer->id }}</td>
-                                    <td>{{ $customer->CustomerName }}</td>
-                                    <td>
-                                        <a href="mailto:{{ $customer->CustomerEmail }}" class="font-text1">{{ $customer->CustomerEmail }}</a>
-                                    </td>
-                                    <td>{{ $customer->CustomerLocation }}</td>
-                                    <td>
-                                        <span class="badge {{ $customer->status == 'aktif' ? 'bg-success' : 'bg-secondary' }}">
-                                            {{ ucfirst($customer->status) }}
-                                        </span>
-                                    </td>
+                                    <td>{{ $mitra->id_mitra }}</td>
+                                    <td>{{ $mitra->nama_mitra }}</td>
+                                    <td>{{ $mitra->alamat_mitra }}</td>
+                                    <td>{{ $mitra->email_mitra }}</td>
+                                    <td>{{ $mitra->no_hp_mitra }}</td>
+                                    <td>{{ $mitra->status }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

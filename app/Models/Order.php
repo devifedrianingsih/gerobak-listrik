@@ -17,8 +17,8 @@ class Order extends Model
 
     // Kolom yang bisa diisi secara massal
     protected $fillable = [
-        'CustomerID',
-        'CustomerName',
+        'id_mitra',
+        'nama_mitra',
         'OrderDate',
         'OrderStatus',
         'PaymentStatus',
@@ -30,7 +30,7 @@ class Order extends Model
     // Relasi ke model Customer (setiap order terkait dengan satu customer)
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'CustomerID', 'CustomerID');
+        return $this->belongsTo(Customer::class, 'id_mitra', 'id_mitra');
     }
 
     // Relasi ke model Invoice (satu order mungkin memiliki satu invoice)

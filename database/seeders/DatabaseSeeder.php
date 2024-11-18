@@ -22,13 +22,17 @@ class DatabaseSeeder extends Seeder
         // Memanggil seeder untuk model Admin
         $this->call(AdminSeeder::class);
 
-        // Memanggil seeder untuk model Customer
-        $this->call(CustomerSeeder::class);
-
         // Memanggil seeder untuk model Category
         $this->call(CategorySeeder::class); // Pastikan CategorySeeder sudah ada
         
         // Memanggil seeder untuk model Mitra
         $this->call(MitraSeeder::class); // Pastikan MitraSeeder sudah ada
+
+        // Memanggil seeder untuk model CalonMitra
+        $this->call(CalonMitraSeeder::class); // Pastikan MitraSeeder sudah ada
+
+        // Memanggil seeder untuk model PetaFranchise
+        $this->call(PetaFranchiseSeeder::class); // Pastikan MitraSeeder sudah ada
+
     }
 }

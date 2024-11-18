@@ -17,8 +17,9 @@ class CreateSalesReportsTable extends Migration
             $table->id('ReportID');
             $table->date('ReportDate')->nullable();
             $table->float('TotalSales')->nullable();
-            $table->unsignedBigInteger('AdminID')->nullable();
-            $table->foreign('AdminID')->references('AdminID')->on('admins')->onDelete('set null');
+            $table->unsignedBigInteger('AdminID')->nullable(); // Kolom yang digunakan untuk foreign key
+            // Pastikan bahwa referensi ke kolom 'id' di tabel 'admins'
+            $table->foreign('AdminID')->references('id')->on('admins')->onDelete('set null');
             $table->timestamps();
         });
     }

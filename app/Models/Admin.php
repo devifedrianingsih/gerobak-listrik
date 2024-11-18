@@ -20,7 +20,6 @@ class Admin extends Model
         'Username',
         'Password',
         'Email',
-        'ProfileInfo'
     ];
 
     // Jika ada relasi ke model lain, misalnya relasi ke `SalesReport`:

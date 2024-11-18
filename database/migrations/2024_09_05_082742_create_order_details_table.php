@@ -21,9 +21,9 @@ class CreateOrderDetailsTable extends Migration
             $table->string('Category', 100)->nullable();
             $table->integer('Quantity')->nullable();
             $table->float('Price')->nullable();
-            $table->string('CustomerName')->nullable();
-            $table->string('CustomerEmail')->nullable();
-            $table->string('CustomerPhone', 20)->nullable();
+            $table->string('nama_mitra')->nullable();
+            $table->string('email_mitra')->nullable();
+            $table->string('no_hp_mitra', 20)->nullable();
             $table->date('ShippingDate')->nullable();
             $table->text('ShippingAddress')->nullable();
             $table->string('ShippingStatus', 50)->nullable();

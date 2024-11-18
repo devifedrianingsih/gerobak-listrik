@@ -13,15 +13,15 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id('OrderID');
-            $table->unsignedBigInteger('CustomerID');
-            $table->float('TotalAmount');
-            $table->timestamps();
-
-            // Jika ada relasi dengan tabel lain, tambahkan foreign key
-            $table->foreign('CustomerID')->references('CustomerID')->on('customers')->onDelete('cascade');
-        });
+        if (!Schema::hasTable('orders')) {
+            Schema::create('orders', function (Blueprint $table) {
+                $table->id('OrderID');
+                $table->string('nama_mitra');
+                $table->float('TotalAmount');
+                $table->timestamps();
+                $table->foreign('Mitra')->references('id_mitra')->on('mitra')->onDelete('cascade');
+            });
+        }
     }
 
     /**

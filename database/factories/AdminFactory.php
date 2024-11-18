@@ -27,7 +27,6 @@ class AdminFactory extends Factory
             'Username' => $this->faker->userName,
             'Password' => Hash::make('password'), // Menggunakan Hash untuk password
             'Email' => $this->faker->unique()->safeEmail,
-            'ProfileInfo' => $this->faker->paragraph,
         ];
     }
 }

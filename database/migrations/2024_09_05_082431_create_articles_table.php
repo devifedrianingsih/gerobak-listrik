@@ -13,18 +13,20 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id('ArticleID');
-            $table->string('Title');
-            $table->text('Content');
-            $table->string('Image')->nullable();
-            $table->dateTime('DateTimeOfPublication')->nullable();
-            $table->string('CategoryArticle', 100)->nullable();
-            $table->string('Tags')->nullable();
-            $table->unsignedBigInteger('AuthorID')->nullable();
-            $table->foreign('AuthorID')->references('AdminID')->on('admins')->onDelete('set null');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('articles')) {
+            Schema::create('articles', function (Blueprint $table) {
+                $table->id('ArticleID');
+                $table->string('Title');
+                $table->text('Content');
+                $table->string('Image')->nullable();
+                $table->dateTime('DateTimeOfPublication')->nullable();
+                $table->string('CategoryArticle', 100)->nullable();
+                $table->string('Tags')->nullable();
+                $table->unsignedBigInteger('AuthorID')->nullable();
+                $table->foreign('AuthorID')->references('id')->on('admins')->onDelete('set null');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

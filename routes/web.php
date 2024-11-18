@@ -1,19 +1,17 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CalonMitraController;
 use App\Http\Controllers\MitraController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+
 
 Auth::routes();
 
 // Route untuk halaman home
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// Route untuk halaman customer dengan nama rute
-Route::get('/ecommerce-customers', [CustomerController::class, 'index'])->name('customers.index');
 
 // Route untuk halaman produk dengan nama rute
 Route::get('/ecommerce-products', [ProductController::class, 'index'])->name('product.index');
@@ -26,6 +24,14 @@ Route::post('/ecommerce-add-product', [ProductController::class, 'store'])->name
 
 // Route untuk pengunggahan gambar (POST)
 Route::post('/upload-product-image', [ProductController::class, 'uploadImage'])->name('upload.product.image');
+
+Route::post('/post-mitra', [CalonMitraController::class, 'post'])->name('post.mitra');
+
+Route::get('/ecommerce-potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
+Route::post('/calon-mitra.index/{nomor}/terima', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
+Route::post('/calon-mitra.index/{nomor}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
+
+Route::get('/ecommerce-customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
 
 // Route untuk dashboard (dengan middleware auth)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
@@ -56,11 +62,6 @@ Route::view('/isiartikel2', 'isiartikel2');
 Route::view('/isiartikel3', 'isiartikel3');
 Route::view('/formpendaftaran', 'formpendaftaran');
 Route::view('/hasiljadi', 'hasiljadi');
-
-// Rute calonMitra, terimaMitra dan tolakMitra
-Route::get('/ecommerce-potential-partners', [MitraController::class, 'indexCalonMitra'])->name('calon-mitra.index');
-Route::post('/ecommerce-potential-partners/{id}/terima', [MitraController::class, 'terima'])->name('calon-mitra.terima');
-Route::post('/ecommerce-potential-partners/{id}/tolak', [MitraController::class, 'tolak'])->name('calon-mitra.tolak');
 
 // Rute fallback untuk menangkap semua route yang tidak didefinisikan (Opsional)
 Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
