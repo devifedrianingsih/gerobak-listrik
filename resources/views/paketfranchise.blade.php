@@ -9,25 +9,25 @@
 </head>
 <body>
 <header>
-        <div class="container">
-            <h3>Gerobak Listrik</h3>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/sejarah">Sejarah</a>
-                <a href="/paketfranchise">Produk</a>
-                <a href="/artikel">Artikel</a>
-                <a href="/hubungi">Hubungi Kami</a>
-            </nav>
-            <div class="icons">
-                <a href="/login">
-                    <i class="fa-solid fa-user"></i></i>
-                </a>   
-                <a href="/checkout">
-                <i class="fa-solid fa-cart-shopping"></i></i>
-                </a>       
-                
-            </div>
-        </div>
+    <div class="container">
+    <h3>Gerobak Listrik</h3>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sejarah">Sejarah</a></li>
+            <li class="dropdown">
+                <a href="/shoppingcart">Produk</a>
+                <ul class="dropdown-content">
+                    <li><a href="/cart">Produk Franchise</a></li>
+                    <li><a href="#">Produk Jadi</a></li>
+                </ul>
+            </li>
+            <li><a href="/artikel">Artikel</a></li>
+            <li><a href="/hubungi">Hubungi Kami</a></li>
+        </ul>
+    </nav>
+</div>
+
     </header>
     <section class="product-selection">
     <div class="container">
@@ -37,7 +37,7 @@
                 <button id="button">Pilih Paket!</button>
                 <ul id="dropdown-menu" class="dropdown">
                     <li><a href="/paketfranchise">Paket Franchise</a></li>
-                    <li><a href="/produk">Paket Hasil Jadi</a></li>
+                    <li><a href="/cart">Paket Hasil Jadi</a></li>
                 </ul>
 
                 <div class="product-grid">
@@ -89,7 +89,7 @@
        </section>
     </main>
 
-    <footer>
+    <!-- <footer>
         <div class="container">
             <div class="footer-info">
                 <div>
@@ -116,7 +116,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
     <script src="{{ asset('js/product.js') }}"></script>
 </body>

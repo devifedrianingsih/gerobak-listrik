@@ -1,127 +1,71 @@
+/* General Styles */
+body {
+    background-color: #ffffff;
+    color: #987540;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
 /* navbar */
 header {
     background-color: #ffffff;
-    color:#987540;
+    color: #987540;
     padding: 20px 0;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Agar elemen di dalam container berada di tengah secara vertikal */
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px 20px;
 }
-
-header h3 {
-    margin: 0;
+header .logo{
+    font-weight: bold;
+    font-size:22px;
+}
+header a {
+    text-decoration: none;
+    color: #604723;
 }
 
 header nav {
     display: flex;
-    gap: 15px;
+    gap: 15px; /* Memberikan jarak antar link */
 }
 
 header nav a {
-    color:#987540;
+    color: #987540;
     text-decoration: none;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px 10px; /* Tambahkan padding agar terlihat lebih rapi */
 }
 
-header .login-button {
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    border: rgb(255, 255, 255) solid 2px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: small;
-}
-.container .icons .fa-cart-shopping {
-    padding: 14px;
-    color: #909090
-}
-
-.container .icons .fa-user {
-    padding: 14px;
-    color: #909090;
-}
-.container .icons{
-    text-decoration: none;
-}
-
-/*  */
-
-/* hubungi kami */
-/* .contact {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+header nav a:hover {
     background-color: #987540;
     color: white;
-    text-align: center;
-    width: auto;
-    height: 700px;
+    transition-duration: 0.3s;
 }
 
-.contact h2 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    font-size: 45px;
-}
-
-.contact p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-}
-
-.contact-number {
-    margin-inline: auto;
-    color: green;
-    font-weight: bold;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-block: 6px;
-    background-color: white;
-    border-radius: 12px;
-    width: 200px;
-}
-.contact-number :hover{
-    background-color: #e90000;
-}
-.contact-number .logo-wa {
-    width: 30px;
-    height: 30px;
-}
-
-.contact-number p {
-    margin-block: 0px !important;
-} */
-body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-image: asset('img/telur.jpg') ; /* Path ke gambar */
-    background-size: cover; /* Agar gambar menutupi seluruh layar */
-    background-position: center;
-    background-repeat: no-repeat; /* Jangan ulangi gambar */
-    background-attachment: fixed; /* Agar gambar tetap di tempat saat di-scroll */
-  }
 .contact-container {
-    max-width: 600px;
-    margin:auto;
-    margin-top: 100px;
-    padding: 20px;
+    display: block;
+    max-width: 800px; /* Set a maximum width for centered container */
+    width: 50%;
+    margin: 100px auto; /* Centers the container horizontally and adds top margin */
+    padding: 30px;
     background-color: #efecec;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+}
+
   
   h2 {
     text-align: center;
@@ -162,7 +106,7 @@ body {
   }
   
   button:hover {
-    background-color: #987540;
+    background-color: #72582f;
   }
   
   .form-message {

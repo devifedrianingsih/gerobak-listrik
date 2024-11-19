@@ -1,5 +1,5 @@
-/* General Styles 
-header {
+/* General Styles */
+body {
     background-color: #ffffff;
     color: #987540;
     margin: 0;
@@ -10,85 +10,52 @@ header {
     font-family: 'Arial', sans-serif;
 }
 
+/* navbar */
+header {
+    background-color: #ffffff;
+    color: #987540;
+    padding: 20px 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 header .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Agar elemen di dalam container berada di tengah secara vertikal */
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px 20px;
+}
+header .logo{
+    font-weight: bold;
+    font-size:22px;
+}
+header a {
+    text-decoration: none;
+    color: #604723;
 }
 
-header h3 {
-    margin: 0;
-    font-size: 24px;
-} */
-
-/*Navbar Styles*/
 header nav {
-    justify-content: center;
-}
-
-header nav ul {
-    list-style: none;
     display: flex;
-    margin: 0;
-    padding: 0;
-    gap: 15px;
+    gap: 15px; /* Memberikan jarak antar link */
 }
 
-header nav ul li {
-    position: relative;
-}
-
-header nav ul li a {
+header nav a {
     color: #987540;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 400;
-    padding: 5px;
-    transition: background-color 0.3s ease;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px 10px; /* Tambahkan padding agar terlihat lebih rapi */
 }
 
-header nav ul li a:hover {
-    background-color: #b99b727c;
+header nav a:hover {
+    background-color: #987540;
+    color: white;
+    transition-duration: 0.3s;
 }
 
-/* Dropdown Menu Styles */
-.dropdown-content {
-    display: none; /* Sembunyikan dropdown pada awalnya */
-    position: absolute;
-    background-color: #b98e6e; /* Warna latar dropdown */
-    min-width: 180px; /* Sedikit diperbesar agar teks muat dengan lebih baik */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Efek bayangan */
-    z-index: 1;
-    border-radius: 8px; /* Menambah sudut melingkar agar lebih halus */
-    padding: 10px 0; /* Jarak di dalam dropdown */
-}
-
-.dropdown-content li {
-    display: block; /* Setiap item tampil sebagai blok */
-    margin: 0; /* Hilangkan margin untuk tampilan rapi */
-}
-
-.dropdown-content li a {
-    padding: 10px 20px; /* Menambah ruang antar teks dan tepi */
-    color: #ffffff; /* Ubah warna teks menjadi putih agar kontras dengan latar */
-    text-decoration: none; /* Hilangkan garis bawah */
-    font-size: 14px; /* Sedikit perbesar font agar lebih mudah dibaca */
-    white-space: nowrap; /* Hindari teks terpotong */
-    transition: background-color 0.3s ease; /* Tambahkan transisi untuk hover */
-}
-
-.dropdown-content li a:hover {
-    background-color: #8e674d; /* Warna hover lebih gelap untuk kontras */
-    border-radius: 5px; /* Tambahkan sudut melingkar saat dihover */
-}
-
-.dropdown:hover .dropdown-content {
-    display: block; /* Tampilkan dropdown saat elemen utama di-hover */
-}
-
+/*  */
 /* Dropdown Menu Styles */
 .dropdown-content {
     display: none;
@@ -125,38 +92,6 @@ header nav ul li a:hover {
     color: white;
 }
 
-/* Icons Styles */
-.container .icons {
-    display: flex;
-    gap: 10px;
-}
-
-.container .icons a {
-    color: #909090;
-    font-size: 20px;
-    padding: 20px;
-}
-
-.container .icons a:hover {
-    color: #987540;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .container .icons {
-        margin-top: 10px;
-    }
-}
 /* General styles */
 .title {
     text-align: center;
@@ -175,12 +110,19 @@ header nav ul li a:hover {
 }
 
 /* Produk Styling */
+.products-cart-container {
+    display: block;
+    justify-content: space-between; /* Jarak antara produk dan cart */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 .products {
     display: flex;
+    min-width: 0;
     flex-wrap: wrap; /* Produk membungkus ke baris berikutnya */
     justify-content: space-between; /* Penyebaran antar produk */
     gap: 30px; /* Jarak antar produk lebih seimbang */
-    max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
 }
@@ -228,9 +170,8 @@ h2 {
 }
 
 h4 {
-    font-family: monospace;
     color: red;
-    font-size: 1rem; /* Memperbaiki ukuran */
+    font-size: 14px; /* Memperbaiki ukuran */
 }
 
 /* Tombol Tambah ke Keranjang */
@@ -251,13 +192,16 @@ h4 {
 
 /* Keranjang Styling */
 .cart {
-    max-width: 600px;
+    max-width: 350px;
     margin: 40px auto;
     padding: 20px;
     text-align: center;
-    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.remove-btn{
+    font-size: 12px;
+    cursor: pointer;
 }
 
 .cart h2 {
@@ -270,22 +214,15 @@ h4 {
     list-style: none;
     padding: 0;
     margin: 0;
-    border-top: 1px solid #e0e0e0; /* Batas di atas */
-    padding-top: 20px;
 }
 
 .cart-items li {
     margin: 10px 0;
     padding: 10px 0;
-    font-size: 1.2rem;
+    font-size: 14px;
     color: #5d4037;
-    border-bottom: 1px solid #e0e0e0; /* Garis pembatas antar item */
-}
-
-.cart-summary {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    color: #3e2723;
+    font-weight: medium;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .cart-total {

@@ -37,31 +37,81 @@ Route::get('/ecommerce-customers', [MitraController::class, 'indexMitra'])->name
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 // Halaman statis
-Route::view('/beranda', 'beranda');
-Route::view('/produk', 'produk');
-Route::view('/hubungi', 'hubungikami');
-Route::view('/profil', 'profil');
-Route::view('/checkout', 'checkout');
-Route::view('/login-user', 'login');
-Route::view('/register-user', 'register');
-Route::view('/paketfranchise', 'paketfranchise');
-Route::view('/produk1', 'produk1');
-Route::view('/visi', 'visi');
-Route::view('/misi', 'misi');
-Route::view('/sejarah', 'sejarah');
-Route::view('/artikel', 'artikel');
-Route::view('/pakethemata', 'pakethemata');
-Route::view('/pakethematb', 'pakethematb');
-Route::view('/pakethematc', 'pakethematc');
-Route::view('/gabung', 'gabung');
-Route::view('/faq', 'faq');
-Route::view('/shoppingcart', 'shoppingcart');
-Route::view('/cart', 'cart');
-Route::view('/isiartikel1', 'isiartikel1');
-Route::view('/isiartikel2', 'isiartikel2');
-Route::view('/isiartikel3', 'isiartikel3');
-Route::view('/formpendaftaran', 'formpendaftaran');
-Route::view('/hasiljadi', 'hasiljadi');
+Route::get('/beranda', function () {
+    return view('beranda');
+});
+Route::get('/produk', function () {
+    return view('produk');
+});
+Route::get('/hubungi', function () {
+    return view('hubungikami');
+});
+Route::get('/profil', function () {
+    return view('profil');
+});
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+Route::get('/login-user', function () {
+    return view('login');
+});
+Route::get('/register-user', function () {
+    return view('register');
+});
+Route::get('/paketfranchise', function () {
+    return view('paketfranchise');
+});
+Route::get('/produk1', function () {
+    return view('produk1');
+});
+Route::get('/visi', function () {
+    return view('visi');
+});
+Route::get('/misi', function () {
+    return view('misi');
+});
+Route::get('/sejarah', function () {
+    return view('sejarah');
+});
+Route::get('/artikel', function () {
+    return view('artikel');
+});
+Route::get('/pakethemata', function () {
+    return view('pakethemata');
+});
+Route::get('/pakethematb', function () {
+    return view('pakethematb');
+});
+Route::get('/pakethematc', function () {
+    return view('pakethematc');
+});
+Route::get('/gabung', function () {
+    return view('gabung');
+});
+Route::get('/faq', function () {
+    return view('faq');
+});
+Route::get('/shoppingcart', function () {
+    return view('shoppingcart');
+});
+Route::get('/cart', function () {
+    return view('cart');
+});
+Route::get('/isiartikel1', function () {
+    return view('isiartikel1');
+});
+Route::get('/isiartikel2', function () {
+    return view('isiartikel2');
+});
+Route::get('/isiartikel3', function () {
+    return view('isiartikel3');
+});
+Route::get('/formpendaftaran', function () {
+    return view('formpendaftaran');
+});
+Route::get('/hasiljadi', function () {
+    return view('hasiljadi');
+});
 
 // Rute fallback untuk menangkap semua route yang tidak didefinisikan (Opsional)
 Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');

@@ -10,7 +10,9 @@
 <body>
 <header>
         <div class="container">
-            <h3>Gerobak Listrik</h3>
+            <div class="logo">
+                <a href="/">Gerobak Listrik</a>
+            </div>
             <nav>
                 <a href="/">Home</a>
                 <a href="/sejarah">Sejarah</a>
@@ -18,15 +20,6 @@
                 <a href="/artikel">Artikel</a>
                 <a href="/hubungi">Hubungi Kami</a>
             </nav>
-            <div class="icons">
-                <a href="/login">
-                    <i class="fa-solid fa-user"></i></i>
-                </a>   
-                <a href="/checkout">
-                <i class="fa-solid fa-cart-shopping"></i></i>
-                </a>       
-                
-            </div>
         </div>
     </header>
          <section class="artikel">

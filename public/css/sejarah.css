@@ -1,64 +1,66 @@
+/* General Styles */
+body {
+    background-color: #ffffff;
+    color: #987540;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
 /* navbar */
 header {
     background-color: #ffffff;
-    color:#987540;
+    color: #987540;
     padding: 20px 0;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Agar elemen di dalam container berada di tengah secara vertikal */
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px 20px;
 }
-
-header h3 {
-    margin: 0;
+header .logo{
+    font-weight: bold;
+    font-size:22px;
+}
+header a {
+    text-decoration: none;
+    color: #604723;
 }
 
 header nav {
     display: flex;
-    gap: 15px;
+    gap: 15px; /* Memberikan jarak antar link */
 }
 
 header nav a {
-    color:#987540;
+    color: #987540;
     text-decoration: none;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px 10px; /* Tambahkan padding agar terlihat lebih rapi */
 }
 
-header .login-button {
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    border: rgb(255, 255, 255) solid 2px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: small;
-}
-.container .icons .fa-cart-shopping {
-    padding: 14px;
-    color: #909090
+header nav a:hover {
+    background-color: #987540;
+    color: white;
+    transition-duration: 0.3s;
 }
 
-.container .icons .fa-user {
-    padding: 14px;
-    color: #909090;
-}
-.container .icons{
-    text-decoration: none;
-}
+/*  */
+/* About Section */
 .img-sjrh{
     width: 100%;
     height: 500px;
     object-fit: cover;
 }
-/*  */
-/* About Section */
 section#about {
     display: block;
     padding: 0;

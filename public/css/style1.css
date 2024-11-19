@@ -13,56 +13,46 @@ body {
 /* navbar */
 header {
     background-color: #ffffff;
-    color:#987540;
+    color: #987540;
     padding: 20px 0;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* Agar elemen di dalam container berada di tengah secara vertikal */
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px 20px;
 }
-
-header h3 {
-    margin: 0;
+header .logo{
+    font-weight: bold;
+    font-size:22px;
+}
+header a {
+    text-decoration: none;
+    color: #604723;
 }
 
 header nav {
     display: flex;
-    gap: 15px;
+    gap: 15px; /* Memberikan jarak antar link */
 }
 
 header nav a {
-    color:#987540;
+    color: #987540;
     text-decoration: none;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px 10px; /* Tambahkan padding agar terlihat lebih rapi */
 }
 
-header .login-button {
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    border: rgb(255, 255, 255) solid 2px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: small;
-}
-.container .icons .fa-cart-shopping {
-    padding: 14px;
-    color: #909090
-}
-
-.container .icons .fa-user {
-    padding: 14px;
-    color: #909090;
-}
-.container .icons{
-    text-decoration: none;
+header nav a:hover {
+    background-color: #987540;
+    color: white;
+    transition-duration: 0.3s;
 }
 
 /*  */
@@ -71,23 +61,39 @@ section .container-home {
     background-color: #fff;
     padding: 50px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-section .text {
+section .container-home .text,
+section .container-home .container-image {
+    flex: 1;
+    max-width: 1000px; /* Limits text width for cleaner layout */
+}
+
+section .container-home .text p {
     color: #987540;
     font-size: 20px;
     font-weight: 500;
+    line-height: 1.6;
     margin-bottom: 20px;
+    text-align: left;
+    padding: 5px;
+    margin-right: 20px;
 }
 
-section .image {
-    max-width: 100%;
+section .container-image img {
+    width: 140%; /* Responsive within container */
     height: auto;
+    max-width: 700px; /* Increased max width for a larger image */
+    border-radius: 8px;
+    margin-right: 50%;
 }
+
 
 section .join-mitra {
     display: inline-block;
@@ -99,6 +105,7 @@ section .join-mitra {
     font-size: 18px;
     font-weight: bold;
     transition: all 0.3s ease;
+    margin-top: 20px;
 }
 
 section .join-mitra:hover {
@@ -106,6 +113,7 @@ section .join-mitra:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 
 /*  Menu  */
 .menu{
@@ -387,6 +395,43 @@ section .join-mitra:hover {
  .accordion input[type="radio"]:checked + label::before{
     content:'-';
  }
+ .accordion-toggle {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #927F63;
+    color: #fff;
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+.accordion-toggle::before {
+    content: '+';
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+.accordion-toggle.active::before {
+    content: '-';
+}
+.accordion .content {
+    color: #555;
+    padding: 0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.accordion .content.open {
+    max-height: 400px;
+    padding: 10px 10px 20px;
+}
 
 /* Footer
 footer {

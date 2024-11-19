@@ -9,40 +9,34 @@
     
 </head>
 <body>
+<!-- Navbar -->
 <header>
         <div class="container">
-            <h3>Gerobak Listrik</h3>
+            <div class="logo">
+                <a href="/">Gerobak Listrik</a>
+            </div>
             <nav>
                 <a href="/">Home</a>
                 <a href="/sejarah">Sejarah</a>
-                <a href="/paketfranchise">Produk</a>
+                <a href="/cart">Produk</a>
                 <a href="/artikel">Artikel</a>
                 <a href="/hubungi">Hubungi Kami</a>
             </nav>
-            <div class="icons">
-                <a href="/login">
-                    <i class="fa-solid fa-user"></i></i>
-                </a>   
-                <a href="/checkout">
-                <i class="fa-solid fa-cart-shopping"></i></i>
-                </a>       
-                
-            </div>
         </div>
     </header>
         <div class="contact-container">
         <h2>Hubungi Kami</h2>
         <form id="contact-form">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
+            <label for="name">Nama Anda</label>
+            <input type="text" id="name" name="name" placeholder="Masukkan nama anda" required>
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Your email" required>
+            <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Write your message" rows="4" required></textarea>
+            <label for="message">Kritik & Saran</label>
+            <textarea id="message" name="message" placeholder="Tuliskan kritik dan saran anda" rows="4" required></textarea>
 
-            <button type="submit">Send Message</button>
+            <button type="submit">Kirim!</button>
         </form>
   <div class="form-message" id="form-message"></div>
 </div>
