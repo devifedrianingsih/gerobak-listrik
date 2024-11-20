@@ -10,23 +10,18 @@
 <body>
 <header>
     <div class="container">
-    <h3>Gerobak Listrik</h3>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/sejarah">Sejarah</a></li>
-            <li class="dropdown">
-                <a href="/shoppingcart">Produk</a>
-                <ul class="dropdown-content">
-                    <li><a href="/cart">Produk Franchise</a></li>
-                    <li><a href="#">Produk Jadi</a></li>
-                </ul>
-            </li>
-            <li><a href="/artikel">Artikel</a></li>
-            <li><a href="/hubungi">Hubungi Kami</a></li>
-        </ul>
-    </nav>
-</div>
+        <div class="logo">
+            <a href="/beranda">Gerobak Listrik</a>
+        </div>
+        <nav>
+            <a href="/beranda">Home</a>
+            <a href="/sejarah">Sejarah</a>
+            <a href="/paketfranchise">Produk</a>
+            <a href="/artikel">Artikel</a>
+            <a href="/hubungi">Hubungi Kami</a>
+        </nav>
+    </div>
+</header>
 
     </header>
     <section class="product-selection">

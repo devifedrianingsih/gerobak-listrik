@@ -13,12 +13,12 @@
 <header>
         <div class="container">
             <div class="logo">
-                <a href="/">Gerobak Listrik</a>
+                <a href="/beranda">Gerobak Listrik</a>
             </div>
             <nav>
-                <a href="/">Home</a>
+                <a href="/beranda">Home</a>
                 <a href="/sejarah">Sejarah</a>
-                <a href="/cart">Produk</a>
+                <a href="/paketfranchise">Produk</a>
                 <a href="/artikel">Artikel</a>
                 <a href="/hubungi">Hubungi Kami</a>
             </nav>
@@ -28,13 +28,13 @@
         <h2>Hubungi Kami</h2>
         <form id="contact-form">
             <label for="name">Nama Anda</label>
-            <input type="text" id="name" name="name" placeholder="Masukkan nama anda" required>
+            <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
+            <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
 
-            <label for="message">Kritik & Saran</label>
-            <textarea id="message" name="message" placeholder="Tuliskan kritik dan saran anda" rows="4" required></textarea>
+            <label for="message">Pesan</label>
+            <textarea id="message" name="message" placeholder="Tuliskan pesan Anda" rows="4" required></textarea>
 
             <button type="submit">Kirim!</button>
         </form>

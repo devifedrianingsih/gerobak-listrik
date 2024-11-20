@@ -12,20 +12,19 @@
         <div class="container">
             <h3>Gerobak Listrik</h3>
             <nav>
-                <a href="/">Home</a>
+                <a href="/beranda">Home</a>
                 <a href="/sejarah">Sejarah</a>
                 <a href="/paketfranchise">Produk</a>
                 <a href="/artikel">Artikel</a>
                 <a href="/hubungi">Hubungi Kami</a>
             </nav>
             <div class="icons">
-                <a href="/login">
+                <a href="/login-user">
                     <i class="fa-solid fa-user"></i></i>
-                </a>   
+                </a>
                 <a href="/checkout">
                 <i class="fa-solid fa-cart-shopping"></i></i>
-                </a>       
-                
+                </a>
             </div>
         </div>
     </header>

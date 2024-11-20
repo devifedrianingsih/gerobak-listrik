@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout Produk</title>
     <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7jmv7jN0vC7ZCiTevmYt-ySWbGsLQbHs&callback=initMap&libraries=places" async defer></script>
 </head>
 <body>
 <div class="checkout-container">
@@ -23,6 +23,11 @@
                     <label for="address">Alamat Pengiriman</label>
                     <input type="text" id="address" placeholder="Masukkan alamat" readonly>
                     <button type="button" onclick="getLocation()">Dapatkan Lokasi Saya</button>
+                </div>
+                <!-- Tambahkan input manual untuk alamat jika gagal mendapatkan lokasi -->
+                <div class="form-group" id="manualAddress" style="display:none;">
+                    <label for="manual-address">Masukkan Alamat Pengiriman</label>
+                    <input type="text" id="manual-address" placeholder="Masukkan alamat manual">
                 </div>
                 <div id="map" style="height: 300px; margin-top: 10px;"></div>
                 <div class="form-group">
@@ -70,6 +75,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <script src="js/checkout.js"></script>
 

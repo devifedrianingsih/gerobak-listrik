@@ -26,6 +26,67 @@ selectedProducts.forEach(product => {
 // Tampilkan total harga
 document.getElementById("total").innerHTML = `Total: <strong>${formatPrice(total)}</strong>`;
 
+// Inisialisasi peta dan marker
+let map;
+let marker;
+
+function initMap() {
+    // Inisialisasi peta dengan lokasi default (Alamat STP)
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -6.5570598, lng: 106.7663379 }, // Jakarta
+        zoom: 14
+    });
+
+    // Tambahkan marker untuk lokasi pengguna
+    marker = new google.maps.Marker({
+        map: map
+    });
+}
+
+// Fungsi untuk mendapatkan lokasi pengguna
+function getLocation() {
+    if (navigator.geolocation) {
+        // Mengambil lokasi pengguna
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Set marker ke lokasi pengguna
+            marker.setPosition({ lat: latitude, lng: longitude });
+
+            // Pindahkan peta ke lokasi pengguna
+            map.setCenter({ lat: latitude, lng: longitude });
+
+            // Gunakan Geocoder untuk mendapatkan alamat dari koordinat
+            const geocoder = new google.maps.Geocoder();
+            const latLng = { lat: latitude, lng: longitude };
+
+            geocoder.geocode({ location: latLng }, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK && results[0]) {
+                    const address = results[0].formatted_address;
+                    document.getElementById("address").value = address;  // Set alamat ke input
+
+                    // Menyembunyikan input manual jika alamat ditemukan otomatis
+                    document.getElementById("manualAddress").style.display = "none";
+                } else {
+                    alert("Alamat tidak ditemukan.");
+                    // Tampilkan input manual jika geolocation gagal
+                    document.getElementById("manualAddress").style.display = "block";
+                }
+            });
+        }, function() {
+            alert("Gagal mengambil lokasi.");
+            // Tampilkan input manual jika geolocation gagal
+            document.getElementById("manualAddress").style.display = "block";
+        });
+    } else {
+        alert("Geolocation tidak didukung oleh browser ini.");
+        // Tampilkan input manual jika geolocation tidak didukung
+        document.getElementById("manualAddress").style.display = "block";
+    }
+}
+
+// Mengatur event listener untuk tombol checkout
 document.getElementById("checkout-btn").addEventListener("click", function() {
     // Ambil data formulir
     const name = document.getElementById("name").value;
@@ -67,3 +128,6 @@ document.getElementById("checkout-btn").addEventListener("click", function() {
     // Buka WhatsApp
     window.open(whatsappUrl, '_blank');
 });
+
+// Inisialisasi peta ketika halaman selesai dimuat
+window.onload = initMap;

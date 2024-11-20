@@ -11,10 +11,10 @@
     <header>
         <div class="container">
             <div class="logo">
-                <a href="/">Gerobak Listrik</a>
+                <a href="/beranda">Gerobak Listrik</a>
             </div>
             <nav>
-                <a href="/">Home</a>
+                <a href="/beranda">Home</a>
                 <a href="/sejarah">Sejarah</a>
                 <a href="/paketfranchise">Produk</a>
                 <a href="/artikel">Artikel</a>
@@ -27,7 +27,7 @@
         <div class="container-home"> 
             <div class="text">
                 <p>Apa itu gerobak listrik? Gerobak listrik adalah<br> suatu perusahaan franchise yang menawarkan<br> produk usaha berupa gerobak listrik dan<br> produk hasil jadi serta bahan baku<br> yang tersedia dalam tiap paket berbeda.</p>
-                <a href="/cart" class="join-mitra">Beli Paket Franchise</a>
+                <a href="/paketfranchise" class="join-mitra">Beli Paket Franchise</a>
                 <a href="/hasiljadi" class="join-mitra">Beli Produk Jadi</a>
             </div>     
             <div class="container-image">

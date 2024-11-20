@@ -10,12 +10,12 @@
 <header>
         <div class="container">
             <div class="logo">
-                <a href="/">Gerobak Listrik</a>
+                <a href="/beranda">Gerobak Listrik</a>
             </div>
             <nav>
-                <a href="/">Home</a>
+                <a href="/beranda">Home</a>
                 <a href="/sejarah">Sejarah</a>
-                <a href="/cart">Produk</a>
+                <a href="/paketfranchise">Produk</a>
                 <a href="/artikel">Artikel</a>
                 <a href="/hubungi">Hubungi Kami</a>
             </nav>

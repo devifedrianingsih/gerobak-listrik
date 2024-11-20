@@ -29,7 +29,7 @@
                     <a href="" class="forgot-password">Lupa Kata Sandi?</a>
                 </div>
                 </div>
-                <a href="/" button type="submit"> <div class="login-button">  LOGIN  </div> </a> 
+                <a href="/beranda" button type="submit"> <div class="login-button">  LOGIN  </div> </a> 
                 <div class="text-bottom">
                    <a href="/formpendaftaran" class="preregister">Belum punya akun?</a>
                 </div>

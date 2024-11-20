@@ -12,14 +12,14 @@
         <div class="container">
             <h3>Gerobak Listrik</h3>
             <nav>
-                <a href="/">Home</a>
+                <a href="/beranda">Home</a>
                 <a href="/sejarah">Sejarah</a>
                 <a href="/paketfranchise">Produk</a>
                 <a href="/artikel">Artikel</a>
                 <a href="/hubungi">Hubungi Kami</a>
             </nav>
             <div class="icons">
-                <a href="/login">
+                <a href="/login-user">
                     <i class="fa-solid fa-user"></i></i>
                 </a>   
                 <a href="/checkout">
@@ -45,7 +45,7 @@
                             <li>Modal Pendaftaran</li>
                         </ul>
                         <p class="price">Rp. 23.670.000,-</p>
-                        <a href="/gabung" class="buy-button">Beli Paket!</a>
+                        <a href="/formpendaftaran" class="buy-button">Beli Paket!</a>
                     </div>
                 </div>
             </div>

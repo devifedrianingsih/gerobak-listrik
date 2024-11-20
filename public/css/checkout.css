@@ -94,18 +94,15 @@ body {
     margin-top: 20px;
     padding: 10px;
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #745A34;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
 }
-.checkout-btn button:hover {
-    background-color: #45a049;
-}
 
 .checkout-btn button:hover {
-    background-color: #6b5d48;
+    background-color: #8e734b;
 }
 
 @media (max-width: 768px) {
