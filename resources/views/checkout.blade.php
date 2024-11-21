@@ -46,14 +46,14 @@
 
             <!-- Metode Pembayaran -->
             <div class="section">
-                <h2>Metode Pembayaran</h2>
+                <h2>Pembayaran</h2>
                 <div class="form-group">
-                    <label for="payment-method">Pilih Metode Pembayaran</label>
+                    <label for="payment-method">Transfer Bank</label>
                     <select id="payment-method">
-                        <option value="credit-card">Kartu Kredit</option>
-                        <option value="bank-transfer">Transfer Bank</option>
-                        <option value="paypal">Paypal</option>
-                        <option value="cod">Bayar di Tempat (COD)</option>
+                        <option value="bca">BCA 12345 a/n Gerobak Listrik</option>
+                        <option value="bri">BRI 12345 a/n Gerobak Listrik</option>
+                        <option value="bni">BNI 12345 a/n Gerobak Listrik</option>
+                        <option value="mandiri">Mandiri 12345 a/n Gerobak Listrik</option>
                     </select>
                 </div>
             </div>
@@ -68,10 +68,17 @@
                 </div>
                 <p id="total">Total: <strong></strong></p>
             </div>
+            <div class="section">
+                <h2>Bukti Transfer</h2>
+                <div class="upload-btn">
+                    <label for="upload-bukti">Upload Bukti Transfer</label>
+                    <input type="file" id="upload-bukti" name="upload-bukti" accept="image/*,application/pdf">
+                </div>
+            </div>
 
             <!-- Tombol Checkout -->
             <div class="checkout-btn">
-                <button type="button" id="checkout-btn">Bayar Sekarang</button>
+                <button type="button" id="checkout-btn">Konfirmasi</button>
             </div>
         </div>
     </div>

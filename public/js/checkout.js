@@ -95,7 +95,28 @@ document.getElementById("checkout-btn").addEventListener("click", function() {
     const postal = document.getElementById("postal").value;
     const phone = document.getElementById("phone").value;
     const paymentMethod = document.getElementById("payment-method").value;
-    
+
+    // Ambil file bukti transfer
+    const uploadBukti = document.getElementById("upload-bukti").files[0];
+
+    let buktiTransferUrl = '';
+    if (uploadBukti) {
+        // Convert the file into a data URL (or handle it as needed for backend upload)
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            buktiTransferUrl = reader.result; // Here you can send this data URL to the server or include it in the message
+
+            // Kirim pesan WhatsApp dengan bukti transfer
+            sendWhatsAppMessage(name, address, city, postal, phone, paymentMethod, buktiTransferUrl);
+        };
+        reader.readAsDataURL(uploadBukti); // Convert the file to Data URL
+    } else {
+        // If no file is selected, proceed without it
+        sendWhatsAppMessage(name, address, city, postal, phone, paymentMethod, buktiTransferUrl);
+    }
+});
+
+function sendWhatsAppMessage(name, address, city, postal, phone, paymentMethod, buktiTransferUrl) {
     // Ambil data rangkuman pembelian
     const summary = document.getElementById("summary");
     const totalPrice = document.getElementById("total").innerText.replace('Total: ', '').trim();
@@ -116,6 +137,7 @@ document.getElementById("checkout-btn").addEventListener("click", function() {
         `${summary.innerText.replace(/\n/g, '\n')}\n\n` +
         `*Total Harga:*\n` +
         `*${totalPrice}*\n\n` +
+        (buktiTransferUrl ? `*Bukti Transfer:*\n ${buktiTransferUrl}\n\n` : '') +
         `*===============*`
     );
 
@@ -127,7 +149,7 @@ document.getElementById("checkout-btn").addEventListener("click", function() {
     
     // Buka WhatsApp
     window.open(whatsappUrl, '_blank');
-});
+}
 
 // Inisialisasi peta ketika halaman selesai dimuat
 window.onload = initMap;
