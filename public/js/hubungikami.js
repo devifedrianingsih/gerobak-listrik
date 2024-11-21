@@ -20,13 +20,13 @@ form.addEventListener('submit', function(event) {
             `*===============*\n` +
             `*HUBUNGI KAMI*\n` +
             `*===============*\n` +
-            `Nama: ${name}%0A\n` +
-            `Email: ${email}%0A\n` +
+            `Nama: ${name}\n` +
+            `Email: ${email}\n` +
             `Pesan: ${message}\n`
         );
 
         // Nomor telepon tujuan
-        const phoneNumber = '6281295206633';  // Ganti dengan nomor WhatsApp tujuan (format internasional tanpa tanda +)
+        const phoneNumber = '6281918999460';  // Ganti dengan nomor WhatsApp tujuan (format internasional tanpa tanda +)
 
         // URL WhatsApp untuk mengirim pesan
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;

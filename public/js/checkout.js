@@ -120,7 +120,7 @@ document.getElementById("checkout-btn").addEventListener("click", function() {
     );
 
     // Nomor telepon tujuan
-    const phoneNumber = '6281295206633';  // Ganti dengan nomor WhatsApp tujuan (format internasional tanpa tanda +)
+    const phoneNumber = '6281918999460';  // Ganti dengan nomor WhatsApp tujuan (format internasional tanpa tanda +)
     
     // URL WhatsApp untuk mengirim pesan
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
