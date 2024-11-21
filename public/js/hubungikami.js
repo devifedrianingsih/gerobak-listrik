@@ -17,10 +17,12 @@ form.addEventListener('submit', function(event) {
 
         // Format pesan WhatsApp dengan line break yang benar
         const whatsappMessage = encodeURIComponent(
-            `*Hubungi Kami*%0A%0A` +
-            `Nama: ${name}%0A` +
-            `Email: ${email}%0A` +
-            `Pesan: ${message}`
+            `*===============*\n` +
+            `*HUBUNGI KAMI*\n` +
+            `*===============*\n` +
+            `Nama: ${name}%0A\n` +
+            `Email: ${email}%0A\n` +
+            `Pesan: ${message}\n`
         );
 
         // Nomor telepon tujuan
