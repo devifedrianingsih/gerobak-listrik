@@ -1,0 +1,247 @@
+/* General Styles */
+body {
+    background-color: #ffffff;
+    color: #987540;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* navbar */
+  header {
+    background-color: #ffffff;
+    color: #987540;
+    padding: 20px 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Agar elemen di dalam container berada di tengah secara vertikal */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px;
+  }
+  header .logo{
+    font-weight: bold;
+    font-size:22px;
+  }
+  header a {
+    text-decoration: none;
+    color: #604723;
+  }
+  
+  header nav {
+    display: flex;
+    gap: 15px; /* Memberikan jarak antar link */
+  }
+  
+  header nav a {
+    color: #987540;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    padding: 5px 10px; /* Tambahkan padding agar terlihat lebih rapi */
+  }
+  
+  header nav a:hover {
+    background-color: #987540;
+    color: white;
+    transition-duration: 0.3s;
+  }
+  
+  .contact-container {
+    display: block;
+    max-width: 800px; /* Set a maximum width for centered container */
+    width: 50%;
+    margin: 100px auto; /* Centers the container horizontally and adds top margin */
+    padding: 30px;
+    background-color: #efecec;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  h2 {
+    text-align: center;
+    color: #604723;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  input, textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  input:focus, textarea:focus {
+    border-color: #987540;
+    outline: none;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #987540;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #72582f;
+  }
+  
+  .form-message {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-container {
+      padding: 10px;
+    }
+  
+    input, textarea {
+      font-size: 14px;
+    }
+  
+    button {
+      font-size: 14px;
+    }
+  }
+  
+  /* */
+  
+  
+  /* footer */
+  footer {
+    background-color:#745A34;
+    color: white;
+    padding: 20px 0;
+  }
+  
+  footer .container {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  footer h3 {
+    margin-top: 0;
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  footer ul li {
+    margin-bottom: 10px;
+  }
+  
+  footer ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  footer .footer-info {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+  }
+  
+  footer .footer-set{
+    gap: 50px;
+  }
+  
+  footer .footer-info img {
+    max-width: 100%;
+  }
+  
+  footer .footer-info div {
+    flex: 1;
+  }
+  
+  footer .footer-info a {
+    margin-right: 10px;
+  }
+  
+  footer .footer-sosial{
+    display: flex;
+  }
+
+/* Contact Container */
+.contact-container {
+    flex: 1; /* Mengisi ruang yang tersisa */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Menyelaraskan konten secara vertikal */
+    align-items: center; /* Menyelaraskan konten secara horizontal */
+    text-align: center; /* Menyelaraskan teks ke tengah */
+}
+
+/* Button Container */
+.button-container {
+    display: flex; /* Menggunakan flexbox untuk tombol */
+    justify-content: center; /* Menyelaraskan tombol secara horizontal */
+    width: 100%; /* Memastikan lebar penuh untuk pusat */
+    margin-top: 20px; /* Menambahkan jarak antara teks dan tombol */
+}
+
+.back-button {
+    background-color: #604723;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: background-color 0.3s, tgitransform 0.3s;
+    width: 60%; /* Memastikan tombol memiliki lebar penuh */
+    max-width: 600px; /* Menentukan lebar maksimum untuk tombol */
+}
+
+.back-button:hover {
+    background-color: #987540;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hubungi-button {
+    background-color: #987540;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 60%; /* Memastikan tombol memiliki lebar penuh */
+    max-width: 600px; /* Menentukan lebar maksimum untuk tombol */
+}
+
+.hubungi-button:hover {
+    background-color: #604723;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  /*  */
