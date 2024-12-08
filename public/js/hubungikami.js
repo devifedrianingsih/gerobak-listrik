@@ -19,7 +19,7 @@ form.addEventListener('submit', function(event) {
         const whatsappMessage = encodeURIComponent(
             `*===============*\n` +
             `*HUBUNGI KAMI*\n` +
-            `*===============*\n` +
+            `*===============*\n\n` +
             `Nama: ${name}\n` +
             `Email: ${email}\n` +
             `Pesan: ${message}\n`

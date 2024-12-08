@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubungi Kami</title>
+    <title>Data Dikirim</title>
     <link rel="stylesheet" href="{{ asset('css/form-mitra.css') }}">
     <script src="https://kit.fontawesome.com/4a1b340fe5.js" crossorigin="anonymous"></script>
 </head>

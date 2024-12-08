@@ -91,5 +91,8 @@ class CalonMitraController extends Controller
         ];
 
         CalonMitra::create($data);
+
+        // Redirect ke halaman konfirmasi
+        return view('post-mitra');
     }
 }

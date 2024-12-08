@@ -70,7 +70,9 @@
             </div>
 
             <div class="polaroid">
-                <img src="{{ asset('img/paket b.jpg') }}" alt="Paket A" style="width:100%" class="img-pol">
+                <a href="/pakethemata">
+                    <img src="{{ asset('img/paket b.jpg') }}" alt="Paket A" style="width:100%" class="img-pol">
+                </a>
                 <div class="container">
                     <h4>Paket A</h4>
                     <p>Gerobak Listrik, Bahan Baku, dan Modal Pendaftaran.</p>
@@ -79,7 +81,9 @@
             </div>
 
             <div class="polaroid">
-                <img src="{{ asset('img/paket c.jpg') }}" alt="Paket B" style="width:100%" class="img-pol">
+                <a href="/pakethematb">
+                    <img src="{{ asset('img/paket c.jpg') }}" alt="Paket B" style="width:100%" class="img-pol">
+                </a>
                 <div class="container">
                     <h4>Paket B</h4>
                     <p>Gerobak Listrik, Bahan Baku, dan Modal Pendaftaran.</p>
@@ -88,7 +92,9 @@
             </div>
 
             <div class="polaroid">
-                <img src="{{ asset('img/paket a.jpg') }}" alt="Paket C" style="width:100%" class="img-pol">
+                <a href="/pakethematc">
+                    <img src="{{ asset('img/paket a.jpg') }}" alt="Paket C" style="width:100%" class="img-pol">
+                </a>
                 <div class="container">
                     <h4>Paket C</h4>
                     <p>Gerobak Listrik, Bahan Baku, dan Modal Pendaftaran.</p>
