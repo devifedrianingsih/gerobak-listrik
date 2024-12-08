@@ -36,7 +36,6 @@
                     <div class="form-group">
                         <label>Jenis Kelamin</label>
                         <select name="jk" required>
-                            <option value="">-- Pilih Jenis Kelamin --</option>
                             <option value="Wanita">Wanita</option>
                             <option value="Laki-laki">Laki-laki</option>
                         </select>
