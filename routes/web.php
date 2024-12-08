@@ -4,6 +4,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CalonMitraController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\AdminPaymentController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +24,11 @@ Route::get('/ecommerce-add-product', [ProductController::class, 'create'])->name
 // Route untuk menyimpan produk baru (POST)
 Route::post('/ecommerce-add-product', [ProductController::class, 'store'])->name('product.store');
 
+
 // Route untuk pengunggahan gambar (POST)
 Route::post('/upload-product-image', [ProductController::class, 'uploadImage'])->name('upload.product.image');
 
+//Route untuk form pendaftaran
 Route::post('/post-mitra', [CalonMitraController::class, 'post'])->name('post.mitra');
 
 Route::get('/ecommerce-potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
@@ -32,6 +36,14 @@ Route::post('/calon-mitra.index/{nomor}/terima', [CalonMitraController::class, '
 Route::post('/calon-mitra.index/{nomor}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
 
 Route::get('/ecommerce-customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
+
+// Route untuk halaman checkout
+Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
+
+//Route untuk halaman konfirmasi pembayaran
+Route::get('ecommerce-payment', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
+Route::post('/admin/payments/{id}/approve', [AdminPaymentController::class, 'approve'])->name('admin.payments.approve');
+Route::post('/admin/payments/{id}/reject', [AdminPaymentController::class, 'reject'])->name('admin.payments.reject');
 
 // Route untuk dashboard (dengan middleware auth)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');

@@ -67,11 +67,11 @@
                                         <td>
                                             <form action="{{ route('calon-mitra.terima', $calon->nomor) }}" method="POST" style="display:inline;">
                                                 @csrf
-                                                <button type="submit" class="btn btn-success" {{ $calon->status === 'terima' ? 'disabled' : '' }}>Terima</button>
+                                                <button type="submit" class="btn btn-success" {{ $calon->status === 'terima' ? 'disabled' : '' }} onclick="return confirm('Yakin ingin menerima calon mitra ini?')"><i class="lni lni-checkmark"></i></button>
                                             </form>
                                             <form action="{{ route('calon-mitra.tolak', $calon->nomor) }}" method="POST" style="display:inline;">
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger">Tolak</button>
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menolak calon mitra ini?')"><i class="lni lni-close"></i></button>
                                             </form>
                                         </td>
                                     </tr>

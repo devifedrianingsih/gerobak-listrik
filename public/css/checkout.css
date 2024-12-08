@@ -107,6 +107,7 @@ body {
     background-color: #8e734b;
 }
 
+
 @media (max-width: 768px) {
     .checkout-container {
         padding: 20px;
@@ -121,4 +122,17 @@ body {
         margin-right: 0; /* Hapus margin kanan pada layar kecil */
         margin-bottom: 20px; /* Tambahkan margin bawah */
     }
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
 }

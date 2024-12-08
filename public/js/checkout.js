@@ -24,7 +24,10 @@ selectedProducts.forEach(product => {
 });
 
 // Tampilkan total harga
-document.getElementById("total").innerHTML = `Total: <strong>${formatPrice(total)}</strong>`;
+document.getElementById("total-display").innerHTML = `Total: <strong>${formatPrice(total)}</strong>`;
+
+// Masukkan nilai total ke input hidden <input id="total">
+document.getElementById("total").value = total;
 
 // Inisialisasi peta dan marker
 let map;
@@ -33,7 +36,7 @@ let marker;
 function initMap() {
     // Inisialisasi peta dengan lokasi default (Alamat STP)
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -6.5570598, lng: 106.7663379 }, // Jakarta
+        center: { lat: -6.5570598, lng: 106.7663379 }, // STP
         zoom: 14
     });
 
@@ -90,7 +93,7 @@ function getLocation() {
 document.getElementById("checkout-btn").addEventListener("click", function() {
     // Ambil data formulir
     const name = document.getElementById("name").value;
-    const address = document.getElementById("address").value;
+    const address = document.getElementById("address").value || document.getElementById("manual-address").value;
     const city = document.getElementById("city").value;
     const postal = document.getElementById("postal").value;
     const phone = document.getElementById("phone").value;

@@ -95,6 +95,8 @@
               <div class="menu-title">Pesanan</div>
             </a>
             <ul>
+              <li><a href="{{ url('/ecommerce-payment') }}"><i class="material-icons-outlined">arrow_right</i>Pembayaran</a>
+              </li>
               <li><a href="{{ url('/ecommerce-orders') }}"><i class="material-icons-outlined">arrow_right</i>Pesanan</a>
               </li>
               <li><a href="{{ url('/ecommerce-order-details') }}"><i class="material-icons-outlined">arrow_right</i>Detail Pesanan</a>
