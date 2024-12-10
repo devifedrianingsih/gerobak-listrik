@@ -11,19 +11,19 @@ class CreateInvoicesTable extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('invoices')) {
-            Schema::create('invoices', function (Blueprint $table) {
-                $table->id('InvoiceID');
-                $table->unsignedBigInteger('OrderID')->nullable();  // Foreign key to orders, nullable in case no order is present
-                $table->date('InvoiceDate');                         // Date of the invoice
-                $table->float('TotalAmount', 8, 2);                  // Total amount with precision of 8,2
-                $table->timestamps();                                // Created_at and Updated_at timestamps
+        // if (!Schema::hasTable('invoices')) {
+        //     Schema::create('invoices', function (Blueprint $table) {
+        //         $table->id('InvoiceID');
+        //         $table->unsignedBigInteger('OrderID')->nullable();  // Foreign key to orders, nullable in case no order is present
+        //         $table->date('InvoiceDate');                         // Date of the invoice
+        //         $table->float('TotalAmount', 8, 2);                  // Total amount with precision of 8,2
+        //         $table->timestamps();                                // Created_at and Updated_at timestamps
     
-                // Foreign key constraint to 'orders' table with 'set null' on delete
-                $table->foreign('OrderID')->references('OrderID')->on('orders')->onDelete('set null');
+        //         // Foreign key constraint to 'orders' table with 'set null' on delete
+        //         $table->foreign('OrderID')->references('OrderID')->on('orders')->onDelete('set null');
                 
-            });
-        }
+        //     });
+        // }
     }
 
     /**

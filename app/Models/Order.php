@@ -9,33 +9,19 @@ class Order extends Model
 {
     use HasFactory;
 
-    // Menentukan tabel yang digunakan (opsional jika nama tabel sesuai konvensi Laravel)
-    protected $table = 'orders';
-
-    // Menentukan primary key
-    protected $primaryKey = 'OrderID';
-
-    // Kolom yang bisa diisi secara massal
     protected $fillable = [
-        'id_mitra',
-        'nama_mitra',
-        'OrderDate',
-        'OrderStatus',
-        'PaymentStatus',
-        'PaymentType',
-        'TotalAmount',
-        'InvoiceID'
+        'order_id',
+        'name',
+        'category',
+        'total',
+        'pickup_method',
+        'status',
+        'tanggal',
+        'payment_id', // Jika menggunakan kolom relasi ke pembayaran
     ];
 
-    // Relasi ke model Customer (setiap order terkait dengan satu customer)
-    public function customer()
+    public function pembayaran()
     {
-        return $this->belongsTo(Customer::class, 'id_mitra', 'id_mitra');
-    }
-
-    // Relasi ke model Invoice (satu order mungkin memiliki satu invoice)
-    public function invoice()
-    {
-        return $this->belongsTo(Invoice::class, 'InvoiceID', 'InvoiceID');
+        return $this->belongsTo(Pembayaran::class, 'payment_id', 'id');
     }
 }

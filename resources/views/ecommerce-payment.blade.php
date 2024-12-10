@@ -58,7 +58,7 @@
                                 <td>{{ $payment->manual_address }}</td>
                                 <td>{{ $payment->phone }}</td>
                                 <td>{{ strtoupper($payment->payment_method) }}</td>
-                                <td>{{ ucwords ($payment->payment_method) }}</td>
+                                <td>{{ ucwords ($payment->pickup_delivery) }}</td>
                                 <td>Rp {{ number_format($payment->total, 0, ',', '.') }}</td>
                                 <td>
                                     @if ($payment->upload_bukti)
@@ -70,17 +70,26 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($payment)
+                                    @if ($payment->status === 'pending')
+                                        <!-- Button Approve -->
                                         <form action="{{ route('admin.payments.approve', $payment->id) }}" method="POST" style="display:inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-success" onclick="return confirm('Yakin ingin menerima pembayaran ini?')"><i class="lni lni-checkmark"></i></button>
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('Yakin ingin menerima pembayaran ini?')">
+                                                <i class="lni lni-checkmark"></i>
+                                            </button>
                                         </form>
+                                        
+                                        <!-- Button Reject -->
                                         <form action="{{ route('admin.payments.reject', $payment->id) }}" method="POST" style="display:inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menolak pembayaran ini?')"><i class="lni lni-close"></i></button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menolak pembayaran ini?')">
+                                                <i class="lni lni-close"></i>
+                                            </button>
                                         </form>
-                                    @else
-                                        {{ ucfirst($payment->status) }}
+                                    @elseif ($payment->status === 'approved')
+                                        <span class="badge bg-success">Approved</span>
+                                    @elseif ($payment->status === 'rejected')
+                                        <span class="badge bg-danger">Rejected</span>
                                     @endif
                                 </td>
                             </tr>

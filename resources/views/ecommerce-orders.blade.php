@@ -7,17 +7,14 @@
     <x-page-title title="Pesanan" subtitle="Daftar Pesanan" />
 
     <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1">
-        <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">(85472)</span></a>
-        <a href="javascript:;"><span class="me-1">Menunggu Pembayaran</span><span class="text-secondary">(86)</span></a>
-        <a href="javascript:;"><span class="me-1">Belum Selesai</span><span class="text-secondary">(76)</span></a>
-        <a href="javascript:;"><span class="me-1">Selesai</span><span class="text-secondary">(8759)</span></a>
-        <a href="javascript:;"><span class="me-1">Pengembalian</span><span class="text-secondary">(769)</span></a>
-        <a href="javascript:;"><span class="me-1">Gagal</span><span class="text-secondary">(42)</span></a>
+        <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">({{ $orders->count() }})</span></a>
+        <a href="javascript:;"><span class="me-1">Menunggu</span><span class="text-secondary">({{ $orders->where('status', 'menunggu')->count() }})</span></a>
+        <a href="javascript:;"><span class="me-1">Sudah diambil</span><span class="text-secondary">({{ $orders->where('status', 'sudah diambil')->count() }})</span></a>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="position-relative">
-            <input class="form-control px-5" id="searchInput" type="search" placeholder="Cari Produk">
+            <input class="form-control px-5" id="searchInput" type="search" placeholder="Cari Pesanan">
             <span class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
         </div>
         <div>
@@ -40,225 +37,81 @@
                     <table class="table align-middle" id="orderTable">
                         <thead class="table-light">
                             <tr>
-                                <th onclick="sortTable(0)">Id Pesanan</th>
-                                <th onclick="sortTable(1)">Harga</th>
-                                <th onclick="sortTable(2)">Pembeli</th>
-                                <th onclick="sortTable(3)">Status Pembayaran</th>
-                                <th onclick="sortTable(4)">Status Pesanan</th>
-                                <th onclick="sortTable(5)">Jenis Pembayaran</th>
-                                <th onclick="sortTable(6)">Tanggal</th>
+                                <th>ID PESANAN</th>
+                                <th>TANGGAL</th>
+                                <th>NAMA</th>
+                                <th>KATEGORI</th>
+                                <th>HARGA</th>
+                                <th>METODE PENGAMBILAN</th>
+                                <th>STATUS PESANAN</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;">#2415</a>
-                                </td>
-                                <td>Rp200.000</td>
-                                <td>
-                                    <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                        <div class="customer-pic">
-                                            <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                width="40" height="40" alt="">
-                                        </div>
-                                        <p class="mb-0 customer-name fw-bold">Shereen Alen</p>
-                                    </a>
-                                </td>
-                                <td><span
-                                        class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                            class="bi bi-check2 ms-2"></i></span></td>
-                                <td><span
-                                    class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Dalam Perjalanan<i
-                                    class="bi bi-info-circle ms-2"></i></span></td>
-                                <td>Bayar di Tempat</td>
-                                <td>Nov 12, 10:45 WIB</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;">#7845</a>
-                                </td>
-                                <td>Rp110.000</td>
-                                <td>
-                                    <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                        <div class="customer-pic">
-                                            <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                width="40" height="40" alt="">
-                                        </div>
-                                        <p class="mb-0 customer-name fw-bold">Devi Fedrianingsih</p>
-                                    </a>
-                                </td>
-                                <td><span
-                                        class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Menunggu<i
-                                            class="bi bi-info-circle ms-2"></i></span></td>
-                                <td><span
-                                    class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Menunggu<i
-                                    class="bi bi-info-circle ms-2"></i></span></td>
-                                <td>Transfer Bank</td>
-                                <td>Nov 12, 10:45 WIB</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;">#5674</a>
-                                </td>
-                                <td>Rp90.000</td>
-                                <td>
-                                    <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                        <div class="customer-pic">
-                                            <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                width="40" height="40" alt="">
-                                        </div>
-                                        <p class="mb-0 customer-name fw-bold">Meilani Jesica</p>
-                                    </a>
-                                </td>
-                                <td><span
-                                    class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                    class="bi bi-check2 ms-2"></i></span></td>
-                                <td><span
-                                    class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                        class="bi bi-check2 ms-2"></i></span></td>
-                                <td>Bayar di Tempat</td>
-                                <td>Nov 12, 10:45 WIB</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:;">#2415</a>
-                                        </td>
-                                        <td>Rp200.000</td>
-                                        <td>
-                                            <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                                <div class="customer-pic">
-                                                    <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                        width="40" height="40" alt="">
-                                                </div>
-                                                <p class="mb-0 customer-name fw-bold">Shereen Alen</p>
-                                            </a>
-                                        </td>
-                                        <td><span
-                                                class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                                    class="bi bi-check2 ms-2"></i></span></td>
-                                        <td><span
-                                            class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Dalam Perjalanan<i
-                                            class="bi bi-info-circle ms-2"></i></span></td>
-                                        <td>Bayar di Tempat</td>
-                                        <td>Nov 12, 10:45 WIB</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:;">#7845</a>
-                                        </td>
-                                        <td>Rp110.000</td>
-                                        <td>
-                                            <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                                <div class="customer-pic">
-                                                    <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                        width="40" height="40" alt="">
-                                                </div>
-                                                <p class="mb-0 customer-name fw-bold">Devi Fedrianingsih</p>
-                                            </a>
-                                        </td>
-                                        <td><span
-                                                class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Menunggu<i
-                                                    class="bi bi-info-circle ms-2"></i></span></td>
-                                        <td><span
-                                            class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Menunggu<i
-                                            class="bi bi-info-circle ms-2"></i></span></td>
-                                        <td>Transfer Bank</td>
-                                        <td>Nov 12, 10:45 WIB</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:;">#5674</a>
-                                        </td>
-                                        <td>Rp90.000</td>
-                                        <td>
-                                            <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                                <div class="customer-pic">
-                                                    <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                        width="40" height="40" alt="">
-                                                </div>
-                                                <p class="mb-0 customer-name fw-bold">Meilani Jesica</p>
-                                            </a>
-                                        </td>
-                                        <td><span
-                                            class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                            class="bi bi-check2 ms-2"></i></span></td>
-                                <td><span
-                                    class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                        class="bi bi-check2 ms-2"></i></span></td>
-                                <td>Bayar di Tempat</td>
-                                <td>Nov 12, 10:45 WIB</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;">#2415</a>
-                                </td>
-                                <td>Rp200.000</td>
-                                <td>
-                                    <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                        <div class="customer-pic">
-                                            <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                width="40" height="40" alt="">
-                                        </div>
-                                        <p class="mb-0 customer-name fw-bold">Shereen Alen</p>
-                                    </a>
-                                </td>
-                                <td><span
-                                        class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                            class="bi bi-check2 ms-2"></i></span></td>
-                                <td><span
-                                    class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Dalam Perjalanan<i
-                                    class="bi bi-info-circle ms-2"></i></span></td>
-                                <td>Bayar di Tempat</td>
-                                <td>Nov 12, 10:45 WIB</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;">#7845</a>
-                                </td>
-                                <td>Rp110.000</td>
-                                <td>
-                                    <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                        <div class="customer-pic">
-                                            <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                width="40" height="40" alt="">
-                                        </div>
-                                        <p class="mb-0 customer-name fw-bold">Devi Fedrianingsih</p>
-                                    </a>
-                                </td>
-                                <td><span
-                                        class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Menunggu<i
-                                            class="bi bi-info-circle ms-2"></i></span></td>
-                                <td><span
-                                    class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Menunggu<i
-                                    class="bi bi-info-circle ms-2"></i></span></td>
-                                <td>Transfer Bank</td>
-                                <td>Nov 12, 10:45 WIB</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;">#5674</a>
-                                </td>
-                                <td>Rp90.000</td>
-                                <td>
-                                    <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                        <div class="customer-pic">
-                                            <img src="https://placehold.co/110x110/png" class="rounded-circle"
-                                                width="40" height="40" alt="">
-                                        </div>
-                                        <p class="mb-0 customer-name fw-bold">Meilani Jesica</p>
-                                    </a>
-                                </td>
-                                <td><span
-                                    class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                    class="bi bi-check2 ms-2"></i></span></td>
-                                <td><span
-                                    class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Berhasil<i
-                                        class="bi bi-check2 ms-2"></i></span></td>
-                                <td>Bayar di Tempat</td>
-                                <td>Nov 12, 10:45 WIB</td>
-                            </tr>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td>
+                                        <a href="javascript:void(0)" class="view-order" data-id="{{ $order->id }}">
+                                            {{ $order->order_id }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $order->tanggal ? \Carbon\Carbon::parse($order->tanggal)->format('d-m-Y') : '-' }}</td>
+                                    <td>{{ $order->name }}</td>
+                                    <td>{{ ucfirst($order->category) }}</td>
+                                    <td>Rp {{ number_format($order->total, 0, ',', '.') }}</td>
+                                    <td>{{ ucfirst($order->pickup_method) }}</td>
+                                    <td>
+                                        <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <select name="status" class="form-select" onchange="this.form.submit()">
+                                                <option value="menunggu" {{ $order->status === 'menunggu' ? 'selected' : '' }}>Menunggu</option>
+                                                <option value="sudah diambil" {{ $order->status === 'sudah diambil' ? 'selected' : '' }}>Sudah diambil</option>
+                                            </select>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Detail Pesanan -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Detail Pesanan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>ID Pesanan:</strong> <span id="orderId"></span></p>
+                    <p><strong>Tanggal:</strong> <span id="tanggal"></span></p>
+                    <p><strong>Nama:</strong> <span id="nama"></span></p>
+                    <p><strong>Alamat:</strong> <span id="alamat"></span></p>
+                    <p><strong>No Telepon:</strong> <span id="noTelepon"></span></p>
+                    <p><strong>Kategori:</strong> <span id="kategori"></span></p>
+                    <p><strong>Jenis Pembayaran:</strong> <span id="jenisPembayaran"></span></p>
+                    <p><strong>Metode Pengambilan:</strong> <span id="metodePengambilan"></span></p>
+                    <p><strong>Total Harga:</strong> <span id="totalHarga"></span></p>
+                    <p><strong>Bukti Bayar:</strong> <a href="javascript:void(0)" id="lihatBukti" class="text-primary">Lihat Bukti</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Bukti Bayar -->
+    <div class="modal fade" id="buktiBayarModal" tabindex="-1" aria-labelledby="buktiBayarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buktiBayarModalLabel">Bukti Bayar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="buktiBayarImage" src="" alt="Bukti Bayar" style="max-width: 100%; max-height: 400px;">
                 </div>
             </div>
         </div>
@@ -274,6 +127,55 @@
 <script src="{{ URL::asset('build/js/main.js') }}"></script>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".view-order").forEach(function (element) {
+            element.addEventListener("click", function () {
+                const orderId = this.getAttribute("data-id");
+
+                fetch(`/order-detail/${orderId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("orderId").textContent = data.order_id || '-';
+                        document.getElementById("tanggal").textContent = data.tanggal || '-';
+                        document.getElementById("nama").textContent = data.name || '-';
+                        document.getElementById("alamat").textContent = data.address || '-';
+                        document.getElementById("noTelepon").textContent = data.phone || '-';
+                        document.getElementById("kategori").textContent = capitalizeFirstLetter(data.category || '-');
+                        document.getElementById("jenisPembayaran").textContent = data.payment_method ? data.payment_method.toUpperCase() : '-';
+                        document.getElementById("metodePengambilan").textContent = capitalizeFirstLetter(data.pickup_method || '-');
+                        document.getElementById("totalHarga").textContent = 'Rp ' + new Intl.NumberFormat().format(data.total || 0);
+
+                        const lihatBukti = document.getElementById("lihatBukti");
+                        lihatBukti.setAttribute("data-url", data.bukti_bayar_url || '#');
+
+                        const modal = new bootstrap.Modal(document.getElementById("orderModal"));
+                        modal.show();
+                    })
+                    .catch(error => {
+                        console.error("Error fetching order detail:", error);
+                        alert("Gagal mengambil detail pesanan.");
+                    });
+            });
+        });
+
+        document.getElementById("lihatBukti").addEventListener("click", function () {
+            const buktiBayarUrl = this.getAttribute("data-url");
+
+            if (buktiBayarUrl && buktiBayarUrl !== '#') {
+                document.getElementById("buktiBayarImage").src = buktiBayarUrl;
+
+                const buktiModal = new bootstrap.Modal(document.getElementById("buktiBayarModal"));
+                buktiModal.show();
+            } else {
+                alert("Bukti bayar tidak tersedia.");
+            }
+        });
+        
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        }
+    });
+    
     document.getElementById('entriesCount').addEventListener('change', function() {
         var select, entriesCount, table, tr;
         select = document.getElementById("entriesCount");

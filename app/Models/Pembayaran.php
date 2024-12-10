@@ -21,5 +21,11 @@ class Pembayaran extends Model
         'pickup_delivery',
         'total',
         'upload_bukti',
+        'status',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'payment_id', 'id');
+    }
 }

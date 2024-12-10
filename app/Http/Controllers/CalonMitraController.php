@@ -95,4 +95,17 @@ class CalonMitraController extends Controller
         // Redirect ke halaman konfirmasi
         return view('post-mitra');
     }
+    
+    public function show($nomor)
+    {
+        // Cari data berdasarkan nomor
+        $calonMitra = CalonMitra::where('nomor', $nomor)->first();
+
+        if (!$calonMitra) {
+            return response()->json(['message' => 'Mitra tidak ditemukan.'], 404);
+        }
+
+        // Kembalikan data dalam format JSON
+        return response()->json($calonMitra);
+    }
 }
