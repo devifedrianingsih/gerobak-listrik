@@ -45,7 +45,8 @@ class CalonMitraController extends Controller
             'alamat_mitra' => $calonMitra->alamat_calon_mitra,
             'email_mitra' => $calonMitra->email_calon_mitra,
             'no_hp_mitra' => $calonMitra->no_hp_calon_mitra,
-            'status' => 'aktif'     // Status aktif
+            'status' => 'aktif',     // Status aktif
+            'nomor' => $calonMitra->nomor, // Isi kolom nomor dari tabel calon_mitra
         ]);
     
         // Mengubah status calon mitra menjadi 'terima' dan menyimpan ID Mitra baru

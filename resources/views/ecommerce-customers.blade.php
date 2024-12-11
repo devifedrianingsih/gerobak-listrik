@@ -75,15 +75,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h6>Data Diri Mitra</h6>
+                    <h5>Data Diri Mitra</h5>
                     <p><strong>Nama Lengkap:</strong> <span id="namaLengkap"></span></p>
                     <p><strong>Tanggal Lahir:</strong> <span id="tanggalLahir"></span></p>
                     <p><strong>Email:</strong> <span id="email"></span></p>
                     <p><strong>Nomor Handphone:</strong> <span id="nomorHandphone"></span></p>
                     <p><strong>Jenis Kelamin:</strong> <span id="jenisKelamin"></span></p>
-                    <p><strong>Domisili:</strong> <span id="domisili"></span></p>
-
-                    <h6>Alamat Mitra</h6>
+                    <p><strong>Domisili:</strong> <span id="domisili"></span></p><br>
+    
+                    <h5>Alamat Mitra</h5>
                     <p><strong>Alamat Lengkap:</strong> <span id="alamatLengkap"></span></p>
                     <p><strong>Kota:</strong> <span id="kota"></span></p>
                     <p><strong>Provinsi:</strong> <span id="provinsi"></span></p>
@@ -106,46 +106,44 @@
 
     <!-- JavaScript -->
     <script>
-       document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll(".view-mitra").forEach(function (element) {
-                element.addEventListener("click", function () {
-                    const mitraNomor = this.getAttribute("data-nomor");
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".view-mitra").forEach(function (element) {
+            element.addEventListener("click", function () {
+                const mitraNomor = this.getAttribute("data-nomor");
 
-                    console.log("Fetching data for mitra nomor:", mitraNomor);
+                fetch(`/ecommerce-potential-partners/${mitraNomor}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Gagal mengambil data mitra");
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log("Data diterima:", data); // Debug log untuk data
+                        // Isi modal dengan data yang diterima
+                        document.getElementById("namaLengkap").textContent = data.nama_calon_mitra || "Tidak ada";
+                        document.getElementById("tanggalLahir").textContent = data.tanggal_lahir || "Tidak ada";
+                        document.getElementById("email").textContent = data.email_calon_mitra || "Tidak ada";
+                        document.getElementById("nomorHandphone").textContent = data.no_hp_calon_mitra || "Tidak ada";
+                        document.getElementById("jenisKelamin").textContent = data.jenis_kelamin || "Tidak ada";
+                        document.getElementById("domisili").textContent = data.domisili || "Tidak ada";
+                        document.getElementById("alamatLengkap").textContent = data.alamat_calon_mitra || "Tidak ada";
+                        document.getElementById("kota").textContent = data.kota_calon_mitra || "Tidak ada";
+                        document.getElementById("provinsi").textContent = data.provinsi || "Tidak ada";
+                        document.getElementById("kodePos").textContent = data.kode_pos || "Tidak ada";
+                        document.getElementById("negara").textContent = data.negara || "Tidak ada";
+                        document.getElementById("latitude").textContent = data.latitude || "Tidak ada";
+                        document.getElementById("longitude").textContent = data.longitude || "Tidak ada";
 
-                    fetch(`/ecommerce-potential-partners/${mitraNomor}`)
-                        .then((response) => {
-                            if (!response.ok) {
-                                throw new Error("HTTP status " + response.status);
-                            }
-                            return response.json();
-                        })
-                        .then((data) => {
-                            // Isi modal dengan data yang diterima
-                            document.getElementById("namaLengkap").textContent = data.nama_calon_mitra || "Tidak ada";
-                            document.getElementById("tanggalLahir").textContent = data.tanggal_lahir || "Tidak ada";
-                            document.getElementById("email").textContent = data.email_calon_mitra || "Tidak ada";
-                            document.getElementById("nomorHandphone").textContent = data.no_hp_calon_mitra || "Tidak ada";
-                            document.getElementById("jenisKelamin").textContent = data.jenis_kelamin || "Tidak ada";
-                            document.getElementById("domisili").textContent = data.domisili || "Tidak ada";
-                            document.getElementById("alamatLengkap").textContent = data.alamat_calon_mitra || "Tidak ada";
-                            document.getElementById("kota").textContent = data.kota_calon_mitra || "Tidak ada";
-                            document.getElementById("provinsi").textContent = data.provinsi || "Tidak ada";
-                            document.getElementById("kodePos").textContent = data.kode_pos || "Tidak ada";
-                            document.getElementById("negara").textContent = data.negara || "Tidak ada";
-                            document.getElementById("latitude").textContent = data.latitude || "Tidak ada";
-                            document.getElementById("longitude").textContent = data.longitude || "Tidak ada";
-
-                            // Tampilkan modal
-                            const mitraModal = new bootstrap.Modal(document.getElementById("mitraModal"));
-                            mitraModal.show();
-                        })
-                        .catch((error) => {
-                            console.error("Error fetching mitra data:", error);
-                            alert("Gagal mengambil data mitra.");
-                        });
+                        const mitraModal = new bootstrap.Modal(document.getElementById("mitraModal"));
+                        mitraModal.show();
+                    })
+                    .catch(error => {
+                    console.error("Error fetching mitra data:", error);
+                    alert("Gagal mengambil data mitra.");
                 });
             });
         });
+    });
     </script>
 @endpush

@@ -10,6 +10,8 @@ class CalonMitra extends Model
     use HasFactory;
 
     protected $primaryKey = 'nomor'; // Gunakan kolom 'nomor' sebagai primary key
+    public $incrementing = false;    // Jika 'nomor' bukan auto-increment
+    protected $keyType = 'string';   // Tipe data sesuai dengan database
     protected $table = 'calon_mitra';
 
     protected $fillable = [
@@ -30,4 +32,9 @@ class CalonMitra extends Model
     ];
 
     public $timestamps = true;
+
+    public function mitra()
+    {
+        return $this->hasOne(Mitra::class, 'nomor', 'nomor'); // Relasi dengan tabel mitra
+    }
 }

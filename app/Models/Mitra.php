@@ -13,15 +13,11 @@ class Mitra extends Model
 
     protected $fillable = [
         'id_mitra', 'nama_mitra', 'alamat_mitra', 'email_mitra', 
-        'no_hp_mitra', 'status'
+        'no_hp_mitra', 'status', 'nomor' // Tambahkan kolom 'nomor' jika diperlukan
     ];
 
-    public function petaFranchise()
+    public function calonMitra()
     {
-        return $this->hasOne(PetaFranchise::class, 'id_mitra', 'id_mitra');
+        return $this->belongsTo(CalonMitra::class, 'nomor', 'nomor'); // Relasi dengan tabel calon_mitra
     }
-
-    public $timestamps = true;
-
-    
 }
