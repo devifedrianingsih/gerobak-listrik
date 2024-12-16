@@ -20,11 +20,11 @@ class Product extends Model
         'ProductName',
         'ProductDescription',
         'Price',
-        'SellingPrice', // Ditambahkan untuk harga jual
         'Stock',
-        'ProductImage', // Ditambahkan untuk menyimpan path gambar
+        'ProductRating',
+        'ProductImage',
         'CategoryID',
-        'status' // Ditambahkan untuk menyimpan status produk (draft/publish)
+        'status'
     ];
 
     // Mengaktifkan timestamps otomatis

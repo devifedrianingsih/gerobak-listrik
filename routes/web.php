@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AdminPaymentController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,7 +24,8 @@ Route::get('/ecommerce-add-product', [ProductController::class, 'create'])->name
 
 // Route untuk menyimpan produk baru (POST)
 Route::post('/ecommerce-add-product', [ProductController::class, 'store'])->name('product.store');
-
+Route::get('/ecommerce-edit-product', [ProductController::class, 'edit'])->name('product.edit');
+Route::get('/ecommerce-hapus-product', [ProductController::class, 'delete'])->name('product.destroy');
 
 // Route untuk pengunggahan gambar (POST)
 Route::post('/upload-product-image', [ProductController::class, 'uploadImage'])->name('upload.product.image');
@@ -122,8 +124,11 @@ Route::get('/formpendaftaran', function () {
     return view('formpendaftaran');
 });
 Route::get('/hasiljadi', function () {
-    return view('hasiljadi');
+    $product = Product::all();
+
+    return view('hasiljadi', compact('product'));
 });
+Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
 
 // Rute fallback untuk menangkap semua route yang tidak didefinisikan (Opsional)
 Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');

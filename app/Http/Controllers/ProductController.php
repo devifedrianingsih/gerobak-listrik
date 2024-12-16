@@ -9,79 +9,81 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    // Fungsi untuk menampilkan halaman daftar produk
+    // 1. Tampilkan daftar produk
     public function index()
     {
-        // Ambil semua produk dari database
-        $products = Product::all();
-        
-        // Kirim data produk ke view ecommerce-products
-        return view('ecommerce-products', compact('products'));
+        // Hitung jumlah produk berdasarkan status
+        $publishedCount = Product::where('status', 'published')->count();
+        $draftCount = Product::where('status', 'draft')->count();
+
+        // Ambil semua produk dengan kategori
+        $products = Product::with('category')->get();
+
+        // Kirim data ke view
+        return view('ecommerce-products', compact('products', 'publishedCount', 'draftCount'));
     }
 
-    // Fungsi untuk menampilkan halaman tambah produk
+    // 2. Form tambah produk
     public function create()
     {
-        // Ambil kategori dari database
+        // Ambil semua kategori
         $categories = Category::all();
-    
-        // Kirim data kategori ke view
+
         return view('ecommerce-add-product', compact('categories'));
     }
 
-    // Fungsi untuk menyimpan produk baru ke database
+    // 3. Simpan data produk baru
     public function store(Request $request)
     {
-        // Validasi input dari form
+        // Validasi input
         $validatedData = $request->validate([
             'ProductName' => 'required|string|max:255',
             'ProductDescription' => 'required|string',
-            'Price' => 'required|numeric',
-            'SellingPrice' => 'nullable|numeric', // Tambahkan validasi untuk harga jual
+            'SellingPrice' => 'nullable|numeric',
             'Stock' => 'required|integer',
-            'CategoryID' => 'required|exists:categories,CategoryID', // Validasi category ID
-            'ProductImage' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi gambar
+            'CategoryID' => 'required|exists:categories,CategoryID', // Periksa apakah kategori ada
+            'ProductImage' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'status' => 'required|in:draft,published', // Status harus draft atau published
         ]);
 
-        // Proses upload gambar jika ada
+        // Proses upload gambar (jika ada)
         $imagePath = null;
         if ($request->hasFile('ProductImage')) {
-            // Upload gambar ke folder public/products
-            $imagePath = $request->file('ProductImage')->store('products', 'public');
-        }
+            $file = $request->file('ProductImage');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $destinationPath = public_path('img/product_image'); // Folder public/img/product_image
+            $file->move($destinationPath, $fileName); // Pindahkan file
+            $imagePath = 'img/product_image/' . $fileName; // Path untuk disimpan ke database
+        }        
 
-        // Tentukan status produk (draft atau publish)
-        $status = $request->input('status', 'draft'); // Default ke 'draft' jika tidak ada input
-
-        // Simpan produk baru ke database
+        // Simpan produk ke database
         Product::create([
             'ProductName' => $validatedData['ProductName'],
             'ProductDescription' => $validatedData['ProductDescription'],
-            'Price' => $validatedData['Price'],
-            'SellingPrice' => $validatedData['SellingPrice'], // Tambahkan SellingPrice
+            'Price' => $validatedData['SellingPrice'],
             'Stock' => $validatedData['Stock'],
             'CategoryID' => $validatedData['CategoryID'],
-            'ProductImage' => $imagePath, // Simpan path gambar
-            'status' => $status, // Simpan status ('draft' atau 'publish')
+            'ProductImage' => $imagePath,
+            'status' => $validatedData['status'],
         ]);
 
-        // Redirect ke halaman daftar produk dengan pesan sukses
+        // Redirect dengan pesan sukses
         return redirect()->route('product.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
-    // Fungsi untuk meng-handle upload gambar dengan Fancy File Uploader
+    // 4. Proses upload gambar
     public function uploadImage(Request $request)
     {
-        // Validasi bahwa file adalah gambar dan sesuai aturan
+        // Validasi input file
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Validasi gambar
+            'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Proses upload gambar ke folder public/products
+        // Upload file
         if ($request->hasFile('file')) {
             $imagePath = $request->file('file')->store('products', 'public');
 
-            // Return response jika berhasil
+            // Kembalikan respon JSON
             return response()->json([
                 'success' => true,
                 'filePath' => Storage::url($imagePath),
@@ -89,7 +91,7 @@ class ProductController extends Controller
             ], 200);
         }
 
-        // Return error jika gagal
         return response()->json(['success' => false], 400);
     }
+    
 }
