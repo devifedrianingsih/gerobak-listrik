@@ -18,9 +18,10 @@ class ProductController extends Controller
 
         // Ambil semua produk dengan kategori
         $products = Product::with('category')->get();
+        $categories = Category::all(); // Ambil semua data kategori
 
         // Kirim data ke view
-        return view('ecommerce-products', compact('products', 'publishedCount', 'draftCount'));
+        return view('ecommerce-products', compact('products', 'categories', 'publishedCount', 'draftCount'));
     }
 
     // 2. Form tambah produk
@@ -39,7 +40,7 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'ProductName' => 'required|string|max:255',
             'ProductDescription' => 'required|string',
-            'SellingPrice' => 'nullable|numeric',
+            'Price' => 'nullable|numeric',
             'Stock' => 'required|integer',
             'CategoryID' => 'required|exists:categories,CategoryID', // Periksa apakah kategori ada
             'ProductImage' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -60,7 +61,7 @@ class ProductController extends Controller
         Product::create([
             'ProductName' => $validatedData['ProductName'],
             'ProductDescription' => $validatedData['ProductDescription'],
-            'Price' => $validatedData['SellingPrice'],
+            'Price' => $validatedData['Price'],
             'Stock' => $validatedData['Stock'],
             'CategoryID' => $validatedData['CategoryID'],
             'ProductImage' => $imagePath,
@@ -93,5 +94,45 @@ class ProductController extends Controller
 
         return response()->json(['success' => false], 400);
     }
+
+    //Update Produk
+    public function update(Request $request, $id)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'ProductName' => 'required|string|max:255',
+            'ProductDescription' => 'required|string',
+            'Price' => 'required|numeric',
+            'Stock' => 'required|integer',
+            'CategoryID' => 'required|exists:categories,CategoryID',
+            'status' => 'required|in:draft,published',
+        ]);
     
+        // Cari produk berdasarkan ID
+        $product = Product::findOrFail($id);
+    
+        // Update data produk
+        $product->update($validatedData);
+    
+        // Redirect dengan pesan sukses
+        return redirect()->route('product.index')->with('success', 'Produk berhasil diperbarui.');
+    }
+
+    //Delete Produk
+    public function destroy($id)
+    {
+        // Temukan produk berdasarkan ID
+        $product = Product::findOrFail($id);
+
+        // Hapus file gambar jika ada
+        if ($product->ProductImage && file_exists(public_path($product->ProductImage))) {
+            unlink(public_path($product->ProductImage)); // Hapus file gambar dari direktori
+        }
+
+        // Hapus produk dari database
+        $product->delete();
+
+        // Redirect kembali ke halaman produk dengan pesan sukses
+        return redirect()->route('product.index')->with('success', 'Produk berhasil dihapus.');
+    }
 }

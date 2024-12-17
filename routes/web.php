@@ -28,8 +28,8 @@ Route::get('/ecommerce-add-product', [ProductController::class, 'create'])->name
 
 // Route untuk menyimpan produk baru (POST)
 Route::post('/ecommerce-add-product', [ProductController::class, 'store'])->name('product.store');
-Route::get('/ecommerce-edit-product', [ProductController::class, 'edit'])->name('product.edit');
-Route::get('/ecommerce-hapus-product', [ProductController::class, 'delete'])->name('product.destroy');
+Route::get('/ecommerce-products/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::delete('/ecommerce-products/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
 // Route untuk pengunggahan gambar (POST)
 Route::post('/upload-product-image', [ProductController::class, 'uploadImage'])->name('upload.product.image');
@@ -64,6 +64,7 @@ Route::get('/order-detail/{id}', [OrderController::class, 'showDetail'])->name('
 
 //Route untuk invoice
 Route::get('/order-invoice/{id}', [OrderController::class, 'showInvoice'])->name('order.invoice');
+
 
 // Route untuk dashboard (dengan middleware auth)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');

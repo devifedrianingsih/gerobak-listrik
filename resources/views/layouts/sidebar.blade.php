@@ -108,13 +108,13 @@
             </a>
           </li> --}}
 
-          <li>
+          {{-- <li>
             <a href="{{ url('/sales-report') }}">
               <div class="material-icons-outlined"> <i class="lni lni-printer"></i>
               </div>
               <div class="menu-title">Laporan Penjualan</div>
             </a>
-          </li>
+          </li> --}}
 
           <li>
             <a href="{{ url('/user-profile') }}">

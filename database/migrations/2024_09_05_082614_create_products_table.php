@@ -6,31 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id('ProductID');
+            $table->id();
             $table->string('ProductName');
-            $table->text('ProductDescription')->nullable();
-            $table->float('Price')->nullable();
-            $table->integer('Stock')->nullable();
-            $table->float('ProductRating')->nullable();
-            $table->unsignedBigInteger('CategoryID')->nullable();
-            $table->foreign('CategoryID')->references('CategoryID')->on('categories')->onDelete('set null');
+            $table->text('ProductDescription');
+            $table->decimal('Price', 10, 2);
+            $table->decimal('SellingPrice', 10, 2)->nullable();
+            $table->integer('Stock');
+            $table->unsignedBigInteger('CategoryID');
+            $table->string('ProductImage')->nullable();
             $table->timestamps();
+
+            $table->foreign('CategoryID')->references('id')->on('categories');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('products');

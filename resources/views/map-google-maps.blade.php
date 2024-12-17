@@ -15,6 +15,12 @@
     </div>
 
     @push('script')
+    <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ URL::asset('build/plugins/peity/jquery.peity.min.js') }}"></script>
+    
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Leaflet JS -->
