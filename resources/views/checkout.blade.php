@@ -83,6 +83,7 @@
                     <!-- Total Harga Ditampilkan -->
                     <p id="total-display">Total: <strong>Rp 0</strong></p>
                     <!-- Input Hidden untuk Mengirim Total -->
+                    <input type="hidden" id="produk-list" name="produk_list" value="">
                     <input type="hidden" id="total" name="total" value="0">
                 </div>
                 <div class="section">
@@ -94,7 +95,7 @@
                 </div>
 
                 <div class="checkout-btn">
-                    <button type="submit" id="checkout-btn">Konfirmasi</button>
+                    <button type="submit" id="checkout-btn">Kirim</button>
                 </div>
                 </div>
             </div>

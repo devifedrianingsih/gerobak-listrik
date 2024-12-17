@@ -17,6 +17,7 @@ class Pembayaran extends Model
         'city',
         'postal',
         'phone',
+        'product_name', // Tambahkan kolom product_name
         'payment_method',
         'pickup_delivery',
         'total',
@@ -27,5 +28,10 @@ class Pembayaran extends Model
     public function orders()
     {
         return $this->hasMany(Order::class, 'payment_id', 'id');
+    }
+
+    public function produkPembayaran()
+    {
+        return $this->hasMany(PembayaranProduk::class, 'pembayaran_id', 'id');
     }
 }

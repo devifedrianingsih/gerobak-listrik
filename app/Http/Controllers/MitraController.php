@@ -27,4 +27,11 @@ class MitraController extends Controller
 
         return response()->json($calonMitra);
     }
+
+    public function updateCalonMitra(Request $request, $nomor)
+    {
+        $calonMitra = CalonMitra::findOrFail($nomor);
+        $calonMitra->update($request->all());
+        return response()->json(['message' => 'Data berhasil diperbarui.']);
+    }
 }

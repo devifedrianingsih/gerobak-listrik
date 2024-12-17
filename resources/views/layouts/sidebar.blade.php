@@ -83,8 +83,6 @@
               </li>
               <li><a href="{{ url('/ecommerce-customers') }}"><i class="material-icons-outlined">arrow_right</i>Mitra</a>
               </li>
-              <li><a href="{{ url('/ecommerce-customer-details') }}"><i class="material-icons-outlined">arrow_right</i>Detail Pelanggan</a>
-              </li>
             </ul>
           </li>
 
@@ -99,18 +97,16 @@
               </li>
               <li><a href="{{ url('/ecommerce-orders') }}"><i class="material-icons-outlined">arrow_right</i>Pesanan</a>
               </li>
-              <li><a href="{{ url('/ecommerce-order-details') }}"><i class="material-icons-outlined">arrow_right</i>Detail Pesanan</a>
-              </li>
             </ul>
           </li>
 
-          <li>
+          {{-- <li>
             <a href="{{ url('/app-invoice') }}">
               <div class="parent-icon"><i class="material-icons-outlined">description</i>
               </div>
               <div class="menu-title">Invoice</div>
             </a>
-          </li>
+          </li> --}}
 
           <li>
             <a href="{{ url('/sales-report') }}">

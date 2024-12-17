@@ -85,7 +85,7 @@ class OrderController extends Controller
     
     public function showDetail($id)
     {
-        $order = Order::with('pembayaran')->findOrFail($id);
+        $order = Order::with('pembayaran', 'pembayaran.produkPembayaran')->findOrFail($id);
 
         if (!$order->pembayaran) {
             return response()->json(['error' => 'Data pembayaran tidak ditemukan'], 404);
@@ -98,10 +98,73 @@ class OrderController extends Controller
             'address' => $order->pembayaran->manual_address,
             'phone' => $order->pembayaran->phone,
             'category' => $order->category,
+            'produk' => $order->pembayaran->produkPembayaran->map(function ($produk) {
+                return [
+                    'nama_produk' => $produk->nama_produk,
+                    'harga_produk' => $produk->harga_produk,
+                    'kuantitas' => $produk->kuantitas,
+                    'total_harga' => $produk->total_harga,
+                ];
+            }),
+            'total' => $order->pembayaran->total,
             'payment_method' => $order->pembayaran->payment_method,
             'pickup_method' => $order->pickup_method,
-            'total' => $order->pembayaran->total,
-            'bukti_bayar_url' => asset('storage/' . $order->pembayaran->upload_bukti), // Tambahkan URL bukti bayar
+            'bukti_bayar_url' => asset('storage/' . $order->pembayaran->upload_bukti),
         ]);
     }
+
+    public function showInvoice($id)
+    {
+        $order = Order::with('pembayaran', 'pembayaran.produkPembayaran')->findOrFail($id);
+    
+        if (!$order->pembayaran) {
+            return response()->json(['error' => 'Data pembayaran tidak ditemukan'], 404);
+        }
+    
+        return response()->json([
+            'order_id' => $order->order_id,
+            'tanggal' => $order->pembayaran->created_at->format('d-m-Y'),
+            'name' => $order->pembayaran->name,
+            'address' => $order->pembayaran->manual_address,
+            'phone' => $order->pembayaran->phone,
+            'category' => $order->category,
+            'produk' => $order->pembayaran->produkPembayaran->map(function ($produk) {
+                return [
+                    'nama_produk' => $produk->nama_produk,
+                    'harga_produk' => $produk->harga_produk,
+                    'kuantitas' => $produk->kuantitas,
+                    'total_harga' => $produk->total_harga,
+                ];
+            }),
+            'total' => $order->pembayaran->total,
+            'payment_method' => $order->pembayaran->payment_method,
+            'pickup_method' => $order->pickup_method,
+        ]);
+    }
+
+public function fetchInvoice($id)
+{
+    $order = Order::with('produk')->findOrFail($id);
+
+    $items = $order->produk->map(function ($item) {
+        return [
+            'name' => $item->nama_produk,
+            'quantity' => $item->quantity,
+            'price' => $item->harga_satuan,
+            'total' => $item->total_harga
+        ];
+    });
+
+    return response()->json([
+        'invoice_id' => $order->order_id,
+        'date' => $order->created_at->format('d-m-Y'),
+        'customer_name' => $order->name,
+        'customer_address' => $order->address,
+        'customer_phone' => $order->phone,
+        'items' => $items,
+        'subtotal' => $order->subtotal,
+        'shipping' => $order->shipping_cost,
+        'total' => $order->total
+    ]);
+}
 }

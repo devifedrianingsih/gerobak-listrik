@@ -109,4 +109,12 @@ class CalonMitraController extends Controller
         // Kembalikan data dalam format JSON
         return response()->json($calonMitra);
     }
+
+    public function petaMitra()
+    {
+        // Ambil data calon mitra dengan status "diterima"
+        $calonMitra = CalonMitra::where('status', 'diterima')->get();
+    
+        return view('map-google-maps', compact('calonMitra'));
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\MitraController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AdminPaymentController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DashboardController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,9 @@ Auth::routes();
 
 // Route untuk halaman home
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//Route untuk halaman Peta Sebaran
+Route::get('/map-google-maps', [CalonMitraController::class, 'petaMitra'])->name('peta-mitra');
 
 // Route untuk halaman produk dengan nama rute
 Route::get('/ecommerce-products', [ProductController::class, 'index'])->name('product.index');
@@ -37,7 +41,12 @@ Route::get('/ecommerce-potential-partners', [CalonMitraController::class, 'index
 Route::post('/calon-mitra.index/{nomor}/terima', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
 Route::post('/calon-mitra.index/{nomor}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
 
+//Mengambil data dari tabel calon mitra untuk page mitra
+Route::get('/ecommerce-potential-partners/{nomor}', [MitraController::class, 'getCalonMitraData']);
+Route::post('/ecommerce-potential-partners/update/{nomor}', [MitraController::class, 'updateCalonMitra']);
+
 Route::get('/ecommerce-customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
+
 
 // Route untuk halaman checkout
 Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
@@ -46,6 +55,15 @@ Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('chec
 Route::get('ecommerce-payment', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
 Route::post('/admin/payments/{id}/approve', [AdminPaymentController::class, 'approve'])->name('admin.payments.approve');
 Route::post('/admin/payments/{id}/reject', [AdminPaymentController::class, 'reject'])->name('admin.payments.reject');
+
+//Route untuk halaman order
+Route::get('/ecommerce-orders', [OrderController::class, 'index'])->name('orders.index');
+Route::post('/orders/create-from-payments', [OrderController::class, 'createFromPayments'])->name('orders.createFromPayments');
+Route::patch('/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+Route::get('/order-detail/{id}', [OrderController::class, 'showDetail'])->name('order.detail');
+
+//Route untuk invoice
+Route::get('/order-invoice/{id}', [OrderController::class, 'showInvoice'])->name('order.invoice');
 
 // Route untuk dashboard (dengan middleware auth)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
