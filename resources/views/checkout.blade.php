@@ -90,7 +90,7 @@
                     <h2>Bukti Transfer</h2>
                     <div class="upload-btn">
                         <label for="upload-bukti">Upload Bukti Transfer</label>
-                        <input type="file" id="upload-bukti" name="upload_bukti" accept="image/*,application/pdf" required>
+                        <input type="file" id="upload-bukti" name="upload_bukti" accept="image/*" required>
                     </div>
                 </div>
 

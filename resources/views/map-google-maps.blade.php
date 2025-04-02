@@ -45,7 +45,7 @@
                     .addTo(map)
                     .bindPopup(`
                         <b>${item.nama_calon_mitra}</b><br>
-                        Lokasi: ${item.alamat_calon_mitra}<br>
+                        Alamat Mitra: ${item.alamat_calon_mitra}<br>
                         Kota: ${item.kota_calon_mitra}<br>
                         Kontak: ${item.no_hp_calon_mitra}
                     `);

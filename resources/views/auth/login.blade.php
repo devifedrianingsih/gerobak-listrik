@@ -21,8 +21,8 @@
                     class="col-12 col-xl-5 col-xxl-5 auth-cover-right align-items-center justify-content-center">
                     <div class="card rounded-0 m-3 mb-0 border-0 shadow-none bg-none">
                         <div class="card-body p-sm-5">
-                            <h4 class="fw-bold">Selamat Datang di Gerobak Listrik</h4>
-                            <p class="mb-0">Selamat datang di Dashboard Admin</p>
+                            <h4 class="fw-bold">Gerobak Listrik Angkringan</h4>
+                            <p class="mb-0">Selamat datang di Website Admin</p>
                             <div class="form-body mt-4">
                                 
                                 <form method="POST" action="{{ route('login') }}" class="row g-3">
@@ -77,17 +77,8 @@
                                             <button type="submit" class="btn btn-primary">Masuk</button>
                                         </div>
                                     </div>
-
-                                    <div class="col-10">
-                                        <div class="text-start">
-                                            <p class="mb-0">Belum punya akun? <a
-                                                    href="{{ route('register') }}">Daftar</a>
-                                            </p>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
