@@ -18,26 +18,26 @@ class CalonMitraController extends Controller
     {
         // Temukan calon mitra berdasarkan nomor (bukan id)
         $calonMitra = CalonMitra::findOrFail($nomor);
-    
+
         // Memeriksa apakah calon mitra sudah diterima sebelumnya
         if ($calonMitra->status === 'terima') {
             return redirect()->route('calon-mitra.index')->with('error', 'Mitra ini sudah terdaftar.');
         }
-    
+
         // Ambil inisial kota dari alamat calon mitra
-        $inisialKota = strtoupper(substr($calonMitra->kota_calon_mitra, 0, 3)); 
-    
+        $inisialKota = strtoupper(substr($calonMitra->kota_calon_mitra, 0, 3));
+
         // Ambil nomor urut terakhir berdasarkan inisial kota
         $lastMitra = Mitra::where('id_mitra', 'LIKE', "{$inisialKota}%")
             ->orderBy('id_mitra', 'desc')
             ->first();
-    
+
         // Tentukan nomor urut berikutnya
         $nextNumber = $lastMitra ? (int) substr($lastMitra->id_mitra, 3) + 1 : 1;
-    
+
         // Format ID dengan inisial kota dan nomor urut
         $idMitraBaru = sprintf("%s%03d", $inisialKota, $nextNumber);
-    
+
         // Menambahkan calon mitra ke daftar mitra
         Mitra::create([
             'id_mitra' => $idMitraBaru,
@@ -48,13 +48,13 @@ class CalonMitraController extends Controller
             'status' => 'aktif',     // Status aktif
             'nomor' => $calonMitra->nomor, // Isi kolom nomor dari tabel calon_mitra
         ]);
-    
+
         // Mengubah status calon mitra menjadi 'terima' dan menyimpan ID Mitra baru
         $calonMitra->update([
             'status' => 'diterima',
             'id_mitra' => $idMitraBaru
         ]);
-    
+
         // Redirect ke halaman calon mitra dengan pesan sukses
         return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra diterima dan ditambahkan sebagai Mitra.');
     }
@@ -63,40 +63,51 @@ class CalonMitraController extends Controller
     {
         // Temukan calon mitra berdasarkan nomor (bukan id)
         $calonMitra = CalonMitra::where('nomor', $nomor)->firstOrFail();
-    
+
         // Mengubah status calon mitra menjadi 'ditolak'
         $calonMitra->update(['status' => 'ditolak']);
-    
+
         // Redirect ke halaman calon mitra dengan pesan sukses
         return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra ditolak.');
     }
 
     public function post(Request $request)
     {
+        $ktpPath = $request->file('upload_ktp')->store('ktp', 'public');
+        $fotoPath = $request->file('upload_foto')->store('foto', 'public');
+
         $data = [
-            'nama_calon_mitra' => $request->nama,
-            'email_calon_mitra' => $request->email,
-            'no_hp_calon_mitra' => $request->telp,
-            'kota_calon_mitra' => $request->kota,
-            'alamat_calon_mitra' => $request->alamat,
-            'status' => $request->status,
+            'nama' => $request->nama,
+            'no_ktp' => $request->no_ktp,
             'tanggal_lahir' => $request->tgl_lahir,
-            'jenis_kelamin' => $request->jk,
-            'domisili' => $request->dom,
-            'provinsi' => $request->prov,
-            'kode_pos' => $request->pos,
-            'status' => "Belum Diproses",
-            'negara' => $request->negara,
-            'latitude' => $request->lat,
-            'longitude' => $request->lon,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'alamat_ktp' => $request->alamat_ktp,
+            'domisili' => $request->domisili,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kecamatan' => $request->kecamatan,
+            'kelurahan' => $request->kelurahan,
+            'provinsi_mitra' => $request->provinsi_mitra,
+            'kota_mitra' => $request->kota_mitra,
+            'kecamatan_mitra' => $request->kecamatan_mitra,
+            'kelurahan_mitra' => $request->kelurahan_mitra,
+            'kode_pos' => $request->kode_pos,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'upload_ktp' => $ktpPath,
+            'upload_foto' => $fotoPath
         ];
+
+        // dd($data);
 
         CalonMitra::create($data);
 
-        // Redirect ke halaman konfirmasi
         return view('post-mitra');
     }
-    
+
     public function show($nomor)
     {
         // Cari data berdasarkan nomor
@@ -114,7 +125,7 @@ class CalonMitraController extends Controller
     {
         // Ambil data calon mitra dengan status "diterima"
         $calonMitra = CalonMitra::where('status', 'diterima')->get();
-    
+
         return view('map-google-maps', compact('calonMitra'));
     }
 }

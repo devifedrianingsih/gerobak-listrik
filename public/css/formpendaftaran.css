@@ -1,3 +1,7 @@
+.form-select {
+    height: 43px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
