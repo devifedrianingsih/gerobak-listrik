@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Data Dikirim</title>
     <link rel="stylesheet" href="{{ asset('css/form-mitra.css') }}">
     <script src="https://kit.fontawesome.com/4a1b340fe5.js" crossorigin="anonymous"></script>
 </head>
-<body> 
+<body>
     <div class="contact-container">
         <h2>Data Anda telah dikirim</h2>
         <div class="text">

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Beranda</title>
     <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
     <script src="https://kit.fontawesome.com/4a1b340fe5.js" crossorigin="anonymous"></script>
@@ -22,17 +23,17 @@
             </nav>
         </div>
     </header>
-    
+
     <section class="home">
-        <div class="container-home"> 
+        <div class="container-home">
             <div class="text">
                 <p>Apa itu gerobak listrik? Gerobak listrik adalah<br> suatu perusahaan franchise yang menawarkan<br> produk usaha berupa gerobak listrik dan<br> produk hasil jadi serta bahan baku<br> yang tersedia dalam tiap paket berbeda.</p>
                 <a href="/paketfranchise" class="join-mitra">Beli Paket Franchise</a>
                 <a href="/hasiljadi" class="join-mitra">Beli Produk Jadi</a>
-            </div>     
+            </div>
             <div class="container-image">
                 <img src="{{ asset('img/gerobak.png') }}" alt="Gerobak Listrik">
-            </div> 
+            </div>
         </div>
 
         <div class="menu">
@@ -41,7 +42,7 @@
             </div>
             <div class="container-menu">
                 <div class="menu1">
-                    <img src="{{ asset('img/ekado.jpg') }}" alt="Ekado Puyuh"> 
+                    <img src="{{ asset('img/ekado.jpg') }}" alt="Ekado Puyuh">
                     <h3>Ekado Crispy</h3>
                     <p>Olahan telur puyuh yang dibalut daging cincang dan kulit lumpia</p>
                 </div>
@@ -104,22 +105,22 @@
         </div>
 
         <div class="berita-terkini">
-            <div class="container-berita"> 
+            <div class="container-berita">
                 <div class="berita-img">
                     <img src="{{ asset('img/berita.jpg') }}" alt="Berita Terkini">
                 </div>
                 <div>
                     <div class="title-berita">
-                        <h1>Sejarah Perusahaan</h1> 
+                        <h1>Sejarah Perusahaan</h1>
                     </div>
                     <div class="text-berita">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                 when an unknown printer took a galley of type and scrambled it to make a type
-                                specimen book. It has survived not only five centuries, but also the leap into 
-                                electronic typesetting, remaining essentially unchanged. It was popularised in 
+                                specimen book. It has survived not only five centuries, but also the leap into
+                                electronic typesetting, remaining essentially unchanged. It was popularised in
                                 the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including 
+                                and more recently with desktop publishing software like Aldus PageMaker including
                                 versions of Lorem Ipsum.</p>
                         <div class="berita-more">Baca Selengkapnya...</div>
                     </div>
@@ -138,13 +139,13 @@
                         <input type="radio" name="accordion" id="first" checked>
                         <label for="first">Produk apa yang banyak peminatnya? </label>
                         <div class="content">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                 when an unknown printer took a galley of type and scrambled it to make a type
-                                specimen book. It has survived not only five centuries, but also the leap into 
-                                electronic typesetting, remaining essentially unchanged. It was popularised in 
+                                specimen book. It has survived not only five centuries, but also the leap into
+                                electronic typesetting, remaining essentially unchanged. It was popularised in
                                 the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including 
+                                and more recently with desktop publishing software like Aldus PageMaker including
                                 versions of Lorem Ipsum.</p>
                         </div>
                     </li>
@@ -152,13 +153,13 @@
                         <input type="radio" name="accordion" id="second">
                         <label for="second">Bagaimana membeli paket franchise?</label>
                         <div class="content">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                 when an unknown printer took a galley of type and scrambled it to make a type
-                                specimen book. It has survived not only five centuries, but also the leap into 
-                                electronic typesetting, remaining essentially unchanged. It was popularised in 
+                                specimen book. It has survived not only five centuries, but also the leap into
+                                electronic typesetting, remaining essentially unchanged. It was popularised in
                                 the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including 
+                                and more recently with desktop publishing software like Aldus PageMaker including
                                 versions of Lorem Ipsum.</p>
                         </div>
                     </li>
@@ -166,13 +167,13 @@
                         <input type="radio" name="accordion" id="third">
                         <label for="third">Apakah produk jadi dapat dikirim langsung?</label>
                         <div class="content">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                 when an unknown printer took a galley of type and scrambled it to make a type
-                                specimen book. It has survived not only five centuries, but also the leap into 
-                                electronic typesetting, remaining essentially unchanged. It was popularised in 
+                                specimen book. It has survived not only five centuries, but also the leap into
+                                electronic typesetting, remaining essentially unchanged. It was popularised in
                                 the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including 
+                                and more recently with desktop publishing software like Aldus PageMaker including
                                 versions of Lorem Ipsum.</p>
                         </div>
                     </li>
@@ -180,13 +181,13 @@
                         <input type="radio" name="accordion" id="fourth">
                         <label for="fourth">Bagaimana cara memperoleh diskon dari paket franchise?</label>
                         <div class="content">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                 when an unknown printer took a galley of type and scrambled it to make a type
-                                specimen book. It has survived not only five centuries, but also the leap into 
-                                electronic typesetting, remaining essentially unchanged. It was popularised in 
+                                specimen book. It has survived not only five centuries, but also the leap into
+                                electronic typesetting, remaining essentially unchanged. It was popularised in
                                 the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including 
+                                and more recently with desktop publishing software like Aldus PageMaker including
                                 versions of Lorem Ipsum.</p>
                         </div>
                     </li>
@@ -202,52 +203,52 @@
             <li>
                 <button class="accordion-toggle">Produk apa yang banyak peminatnya?</button>
                 <div class="content">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                         when an unknown printer took a galley of type and scrambled it to make a type
-                        specimen book. It has survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was popularised in 
+                        specimen book. It has survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was popularised in
                         the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including 
+                        and more recently with desktop publishing software like Aldus PageMaker including
                         versions of Lorem Ipsum.</p>
                 </div>
             </li>
             <li>
                 <button class="accordion-toggle">Bagaimana membeli paket franchise?</button>
                 <div class="content">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                         when an unknown printer took a galley of type and scrambled it to make a type
-                        specimen book. It has survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was popularised in 
+                        specimen book. It has survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was popularised in
                         the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including 
+                        and more recently with desktop publishing software like Aldus PageMaker including
                         versions of Lorem Ipsum.</p>
                 </div>
             </li>
             <li>
                 <button class="accordion-toggle">Apakah produk jadi dapat dikirim langsung?</button>
                 <div class="content">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                         when an unknown printer took a galley of type and scrambled it to make a type
-                        specimen book. It has survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was popularised in 
+                        specimen book. It has survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was popularised in
                         the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including 
+                        and more recently with desktop publishing software like Aldus PageMaker including
                         versions of Lorem Ipsum.</p>
                 </div>
             </li>
             <li>
                 <button class="accordion-toggle">Bagaimana cara memperoleh diskon dari paket franchise?</button>
                 <div class="content">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                         when an unknown printer took a galley of type and scrambled it to make a type
-                        specimen book. It has survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was popularised in 
+                        specimen book. It has survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged. It was popularised in
                         the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including 
+                        and more recently with desktop publishing software like Aldus PageMaker including
                         versions of Lorem Ipsum.</p>
                 </div>
             </li>

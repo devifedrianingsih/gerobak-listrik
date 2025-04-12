@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Hubungi Kami</title>
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,11 +26,11 @@
             <div class="icons">
                 <a href="/login">
                     <i class="fa-solid fa-user"></i></i>
-                </a>   
+                </a>
                 <a href="/checkout">
                 <i class="fa-solid fa-cart-shopping"></i></i>
-                </a>       
-                
+                </a>
+
             </div>
         </div>
     </header>
@@ -44,7 +45,7 @@
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
     </div>
-    
+
     <div class="content-right">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -83,10 +84,10 @@
     carouselElement.addEventListener('slid.bs.carousel', function(event) {
         // Get the active carousel item
         var activeItem = document.querySelector('.carousel-item.active');
-        
+
         // Get the URL from the data attribute of the active item
         var targetUrl = activeItem.getAttribute('data-url');
-        
+
         // Redirect to the target URL
         if (targetUrl) {
             window.location.href = targetUrl;

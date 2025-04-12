@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Paket Hemat A</title>
     <link rel="stylesheet" href="{{ asset('css/paketfranchise.css') }}">
     <script src="https://kit.fontawesome.com/4a1b340fe5.js" crossorigin="anonymous"></script>
@@ -42,7 +43,7 @@
                             <li>Modal Pendaftaran</li>
                         </ul>
                         <p class="price">Rp. 23.670.000,-</p>
-                        <a href="/formpendaftaran" class="buy-button">Beli Paket!</a>    
+                        <a href="/formpendaftaran" class="buy-button">Beli Paket!</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +66,7 @@
                 </div>
                 <div>
                     <h3>Map</h3>
-                   
+
                 </div>
                 <div>
                     <h3>Media Sosial</h3>

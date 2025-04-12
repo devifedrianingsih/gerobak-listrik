@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Gabung Kemitraan</title>
     <link rel="stylesheet" href="{{ asset('css/gabungk.css') }}">
 </head>
@@ -11,7 +12,7 @@
     <div class="title">
         <h2>GEROBAK LISTRIK</h2>
         <p> lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet.lorem ipsum dolor sit amet. lorem ipsum dolor sit amet. lorem ipsum dolor sit amet.
-        </p>  
+        </p>
     </div>
     <div class="data-title">
      <h3> DATA DIRI PELANGGAN </h3>

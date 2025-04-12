@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Checkout Produk</title>
     <link rel="stylesheet" href="{{ asset('css/shoppingcart.css') }}">
 </head>
@@ -10,14 +11,14 @@
 
     <div class="checkout-container">
         <h1>Checkout Produk</h1>
-        
+
         <!-- Produk Checkout -->
         <div class="product-item">
             <img src="https://via.placeholder.com/100" alt="Produk">
             <div class="product-details">
                 <h2>Produk 1</h2>
                 <p>Harga: Rp <span class="price">50000</span></p>
-                <label>Jumlah: 
+                <label>Jumlah:
                     <input type="number" class="quantity" value="1" min="1">
                 </label>
             </div>

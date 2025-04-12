@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Produk</title>
     <link rel="stylesheet" href="{{ asset('css/product.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
@@ -93,7 +94,7 @@
     </footer> -->
 
     <script src="{{asset('js/product.js') }}"></script>
-    
+
     <script>
         // Initialize empty cart
         let cart = [];
@@ -124,7 +125,7 @@
                     const li = document.createElement('li');
                     li.className = 'cart-item';
                     li.innerHTML = `
-                        ${item.name} - ${formatPrice(item.price)} 
+                        ${item.name} - ${formatPrice(item.price)}
                         <span class="qty">Qty: <input type="number" class="qty-input" style="width: 30px;" value="${item.quantity}" data-index="${index}" min="1"></span>
                         <span class="remove-btn" data-index="${index}">X</span>
                     `;

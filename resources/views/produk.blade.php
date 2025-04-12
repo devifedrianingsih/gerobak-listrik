@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('css/produk.css') }}">
 </head>
 <body>
-    <div class="container"> 
+    <div class="container">
         <header>
             <div>
                 <div class="title"> Produk Pilihan </div>

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
     <title>Hubungi Kami</title>
     <link rel="stylesheet" href="{{ asset('css/hubungikami.css') }}">
     <script src="https://kit.fontawesome.com/4a1b340fe5.js" crossorigin="anonymous"></script>
-    
+
 </head>
 <body>
 <!-- Navbar -->
@@ -40,6 +41,6 @@
         </form>
   <div class="form-message" id="form-message"></div>
 </div>
-<script src="{{asset('js/hubungikami.js') }}"></script>  
+<script src="{{asset('js/hubungikami.js') }}"></script>
 </body>
 </html>
