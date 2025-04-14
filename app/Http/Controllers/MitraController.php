@@ -17,21 +17,10 @@ class MitraController extends Controller
         return view('ecommerce-customers', compact('mitra'));
     }
 
-    public function getCalonMitraData($nomor)
-    {
-        $calonMitra = CalonMitra::where('nomor', $nomor)->first();
-
-        if (!$calonMitra) {
-            return response()->json(['error' => 'Calon mitra tidak ditemukan'], 404);
-        }
-
-        return response()->json($calonMitra);
-    }
-
     public function updateCalonMitra(Request $request, $nomor)
     {
-        $calonMitra = CalonMitra::findOrFail($nomor);
+        $calonMitra = Mitra::findOrFail($nomor);
         $calonMitra->update($request->all());
-        return response()->json(['message' => 'Data berhasil diperbarui.']);
+        return redirect()->route('mitra.index')->with('success', 'Data mitra berhasil di update.');
     }
 }

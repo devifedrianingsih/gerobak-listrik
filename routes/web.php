@@ -1,15 +1,16 @@
 <?php
 
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CalonMitraController;
 use App\Http\Controllers\MitraController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\AdminPaymentController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DashboardController;
-use App\Models\Product;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CalonMitraController;
+use App\Http\Controllers\AdminPaymentController;
 
 
 Auth::routes();
@@ -38,15 +39,11 @@ Route::post('/upload-product-image', [ProductController::class, 'uploadImage'])-
 Route::post('/post-mitra', [CalonMitraController::class, 'post'])->name('post.mitra');
 
 Route::get('/ecommerce-potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
-Route::post('/calon-mitra.index/{id}/terima', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
-Route::post('/calon-mitra.index/{id}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
-
-//Mengambil data dari tabel calon mitra untuk page mitra
-Route::get('/ecommerce-potential-partners/{id}', [MitraController::class, 'getCalonMitraData']);
-Route::post('/ecommerce-potential-partners/update/{id}', [MitraController::class, 'updateCalonMitra']);
+Route::post('/ecommerce-potential-partners/{id}/terima', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
+Route::post('/ecommerce-potential-partners/{id}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
 
 Route::get('/ecommerce-customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
-
+Route::post('/ecommerce-customers/update/{id}', [MitraController::class, 'updateCalonMitra'])->name('mitra.update');;
 
 // Route untuk halaman checkout
 Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
@@ -65,9 +62,8 @@ Route::get('/order-detail/{id}', [OrderController::class, 'showDetail'])->name('
 //Route untuk invoice
 Route::get('/order-invoice/{id}', [OrderController::class, 'showInvoice'])->name('order.invoice');
 
-
 // Route untuk dashboard (dengan middleware auth)
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 // Halaman statis
 Route::get('/beranda', function () {

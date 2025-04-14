@@ -34,9 +34,9 @@
                                 <td>Kode Pos</td>
                                 <td>Latidue</td>
                                 <td>Longitude</td>
-                                <th class="text-center">Lihat Detail</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Aktif</th>
+                                <th class="text-center">Lihat Detail dan Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,6 +69,8 @@
                                         <td>{{ $mitr->kode_pos }} </td>
                                         <td>{{ $mitr->latitude }} </td>
                                         <td>{{ $mitr->longitude }} </td>
+                                        <td class="text-center">{{ ucfirst($mitr->status) }}</td>
+                                        <td class="text-center">{{ ucwords(str_replace('-', ' ', $mitr->aktif)) }}</td>
                                         <td class="text-center fs-3">
                                             <i class="fadeIn animated lni lni-eye text-secondary"
                                                 onmouseover="this.classList.replace('text-secondary', 'text-primary')"
@@ -77,77 +79,82 @@
                                                 style="cursor: pointer">
                                             </i>
                                         </td>
-                                        <td class="text-center">{{ ucfirst($mitr->status) }}</td>
-                                        <td class="text-center">{{ ucwords(str_replace('-', ' ', $mitr->aktif)) }}</td>
                                     </tr>
 
                                     <div class="modal fade" id="uploadModal{{ $mitr->id }}" tabindex="-1"
                                         aria-labelledby="uploadModal{{ $mitr->id }}Label" aria-hidden="true">
                                         <div class="modal-dialog modal-xl modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="uploadModal{{ $mitr->id }}Label">
-                                                        KTP dan Pas Foto</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @php
-                                                        $fields = [
-                                                            'kode_mitra' => 'Kode Mitra',
-                                                            'nama' => 'Nama Lengkap',
-                                                            'no_ktp' => 'No KTP',
-                                                            'tanggal_lahir' => 'Tanggal Lahir',
-                                                            'email' => 'Email',
-                                                            'no_hp' => 'No HP',
-                                                            'jenis_kelamin' => 'Jenis Kelamin',
-                                                            'alamat' => 'Alamat',
-                                                            'alamat_ktp' => 'Alamat KTP',
-                                                            'domisili' => 'Domisili',
-                                                            'provinsi' => 'Provinsi',
-                                                            'kota' => 'Kota',
-                                                            'kecamatan' => 'Kecamatan',
-                                                            'kelurahan' => 'Kelurahan',
-                                                            'provinsi_mitra' => 'Provinsi Mitra',
-                                                            'kota_mitra' => 'Kota Mitra',
-                                                            'kecamatan_mitra' => 'Kecamatan Mitra',
-                                                            'kelurahan_mitra' => 'Kelurahan Mitra',
-                                                            'kode_pos' => 'Kode Pos',
-                                                            'latitude' => 'Latitude',
-                                                            'longitude' => 'Longitude',
-                                                        ];
-                                                    @endphp
+                                            <form action="{{ route('mitra.update', ['id' => $mitr->id]) }}" method="POST">
+                                                @csrf @method('POST')
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5"
+                                                            id="uploadModal{{ $mitr->id }}Label">
+                                                            Detail Mitra</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @php
+                                                            $fields = [
+                                                                'kode_mitra' => 'Kode Mitra',
+                                                                'nama' => 'Nama Lengkap',
+                                                                'no_ktp' => 'No KTP',
+                                                                'tanggal_lahir' => 'Tanggal Lahir',
+                                                                'email' => 'Email',
+                                                                'no_hp' => 'No HP',
+                                                                'jenis_kelamin' => 'Jenis Kelamin',
+                                                                'alamat' => 'Alamat',
+                                                                'alamat_ktp' => 'Alamat KTP',
+                                                                'domisili' => 'Domisili',
+                                                                'provinsi' => 'Provinsi',
+                                                                'kota' => 'Kota',
+                                                                'kecamatan' => 'Kecamatan',
+                                                                'kelurahan' => 'Kelurahan',
+                                                                'provinsi_mitra' => 'Provinsi Mitra',
+                                                                'kota_mitra' => 'Kota Mitra',
+                                                                'kecamatan_mitra' => 'Kecamatan Mitra',
+                                                                'kelurahan_mitra' => 'Kelurahan Mitra',
+                                                                'kode_pos' => 'Kode Pos',
+                                                                'latitude' => 'Latitude',
+                                                                'longitude' => 'Longitude',
+                                                            ];
+                                                        @endphp
 
-                                                    @foreach ($fields as $field => $label)
-                                                        <div class="row">
-                                                            <label
-                                                                class="col-sm-3 col-form-label">{{ $label }}</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" readonly
-                                                                    class="form-control-plaintext"
-                                                                    value="{{ $mitr->$field }}">
+                                                        @foreach ($fields as $field => $label)
+                                                            <div class="row mb-2">
+                                                                <label
+                                                                    class="col-sm-3 col-form-label">{{ $label }}</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text"
+                                                                        @if ($label == 'Kode Mitra') disabled @endif
+                                                                        class="form-control"
+                                                                        name="{{ str_replace(' ', '_', strtolower($field)) }}"
+                                                                        value="{{ $mitr->$field }}">
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+
+                                                        <div class="row text-center my-5">
+                                                            <div class="col-lg-6 col-md-12">
+                                                                <label for="KTP" class="d-block fs-5">KTP</label>
+                                                                <img src="{{ asset('storage/' . $mitr->upload_ktp) }}"
+                                                                    alt="KTP" width="200">
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-12">
+                                                                <label for="Pas Photo" class="d-block fs-5">Pas Foto</label>
+                                                                <img src="{{ asset('storage/' . $mitr->upload_foto) }}"
+                                                                    alt="Pas foto" width="200">
                                                             </div>
                                                         </div>
-                                                    @endforeach
-
-                                                    <div class="row text-center my-5">
-                                                        <div class="col-lg-6 col-md-12">
-                                                            <label for="KTP" class="d-block fs-5">KTP</label>
-                                                            <img src="{{ asset('storage/' . $mitr->upload_ktp) }}"
-                                                                alt="KTP" width="200">
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-12">
-                                                            <label for="Pas Photo" class="d-block fs-5">Pas Foto</label>
-                                                            <img src="{{ asset('storage/' . $mitr->upload_foto) }}"
-                                                                alt="Pas foto" width="200">
-                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal" aria-label="Close">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                                        aria-label="Close">Tutup</button>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 @endforeach
@@ -183,6 +190,7 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
 
     <!-- JSZip untuk Excel export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -193,8 +201,7 @@
                 dom: "<'row mb-3'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                buttons: [
-                    {
+                buttons: [{
                         extend: 'excelHtml5',
                         text: 'Export ke Excel',
                         className: 'btn btn-success mb-3',
@@ -202,13 +209,22 @@
                             columns: [
                                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
                                 10, 11, 12, 13, 14, 15, 16, 17,
-                                18, 19, 20, 21, 23, 24
+                                18, 19, 20, 21, 22, 23
                             ]
                         }
+                    },
+                    {
+                        extend: 'colvis',
+                        text: 'Tampilkan/Sembunyikan Kolom',
+                        className: 'btn btn-secondary mb-3'
                     }
                 ],
-                columnDefs: [
-                    { targets: [3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], visible: false } // kolom disembunyikan
+                columnDefs: [{
+                        targets: [3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                            23
+                        ],
+                        visible: false
+                    } // kolom disembunyikan
                 ],
                 pageLength: 10,
                 lengthMenu: [5, 10, 15, 20],
