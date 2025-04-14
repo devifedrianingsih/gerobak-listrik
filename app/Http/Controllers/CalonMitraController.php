@@ -108,7 +108,7 @@ class CalonMitraController extends Controller
         // Ambil data calon mitra dengan status "diterima"
         $calonMitra = Mitra::where('status', 'diterima')->get();
 
-        return view('map-google-maps', compact('calonMitra'));
+        return view('maps', compact('calonMitra'));
     }
 
     private function buildWaMessage($calonMitra, $status, $catatan)

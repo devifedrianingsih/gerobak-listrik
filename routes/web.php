@@ -15,135 +15,149 @@ use App\Http\Controllers\AdminPaymentController;
 
 Auth::routes();
 
-// Route untuk halaman home
-Route::get('/', [HomeController::class, 'index'])->name('home');
+/// ==================== PETA ====================
+Route::get('/maps', [CalonMitraController::class, 'petaMitra'])->name('peta-mitra');
 
-//Route untuk halaman Peta Sebaran
-Route::get('/map-google-maps', [CalonMitraController::class, 'petaMitra'])->name('peta-mitra');
+// ==================== PRODUK ====================
+Route::get('/ecommerce/products', [ProductController::class, 'index'])->name('product.index');
+Route::get('/ecommerce/products/create', [ProductController::class, 'create'])->name('product.create');
+Route::post('/ecommerce/products', [ProductController::class, 'store'])->name('product.store');
+Route::get('/ecommerce/products/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::delete('/ecommerce/products/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::post('/ecommerce/products/upload-image', [ProductController::class, 'uploadImage'])->name('upload.product.image');
 
-// Route untuk halaman produk dengan nama rute
-Route::get('/ecommerce-products', [ProductController::class, 'index'])->name('product.index');
+// ==================== CALON MITRA ====================
+Route::post('/ecommerce/partners', [CalonMitraController::class, 'post'])->name('post.mitra');
+Route::get('/ecommerce/potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
+Route::post('/ecommerce/potential-partners/{id}/accept', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
+Route::post('/ecommerce/potential-partners/{id}/reject', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
 
-// Route untuk menampilkan halaman tambah produk (GET)
-Route::get('/ecommerce-add-product', [ProductController::class, 'create'])->name('product.create');
+// ==================== MITRA ====================
+Route::get('/ecommerce/customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
+Route::post('/ecommerce/customers/{id}/update', [MitraController::class, 'updateCalonMitra'])->name('mitra.update');
 
-// Route untuk menyimpan produk baru (POST)
-Route::post('/ecommerce-add-product', [ProductController::class, 'store'])->name('product.store');
-Route::get('/ecommerce-products/{id}', [ProductController::class, 'update'])->name('product.update');
-Route::delete('/ecommerce-products/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+// ==================== CHECKOUT ====================
+Route::post('/ecommerce/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
-// Route untuk pengunggahan gambar (POST)
-Route::post('/upload-product-image', [ProductController::class, 'uploadImage'])->name('upload.product.image');
-
-//Route untuk form pendaftaran
-Route::post('/post-mitra', [CalonMitraController::class, 'post'])->name('post.mitra');
-
-Route::get('/ecommerce-potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
-Route::post('/ecommerce-potential-partners/{id}/terima', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
-Route::post('/ecommerce-potential-partners/{id}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
-
-Route::get('/ecommerce-customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
-Route::post('/ecommerce-customers/update/{id}', [MitraController::class, 'updateCalonMitra'])->name('mitra.update');;
-
-// Route untuk halaman checkout
-Route::post('/checkout/store', [CheckoutController::class, 'store'])->name('checkout.store');
-
-//Route untuk halaman konfirmasi pembayaran
-Route::get('ecommerce-payment', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
+// ==================== PEMBAYARAN ====================
+Route::get('/ecommerce/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
 Route::post('/admin/payments/{id}/approve', [AdminPaymentController::class, 'approve'])->name('admin.payments.approve');
 Route::post('/admin/payments/{id}/reject', [AdminPaymentController::class, 'reject'])->name('admin.payments.reject');
 
-//Route untuk halaman order
-Route::get('/ecommerce-orders', [OrderController::class, 'index'])->name('orders.index');
-Route::post('/orders/create-from-payments', [OrderController::class, 'createFromPayments'])->name('orders.createFromPayments');
-Route::patch('/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
-Route::get('/order-detail/{id}', [OrderController::class, 'showDetail'])->name('order.detail');
+// ==================== PESANAN ====================
+Route::get('/ecommerce/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::post('/ecommerce/orders', [OrderController::class, 'createFromPayments'])->name('orders.createFromPayments');
+Route::get('/ecommerce/orders/{id}', [OrderController::class, 'showDetail'])->name('order.detail');
+Route::patch('/ecommerce/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
-//Route untuk invoice
-Route::get('/order-invoice/{id}', [OrderController::class, 'showInvoice'])->name('order.invoice');
+// ==================== INVOICE ====================
+Route::get('/ecommerce/orders/{id}/invoice', [OrderController::class, 'showInvoice'])->name('order.invoice');
 
-// Route untuk dashboard (dengan middleware auth)
-// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+// ==================== DASHBOARD ====================
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
 
 // Halaman statis
 Route::get('/beranda', function () {
     return view('beranda');
 });
+
 Route::get('/produk', function () {
     return view('produk');
 });
+
 Route::get('/hubungi', function () {
     return view('hubungikami');
 });
+
 Route::get('/profil', function () {
     return view('profil');
 });
+
 Route::get('/checkout', function () {
     return view('checkout');
 });
+
 Route::get('/login-user', function () {
     return view('login');
 });
+
 Route::get('/register-user', function () {
     return view('register');
 });
+
 Route::get('/paketfranchise', function () {
     return view('paketfranchise');
 });
+
 Route::get('/produk1', function () {
     return view('produk1');
 });
+
 Route::get('/visi', function () {
     return view('visi');
 });
+
 Route::get('/misi', function () {
     return view('misi');
 });
+
 Route::get('/sejarah', function () {
     return view('sejarah');
 });
+
 Route::get('/artikel', function () {
     return view('artikel');
 });
+
 Route::get('/pakethemata', function () {
     return view('pakethemata');
 });
+
 Route::get('/pakethematb', function () {
     return view('pakethematb');
 });
+
 Route::get('/pakethematc', function () {
     return view('pakethematc');
 });
+
 Route::get('/gabung', function () {
     return view('gabung');
 });
+
 Route::get('/faq', function () {
     return view('faq');
 });
+
 Route::get('/shoppingcart', function () {
     return view('shoppingcart');
 });
+
 Route::get('/cart', function () {
     return view('cart');
 });
+
 Route::get('/isiartikel1', function () {
     return view('isiartikel1');
 });
+
 Route::get('/isiartikel2', function () {
     return view('isiartikel2');
 });
+
 Route::get('/isiartikel3', function () {
     return view('isiartikel3');
 });
+
 Route::get('/formpendaftaran', function () {
     return view('formpendaftaran');
 });
+
 Route::get('/hasiljadi', function () {
     $product = Product::all();
-
     return view('hasiljadi', compact('product'));
 });
-Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
 
-// Rute fallback untuk menangkap semua route yang tidak didefinisikan (Opsional)
+Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
 Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');
