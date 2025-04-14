@@ -10,47 +10,67 @@
     <!-- Container untuk Peta -->
     <div class="card">
         <div class="card-body">
-            <div id="map" style="height: 540px;"></div>
+            <div id="map" style="height: 80vh;"></div>
         </div>
     </div>
 
     @push('script')
-    <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
-    <script src="{{ URL::asset('build/plugins/peity/jquery.peity.min.js') }}"></script>
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <!-- Tambahkan CSS Leaflet & MarkerCluster -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 
-    <script>
-        // Inisialisasi Peta
-        var map = L.map('map').setView([-6.595038, 106.816635], 13);
+        <!-- Tambahkan JS Leaflet & MarkerCluster -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
-        // Tambahkan Tile Layer dari OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+        <script>
+            // Inisialisasi peta di Jakarta
+            var map = L.map('map').setView([-6.2, 106.816666], 11); // Jakarta
 
-        // Data Mitra dari Database
-        var mitraData = @json($calonMitra);
+            // Tambahkan tile layer OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
 
-        // Looping untuk Menambahkan Marker ke Peta
-        mitraData.forEach(function (item) {
-            if (item.latitude && item.longitude) {
-                L.marker([item.latitude, item.longitude])
-                    .addTo(map)
-                    .bindPopup(`
-                        <b>${item.nama_calon_mitra}</b><br>
-                        Alamat Mitra: ${item.alamat_calon_mitra}<br>
-                        Kota: ${item.kota_calon_mitra}<br>
-                        Kontak: ${item.no_hp_calon_mitra}
-                    `);
-            }
-        });
-    </script>
+            // Custom icon
+            var mitraIcon = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30],
+                popupAnchor: [0, -28]
+            });
+
+            // Ambil data dari backend
+            var mitraData = @json($calonMitra);
+
+            // Cluster group biar marker bisa digabung
+            var markers = L.markerClusterGroup();
+
+            // Looping setiap mitra
+            mitraData.forEach(function(item) {
+                if (item.latitude && item.longitude) {
+                    var marker = L.marker([item.latitude, item.longitude], {
+                            icon: mitraIcon
+                        })
+                        .bindPopup(`
+                    <b>${item.nama}</b><br>
+                    <small><b>Alamat:</b> ${item.alamat}<br>
+                    <b>Kota:</b> ${item.kota}<br>
+                    <b>Kontak:</b> ${item.no_hp}</small>
+                `);
+
+                    // Zoom ke marker saat diklik
+                    marker.on('click', function() {
+                        map.setView(marker.getLatLng(), 15);
+                    });
+
+                    markers.addLayer(marker);
+                }
+            });
+
+            // Tambahkan semua marker ke peta
+            map.addLayer(markers);
+        </script>
     @endpush
 @endsection
