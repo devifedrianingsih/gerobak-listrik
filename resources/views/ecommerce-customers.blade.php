@@ -13,12 +13,27 @@
                         <thead class="table-light">
                             <tr>
                                 <th>No</th>
-                                <th>Kode Mitra</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>No Hp</th>
-                                <th>Kota</th>
-                                <th>Alamat</th>
+                                <td>Kode Mitra</td>
+                                <td>Nama</td>
+                                <td>No KTP</td>
+                                <td>Tanggal Lahir</td>
+                                <td>Email</td>
+                                <td>No HP</td>
+                                <td>Jenis Kelamin</td>
+                                <td>Alamat</td>
+                                <td>Alamat KTP</td>
+                                <td>Domisili</td>
+                                <td>Provinsi</td>
+                                <td>Kota</td>
+                                <td>Kecamatan</td>
+                                <td>Kelurahan</td>
+                                <td>Provinsi Mitra</td>
+                                <td>Kota Mitra</td>
+                                <td>Kecamatan Mitra</td>
+                                <td>Kelurahan Mitra</td>
+                                <td>Kode Pos</td>
+                                <td>Latidue</td>
+                                <td>Longitude</td>
                                 <th class="text-center">Lihat Detail</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Aktif</th>
@@ -33,12 +48,27 @@
                                 @foreach ($mitra as $key => $mitr)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $mitr->kode_mitra }}</td>
-                                        <td>{{ $mitr->nama }}</td>
-                                        <td>{{ $mitr->email }}</td>
-                                        <td>{{ $mitr->no_hp }}</td>
-                                        <td>{{ $mitr->kota }}</td>
-                                        <td>{{ $mitr->alamat }}</td>
+                                        <td>{{ $mitr->kode_mitra }} </td>
+                                        <td>{{ $mitr->nama }} </td>
+                                        <td>{{ $mitr->no_ktp }} </td>
+                                        <td>{{ $mitr->tanggal_lahir }} </td>
+                                        <td>{{ $mitr->email }} </td>
+                                        <td>{{ $mitr->no_hp }} </td>
+                                        <td>{{ $mitr->jenis_kelamin }} </td>
+                                        <td>{{ $mitr->alamat }} </td>
+                                        <td>{{ $mitr->alamat_ktp }} </td>
+                                        <td>{{ $mitr->domisili }} </td>
+                                        <td>{{ $mitr->provinsi }} </td>
+                                        <td>{{ $mitr->kota }} </td>
+                                        <td>{{ $mitr->kecamatan }} </td>
+                                        <td>{{ $mitr->kelurahan }} </td>
+                                        <td>{{ $mitr->provinsi_mitra }} </td>
+                                        <td>{{ $mitr->kota_mitra }} </td>
+                                        <td>{{ $mitr->kecamatan_mitra }} </td>
+                                        <td>{{ $mitr->kelurahan_mitra }} </td>
+                                        <td>{{ $mitr->kode_pos }} </td>
+                                        <td>{{ $mitr->latitude }} </td>
+                                        <td>{{ $mitr->longitude }} </td>
                                         <td class="text-center fs-3">
                                             <i class="fadeIn animated lni lni-eye text-secondary"
                                                 onmouseover="this.classList.replace('text-secondary', 'text-primary')"
@@ -114,7 +144,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Tutup</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                                        aria-label="Close">Tutup</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,12 +170,46 @@
 
     <!-- DataTables with Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JS + Bootstrap5 adapter -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Buttons extension -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+
+    <!-- JSZip untuk Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
     <script>
         $(document).ready(function() {
             $('#mitraTable').DataTable({
+                dom: "<'row mb-3'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export ke Excel',
+                        className: 'btn btn-success mb-3',
+                        exportOptions: {
+                            columns: [
+                                0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                                10, 11, 12, 13, 14, 15, 16, 17,
+                                18, 19, 20, 21, 23, 24
+                            ]
+                        }
+                    }
+                ],
+                columnDefs: [
+                    { targets: [3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], visible: false } // kolom disembunyikan
+                ],
                 pageLength: 10,
                 lengthMenu: [5, 10, 15, 20],
                 language: {
