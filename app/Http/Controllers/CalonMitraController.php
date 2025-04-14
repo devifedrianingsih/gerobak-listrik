@@ -2,79 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CalonMitra;
 use App\Models\Mitra;
 use Illuminate\Http\Request;
 
 class CalonMitraController extends Controller
 {
+    private $phoneNumber = '6281918999460';
+
     public function index()
     {
-        $calonMitra = CalonMitra::where('status', 'belum diproses')->get();
+        $calonMitra = Mitra::whereIn('status', ['belum diproses', 'ditolak'])->get();
         return view('ecommerce-potential-partners', compact('calonMitra'));
     }
 
-    public function terimaMitra($nomor)
+    public function terimaMitra(Request $request, $id)
     {
-        // Temukan calon mitra berdasarkan nomor (bukan id)
-        $calonMitra = CalonMitra::findOrFail($nomor);
-
-        // Memeriksa apakah calon mitra sudah diterima sebelumnya
+        $calonMitra = Mitra::findOrFail($id);
         if ($calonMitra->status === 'terima') {
             return redirect()->route('calon-mitra.index')->with('error', 'Mitra ini sudah terdaftar.');
         }
 
-        // Ambil inisial kota dari alamat calon mitra
-        $inisialKota = strtoupper(substr($calonMitra->kota_calon_mitra, 0, 3));
-
-        // Ambil nomor urut terakhir berdasarkan inisial kota
-        $lastMitra = Mitra::where('id_mitra', 'LIKE', "{$inisialKota}%")
-            ->orderBy('id_mitra', 'desc')
-            ->first();
-
-        // Tentukan nomor urut berikutnya
-        $nextNumber = $lastMitra ? (int) substr($lastMitra->id_mitra, 3) + 1 : 1;
-
-        // Format ID dengan inisial kota dan nomor urut
-        $idMitraBaru = sprintf("%s%03d", $inisialKota, $nextNumber);
-
-        // Menambahkan calon mitra ke daftar mitra
-        Mitra::create([
-            'id_mitra' => $idMitraBaru,
-            'nama_mitra' => $calonMitra->nama_calon_mitra,
-            'alamat_mitra' => $calonMitra->alamat_calon_mitra,
-            'email_mitra' => $calonMitra->email_calon_mitra,
-            'no_hp_mitra' => $calonMitra->no_hp_calon_mitra,
-            'status' => 'aktif',     // Status aktif
-            'nomor' => $calonMitra->nomor, // Isi kolom nomor dari tabel calon_mitra
-        ]);
-
-        // Mengubah status calon mitra menjadi 'terima' dan menyimpan ID Mitra baru
         $calonMitra->update([
-            'status' => 'diterima',
-            'id_mitra' => $idMitraBaru
+            'catatan_approver' => $request->catatan_approver,
+            'status' => 'diterima'
         ]);
 
-        // Redirect ke halaman calon mitra dengan pesan sukses
-        return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra diterima dan ditambahkan sebagai Mitra.');
+        if ($request->whatsapp == 1) {
+            $message = $this->buildWaMessage($calonMitra->nama, 'diterima', $request->catatan_approver);
+            $waUrl = "https://wa.me/{$this->phoneNumber}?text=" . urlencode($message);
+
+            return view('redirect-whatsapp', [
+                'waUrl' => $waUrl,
+                'redirectUrl' => url('ecommerce-potential-partners'),
+            ]);
+        } else {
+            return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra diterima dan ditambahkan sebagai Mitra.');
+        }
     }
 
-    public function tolakMitra($nomor)
+    public function tolakMitra(Request $request, $id)
     {
-        // Temukan calon mitra berdasarkan nomor (bukan id)
-        $calonMitra = CalonMitra::where('nomor', $nomor)->firstOrFail();
+        $calonMitra = Mitra::where('id', $id)->firstOrFail();
 
-        // Mengubah status calon mitra menjadi 'ditolak'
-        $calonMitra->update(['status' => 'ditolak']);
+        $calonMitra->update([
+            'catatan_approver' => $request->catatan_approver,
+            'status' => 'ditolak'
+        ]);
 
-        // Redirect ke halaman calon mitra dengan pesan sukses
-        return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra ditolak.');
+        if ($request->whatsapp == 1) {
+            $message = $this->buildWaMessage($calonMitra->nama, 'ditolak', $request->catatan_approver);
+            $waUrl = "https://wa.me/{$this->phoneNumber}?text=" . urlencode($message);
+
+            return view('redirect-whatsapp', [
+                'waUrl' => $waUrl,
+                'redirectUrl' => url('ecommerce-potential-partners'),
+            ]);
+        } else {
+            return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra ditolak.');
+        }
     }
 
     public function post(Request $request)
     {
         $ktpPath = $request->file('upload_ktp')->store('ktp', 'public');
         $fotoPath = $request->file('upload_foto')->store('foto', 'public');
+
+        $inisialKota = strtoupper(substr($request->kota_mitra, 0, 3));
+        $lastMitra = Mitra::where('kode_mitra', 'LIKE', "{$inisialKota}%")->orderBy('id', 'desc')->first();
+        $nextNumber = $lastMitra ? (int) substr($lastMitra->kode_mitra, 3) + 1 : 1;
+        $kodeMitra = sprintf("%s%03d", $inisialKota, $nextNumber);
 
         $data = [
             'nama' => $request->nama,
@@ -98,34 +94,73 @@ class CalonMitraController extends Controller
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'upload_ktp' => $ktpPath,
-            'upload_foto' => $fotoPath
+            'upload_foto' => $fotoPath,
+            'kode_mitra' => $kodeMitra,
         ];
 
-        // dd($data);
-
-        CalonMitra::create($data);
+        Mitra::create($data);
 
         return view('post-mitra');
-    }
-
-    public function show($nomor)
-    {
-        // Cari data berdasarkan nomor
-        $calonMitra = CalonMitra::where('nomor', $nomor)->first();
-
-        if (!$calonMitra) {
-            return response()->json(['message' => 'Mitra tidak ditemukan.'], 404);
-        }
-
-        // Kembalikan data dalam format JSON
-        return response()->json($calonMitra);
     }
 
     public function petaMitra()
     {
         // Ambil data calon mitra dengan status "diterima"
-        $calonMitra = CalonMitra::where('status', 'diterima')->get();
+        $calonMitra = Mitra::where('status', 'diterima')->get();
 
         return view('map-google-maps', compact('calonMitra'));
+    }
+
+    private function buildWaMessage($calonMitra, $status, $catatan)
+    {
+        if ($status == 'diterima') {
+            $message = <<<TEXT
+                *===============*
+                *HUBUNGI KAMI*
+                *===============*
+
+                Subjek: Konfirmasi Penerimaan Sebagai Mitra Gerobak Listrik Angkringan
+
+                Pesan:
+                Kepada Yth.
+                Bapak/Ibu {$calonMitra}
+
+                Dengan hormat,
+                Kami dengan senang hati menginformasikan bahwa pendaftaran Anda telah berhasil kami terima dan Anda resmi menjadi mitra *Gerobak Listrik Angkringan*.
+
+                Kami sangat menghargai komitmen dan minat Anda untuk bergabung bersama kami. Kami percaya bahwa kerjasama ini akan memberikan kontribusi positif yang saling menguntungkan. Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
+
+                Selamat bergabung dan mari mulai perjalanan sukses bersama!
+
+                Hormat kami,
+                *Gerobak Listrik Angkringan*
+            TEXT;
+        } else {
+            $message = <<<TEXT
+                *===============*
+                *HUBUNGI KAMI*
+                *===============*
+
+                Subjek: Konfirmasi Penerimaan Sebagai Mitra Gerobak Listrik Angkringan
+
+                Pesan:
+                Kepada Yth.
+                Bapak/Ibu {$calonMitra}
+
+                Terima kasih atas minat dan perhatian yang telah Anda berikan kepada Gerobak Listrik Angkringan. Setelah melalui proses evaluasi, kami sangat menyesal untuk memberitahukan bahwa pendaftaran Anda untuk menjadi mitra kami belum dapat kami terima pada saat ini.
+
+                Alasan penolakan kami adalah sebagai berikut:
+                {$catatan}
+
+                Kami menghargai minat Anda untuk bergabung dengan kami dan berharap dapat bekerjasama di kesempatan yang akan datang. Anda dapat mengajukan ulang pendaftaran setelah melakukan revisi atau pembaruan sesuai dengan alasan penolakan yang kami sampaikan. Kami akan mempertimbangkan kembali pendaftaran Anda setelah perbaikan dilakukan.
+
+                Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
+
+                Terima kasih atas pengertian Anda,
+                *Gerobak Listrik Angkringan*
+            TEXT;
+        }
+
+        return $message;
     }
 }

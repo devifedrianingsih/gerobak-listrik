@@ -38,12 +38,12 @@ Route::post('/upload-product-image', [ProductController::class, 'uploadImage'])-
 Route::post('/post-mitra', [CalonMitraController::class, 'post'])->name('post.mitra');
 
 Route::get('/ecommerce-potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
-Route::post('/calon-mitra.index/{nomor}/terima', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
-Route::post('/calon-mitra.index/{nomor}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
+Route::post('/calon-mitra.index/{id}/terima', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
+Route::post('/calon-mitra.index/{id}/tolak', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
 
 //Mengambil data dari tabel calon mitra untuk page mitra
-Route::get('/ecommerce-potential-partners/{nomor}', [MitraController::class, 'getCalonMitraData']);
-Route::post('/ecommerce-potential-partners/update/{nomor}', [MitraController::class, 'updateCalonMitra']);
+Route::get('/ecommerce-potential-partners/{id}', [MitraController::class, 'getCalonMitraData']);
+Route::post('/ecommerce-potential-partners/update/{id}', [MitraController::class, 'updateCalonMitra']);
 
 Route::get('/ecommerce-customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
 

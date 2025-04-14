@@ -7,31 +7,6 @@
 @section('content')
     <x-page-title title="Calon Mitra" subtitle="Daftar Calon Mitra" />
 
-    <div class="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-bold flex-wrap font-text1">
-        <a href="javascript:;"><span class="me-1">Semua</span><span class="text-secondary">({{ $calonMitra->count() }})</span></a>
-    </div>
-
-    <div class="row g-3">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-            <!-- Search input di kiri -->
-            <div class="position-relative">
-                <input id="searchInput" class="form-control px-5" type="search" placeholder="Cari Calon Mitra">
-                <span class="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
-            </div>
-            <!-- Dropdown Show entries di kanan -->
-            <div>
-                <label for="entriesCount">Show</label>
-                <select id="entriesCount" class="form-select d-inline-block" style="width: auto;">
-                    <option value="5">5</option>
-                    <option value="10" selected>10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select>
-                <label for="entriesCount">entries</label>
-            </div>
-        </div>
-    </div><!--end row-->
-
     <div class="card mt-4">
         <div class="card-body">
             <div class="calon_mitra-table">
@@ -39,45 +14,160 @@
                     <table class="table align-middle" id="calon_mitraTable">
                         <thead class="table-light">
                             <tr>
-                                <th>NO</th>
-                                <th>NAMA CALON MITRA</th>
-                                <th>EMAIL CALON MITRA</th>
-                                <th>NO HP CALON MITRA</th>
-                                <th>KOTA CALON MITRA</th>
-                                <th>ALAMAT CALON MITRA</th>
-                                <th>STATUS</th>
-                                <th>AKSI</th>
+                                <th>No</th>
+                                <th>Kode Mitra</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>No Hp</th>
+                                <th>Kota</th>
+                                <th>Alamat</th>
+                                <th class="text-center">Lihat Detail</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if($calonMitra->isEmpty())
+                            @if ($calonMitra->isEmpty())
                                 <tr>
                                     <td colspan="8" class="text-center">Tidak ada data calon mitra.</td>
                                 </tr>
                             @else
-                                @foreach($calonMitra as $key => $calon)
+                                @foreach ($calonMitra as $key => $calon)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $calon->nama_calon_mitra }}</td>
-                                        <td>{{ $calon->email_calon_mitra }}</td>
-                                        <td>{{ $calon->no_hp_calon_mitra }}</td>
-                                        <td>{{ $calon->kota_calon_mitra }}</td>
-                                        <td>{{ $calon->alamat_calon_mitra }}</td>
-                                        <td>{{ ucfirst($calon->status) }}</td>
-                                        <td>
-                                            <form action="{{ route('calon-mitra.terima', $calon->nomor) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success" {{ $calon->status === 'terima' ? 'disabled' : '' }} onclick="return confirm('Yakin ingin menerima calon mitra ini?')"><i class="lni lni-checkmark"></i></button>
-                                            </form>
-                                            <form action="{{ route('calon-mitra.tolak', $calon->nomor) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menolak calon mitra ini?')"><i class="lni lni-close"></i></button>
-                                            </form>
+                                        <td>{{ $calon->kode_mitra }}</td>
+                                        <td>{{ $calon->nama }}</td>
+                                        <td>{{ $calon->email }}</td>
+                                        <td>{{ $calon->no_hp }}</td>
+                                        <td>{{ $calon->kota }}</td>
+                                        <td>{{ $calon->alamat }}</td>
+                                        <td class="text-center fs-3">
+                                            <i class="fadeIn animated lni lni-eye text-secondary"
+                                                onmouseover="this.classList.replace('text-secondary', 'text-primary')"
+                                                onmouseout="this.classList.replace('text-primary', 'text-secondary')"
+                                                data-bs-toggle="modal" data-bs-target="#uploadModal{{ $calon->id }}"
+                                                style="cursor: pointer">
+                                            </i>
                                         </td>
+                                        <td class="text-center">{{ ucfirst($calon->status) }}</td>
+
+                                        @if ($calon->status != 'ditolak')
+                                            <td class="text-center">
+                                                <form id="formTerima" action="{{ route('calon-mitra.terima', $calon->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success"
+                                                        {{ $calon->status === 'terima' ? 'disabled' : '' }}
+                                                        onclick="return confirm('Yakin ingin menerima calon mitra ini?')"><i
+                                                            class="lni lni-checkmark"></i></button>
+                                                </form>
+                                                <form id="formTolak" action="{{ route('calon-mitra.tolak', $calon->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger"
+                                                        onclick="return confirm('Yakin ingin menolak calon mitra ini?')"><i
+                                                            class="lni lni-close"></i></button>
+                                                </form>
+                                            </td>
+                                        @else
+                                            <td class="text-center">
+                                                <button type="submit" class="btn btn-success" disabled><i class="lni lni-checkmark"></i></button>
+                                                <button type="submit" class="btn btn-danger" disabled><i class="lni lni-close"></i></button>
+                                            </td>
+                                        @endif
                                     </tr>
+
+                                    <div class="modal fade" id="uploadModal{{ $calon->id }}" tabindex="-1"
+                                        aria-labelledby="uploadModal{{ $calon->id }}Label" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="uploadModal{{ $calon->id }}Label">
+                                                        KTP dan Pas Foto</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @php
+                                                        $fields = [
+                                                            'kode_mitra' => 'Kode Mitra',
+                                                            'nama' => 'Nama Lengkap',
+                                                            'no_ktp' => 'No KTP',
+                                                            'tanggal_lahir' => 'Tanggal Lahir',
+                                                            'email' => 'Email',
+                                                            'no_hp' => 'No HP',
+                                                            'jenis_kelamin' => 'Jenis Kelamin',
+                                                            'alamat' => 'Alamat',
+                                                            'alamat_ktp' => 'Alamat KTP',
+                                                            'domisili' => 'Domisili',
+                                                            'provinsi' => 'Provinsi',
+                                                            'kota' => 'Kota',
+                                                            'kecamatan' => 'Kecamatan',
+                                                            'kelurahan' => 'Kelurahan',
+                                                            'provinsi_mitra' => 'Provinsi Mitra',
+                                                            'kota_mitra' => 'Kota Mitra',
+                                                            'kecamatan_mitra' => 'Kecamatan Mitra',
+                                                            'kelurahan_mitra' => 'Kelurahan Mitra',
+                                                            'kode_pos' => 'Kode Pos',
+                                                            'latitude' => 'Latitude',
+                                                            'longitude' => 'Longitude',
+                                                        ];
+                                                    @endphp
+
+                                                    @foreach ($fields as $field => $label)
+                                                        <div class="row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">{{ $label }}</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" readonly
+                                                                    class="form-control-plaintext"
+                                                                    value="{{ $calon->$field }}">
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+
+                                                    <div class="row text-center my-5">
+                                                        <div class="col-lg-6 col-md-12">
+                                                            <label for="KTP" class="d-block fs-5">KTP</label>
+                                                            <img src="{{ asset('storage/' . $calon->upload_ktp) }}"
+                                                                alt="KTP" width="200">
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-12">
+                                                            <label for="Pas Photo" class="d-block fs-5">Pas Foto</label>
+                                                            <img src="{{ asset('storage/' . $calon->upload_foto) }}"
+                                                                alt="Pas foto" width="200">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input @if ($calon->status == 'ditolak') disabled @endif name="whatsapp" class="form-check-input" type="checkbox" id="sendToWhatsapp" value="1">
+                                                        <label class="form-check-label" for="sendToWhatsapp">Kirim notifikasi ke WhatsApp?</label>
+                                                    </div>
+
+                                                    <div class="form-floating">
+                                                        <textarea @if ($calon->status == 'ditolak') disabled @endif class="form-control" placeholder="Ketik catatan di sini" id="catatan" name="catatan" style="height: 150px">{{ $calon->catatan_approver }}</textarea>
+                                                        <label for="catatan">Catatan</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form id="formTolak" action="{{ route('calon-mitra.tolak', $calon->id) }}" method="POST" style="display:inline; margin: 0;">
+                                                        @csrf
+                                                        <input type="hidden" name="whatsapp">
+                                                        <input type="hidden" name="catatan_approver">
+                                                        <button @if ($calon->status == 'ditolak') disabled @endif type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menolak calon mitra ini?')">Tolak</button>
+                                                    </form>
+                                                    <form id="formTerima" action="{{ route('calon-mitra.terima', $calon->id) }}" method="POST" style="display:inline; margin: 0;">
+                                                        @csrf
+                                                        <input type="hidden" name="whatsapp">
+                                                        <input type="hidden" name="catatan_approver">
+                                                        <button @if ($calon->status == 'ditolak') disabled @endif type="submit" class="btn btn-success" {{ $calon->status === 'terima' ? 'disabled' : '' }} onclick="return confirm('Yakin ingin menerima calon mitra ini?')">Terima</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             @endif
-
                         </tbody>
                     </table>
                 </div>
@@ -93,8 +183,67 @@
     <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>
     <script src="{{ URL::asset('build/js/main.js') }}"></script>
 
-    <!-- JavaScript untuk fitur pencarian, sort, dan show entries -->
+    <!-- DataTables with Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
+        $(document).ready(function() {
+            $('#calon_mitraTable').DataTable({
+                pageLength: 10,
+                lengthMenu: [5, 10, 15, 20],
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "→",
+                        previous: "←"
+                    },
+                    zeroRecords: "Data tidak ditemukan",
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const catatan = document.getElementById("catatan");
+            const catatanApprovers = document.querySelectorAll("input[name='catatan_approver']");
+
+            const checkbox = document.getElementById("sendToWhatsapp");
+            const whatsappInputs = document.querySelectorAll("input[name='whatsapp']");
+
+            // Mirror textarea ke input catatan_approver
+            catatan.addEventListener("input", function () {
+                catatanApprovers.forEach(input => {
+                    input.value = catatan.value;
+                });
+            });
+
+            // Mirror checkbox ke input whatsapp
+            checkbox.addEventListener("change", function () {
+                whatsappInputs.forEach(input => {
+                    input.value = checkbox.checked ? "1" : "";
+                });
+            });
+
+            // Set initial value waktu load halaman
+            catatanApprovers.forEach(input => {
+                input.value = catatan.value;
+            });
+
+            whatsappInputs.forEach(input => {
+                input.value = checkbox.checked ? "1" : "";
+            });
+        });
+    </script>
+
+    <!-- JavaScript untuk fitur pencarian, sort, dan show entries -->
+    {{-- <script>
         document.getElementById('searchInput').addEventListener('keyup', function() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById('searchInput');
@@ -174,6 +323,5 @@
         });
 
         document.getElementById('entriesCount').dispatchEvent(new Event('change'));
-    </script>
+    </script> --}}
 @endpush
-

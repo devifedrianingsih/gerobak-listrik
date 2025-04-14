@@ -11,10 +11,10 @@ class MitraController extends Controller
     public function indexMitra()
     {
         // Ambil data mitra beserta relasi calonMitra
-        $mitras = Mitra::with('calonMitra')->get();
+        $mitra = Mitra::where('status', 'diterima')->get();
 
         // Kirim data ke view
-        return view('ecommerce-customers', compact('mitras'));
+        return view('ecommerce-customers', compact('mitra'));
     }
 
     public function getCalonMitraData($nomor)
