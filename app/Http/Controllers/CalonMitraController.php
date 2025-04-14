@@ -11,7 +11,7 @@ class CalonMitraController extends Controller
 
     public function index()
     {
-        $calonMitra = Mitra::whereIn('status', ['belum diproses', 'ditolak'])->get();
+        $calonMitra = Mitra::whereIn('status', ['belum diproses', 'ditolak'])->orderBy("id", "desc")->get();
         return view('ecommerce-potential-partners', compact('calonMitra'));
     }
 
@@ -33,7 +33,7 @@ class CalonMitraController extends Controller
 
             return view('redirect-whatsapp', [
                 'waUrl' => $waUrl,
-                'redirectUrl' => url('ecommerce-potential-partners'),
+                'redirectUrl' => url('ecommerce/potential-partners'),
             ]);
         } else {
             return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra diterima dan ditambahkan sebagai Mitra.');
@@ -55,7 +55,7 @@ class CalonMitraController extends Controller
 
             return view('redirect-whatsapp', [
                 'waUrl' => $waUrl,
-                'redirectUrl' => url('ecommerce-potential-partners'),
+                'redirectUrl' => url('ecommerce/potential-partners'),
             ]);
         } else {
             return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra ditolak.');
