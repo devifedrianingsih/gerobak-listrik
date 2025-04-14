@@ -46,8 +46,8 @@
                                 <th>JENIS PEMBAYARAN</th>
                                 <th>METODE PENGAMBILAN</th>
                                 <th>TOTAL HARGA</th>
-                                <th>BUKTI BAYAR</th>
-                                <th>AKSI</th>
+                                <th class="text-center">BUKTI BAYAR</th>
+                                <th class="text-center">AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,7 +60,7 @@
                                 <td>{{ strtoupper($payment->payment_method) }}</td>
                                 <td>{{ ucwords ($payment->pickup_delivery) }}</td>
                                 <td>Rp {{ number_format($payment->total, 0, ',', '.') }}</td>
-                                <td>
+                                <td class="text-center">
                                     @if ($payment->upload_bukti)
                                         <a href="javascript:void(0)" class="view-proof" data-bs-toggle="modal" data-bs-target="#proofModal" data-image="{{ asset('storage/' . $payment->upload_bukti) }}">
                                             <i class="lni lni-eye" style="font-size: 1.3rem;"></i>
@@ -69,7 +69,7 @@
                                         Tidak Ada
                                     @endif
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @if ($payment->status === 'pending')
                                         <!-- Button Approve -->
                                         <form action="{{ route('admin.payments.approve', $payment->id) }}" method="POST" style="display:inline;">
@@ -78,7 +78,7 @@
                                                 <i class="lni lni-checkmark"></i>
                                             </button>
                                         </form>
-                                        
+
                                         <!-- Button Reject -->
                                         <form action="{{ route('admin.payments.reject', $payment->id) }}" method="POST" style="display:inline;">
                                             @csrf

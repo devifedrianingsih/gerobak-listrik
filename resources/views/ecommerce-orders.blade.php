@@ -42,7 +42,7 @@
                                 <th>NAMA</th>
                                 <th>KATEGORI</th>
                                 <th>HARGA</th>
-                                <th>INVOICE</th>
+                                <th class="text-center">INVOICE</th>
                                 <th>METODE PENGAMBILAN</th>
                                 <th>STATUS PESANAN</th>
                             </tr>
