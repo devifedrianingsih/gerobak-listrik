@@ -8,7 +8,7 @@
         <!-- Search bar section -->
      </div>
      <ul class="navbar-nav gap-1 nav-right-links align-items-center">
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" data-bs-auto-close="outside"
               data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">notifications</i>
               <span class="badge-notify">5</span>
@@ -42,7 +42,7 @@
                  <!-- Other notifications here -->
               </div>
            </div>
-        </li>
+        </li> --}}
 
         <!-- Profile dropdown -->
         <li class="nav-item dropdown">
