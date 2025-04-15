@@ -12,10 +12,34 @@ class CalonMitraController extends Controller
     public function index()
     {
         $calonMitra = Mitra::whereIn('status', ['belum diproses', 'ditolak'])->get();
-        return view('ecommerce-potential-partners', compact('calonMitra'));
+        $fields = [
+            'kode_mitra' => 'Kode Mitra',
+            'nama' => 'Nama Lengkap',
+            'no_ktp' => 'No KTP',
+            'tanggal_lahir' => 'Tanggal Lahir',
+            'email' => 'Email',
+            'no_hp' => 'No HP',
+            'jenis_kelamin' => 'Jenis Kelamin',
+            'alamat' => 'Alamat',
+            'alamat_ktp' => 'Alamat KTP',
+            'domisili' => 'Domisili',
+            'provinsi' => 'Provinsi',
+            'kota' => 'Kota',
+            'kecamatan' => 'Kecamatan',
+            'kelurahan' => 'Kelurahan',
+            'provinsi_mitra' => 'Provinsi Mitra',
+            'kota_mitra' => 'Kota Mitra',
+            'kecamatan_mitra' => 'Kecamatan Mitra',
+            'kelurahan_mitra' => 'Kelurahan Mitra',
+            'kode_pos' => 'Kode Pos',
+            'latitude' => 'Latitude',
+            'longitude' => 'Longitude',
+        ];
+
+        return view('ecommerce-potential-partners', compact('calonMitra', 'fields'));
     }
 
-    public function terimaMitra(Request $request, $id)
+    public function prosesMitra(Request $request, $id)
     {
         $calonMitra = Mitra::findOrFail($id);
         if ($calonMitra->status === 'terima') {
@@ -24,41 +48,19 @@ class CalonMitraController extends Controller
 
         $calonMitra->update([
             'catatan_approver' => $request->catatan_approver,
-            'status' => 'diterima'
+            'status' => $request->action,
         ]);
 
         if ($request->whatsapp == 1) {
-            $message = $this->buildWaMessage($calonMitra->nama, 'diterima', $request->catatan_approver);
+            $message = $this->buildWaMessage($calonMitra->nama, $request->action, $request->catatan_approver);
             $waUrl = "https://wa.me/{$this->phoneNumber}?text=" . urlencode($message);
 
             return view('redirect-whatsapp', [
                 'waUrl' => $waUrl,
-                'redirectUrl' => url('ecommerce-potential-partners'),
+                'redirectUrl' => url('ecommerce/potential-partners'),
             ]);
         } else {
-            return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra diterima dan ditambahkan sebagai Mitra.');
-        }
-    }
-
-    public function tolakMitra(Request $request, $id)
-    {
-        $calonMitra = Mitra::where('id', $id)->firstOrFail();
-
-        $calonMitra->update([
-            'catatan_approver' => $request->catatan_approver,
-            'status' => 'ditolak'
-        ]);
-
-        if ($request->whatsapp == 1) {
-            $message = $this->buildWaMessage($calonMitra->nama, 'ditolak', $request->catatan_approver);
-            $waUrl = "https://wa.me/{$this->phoneNumber}?text=" . urlencode($message);
-
-            return view('redirect-whatsapp', [
-                'waUrl' => $waUrl,
-                'redirectUrl' => url('ecommerce-potential-partners'),
-            ]);
-        } else {
-            return redirect()->route('calon-mitra.index')->with('success', 'Calon Mitra ditolak.');
+            return redirect()->route('calon-mitra.index')->with('success', "Calon Mitra {$request->action}.");
         }
     }
 
@@ -68,9 +70,9 @@ class CalonMitraController extends Controller
         $fotoPath = $request->file('upload_foto')->store('foto', 'public');
 
         $inisialKota = strtoupper(substr($request->kota_mitra, 0, 3));
-        $lastMitra = Mitra::where('kode_mitra', 'LIKE', "{$inisialKota}%")->orderBy('id', 'desc')->first();
-        $nextNumber = $lastMitra ? (int) substr($lastMitra->kode_mitra, 3) + 1 : 1;
-        $kodeMitra = sprintf("%s%03d", $inisialKota, $nextNumber);
+        $lastMitra   = Mitra::where('kode_mitra', 'LIKE', "{$inisialKota}%")->orderBy('id', 'desc')->first();
+        $nextNumber  = $lastMitra ? (int) substr($lastMitra->kode_mitra, 3) + 1 : 1;
+        $kodeMitra   = sprintf("%s%03d", $inisialKota, $nextNumber);
 
         $data = [
             'nama' => $request->nama,

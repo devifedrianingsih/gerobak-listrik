@@ -42,7 +42,7 @@
                         <tbody>
                             @if ($mitra->isEmpty())
                                 <tr>
-                                    <td colspan="8" class="text-center">Tidak ada data mitr mitra.</td>
+                                    <td colspan="25" class="text-center">Tidak ada data mitra.</td>
                                 </tr>
                             @else
                                 @foreach ($mitra as $key => $mitr)

@@ -11,12 +11,12 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CalonMitraController;
 use App\Http\Controllers\AdminPaymentController;
-
+use App\Http\Controllers\MapsController;
 
 Auth::routes();
 
 /// ==================== PETA ====================
-Route::get('/maps', [CalonMitraController::class, 'petaMitra'])->name('peta-mitra');
+Route::get('/maps', [MapsController::class, 'index'])->name('peta-mitra');
 
 // ==================== PRODUK ====================
 Route::get('/ecommerce/products', [ProductController::class, 'index'])->name('product.index');
@@ -29,8 +29,7 @@ Route::post('/ecommerce/products/upload-image', [ProductController::class, 'uplo
 // ==================== CALON MITRA ====================
 Route::post('/ecommerce/partners', [CalonMitraController::class, 'post'])->name('post.mitra');
 Route::get('/ecommerce/potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
-Route::post('/ecommerce/potential-partners/{id}/accept', [CalonMitraController::class, 'terimaMitra'])->name('calon-mitra.terima');
-Route::post('/ecommerce/potential-partners/{id}/reject', [CalonMitraController::class, 'tolakMitra'])->name('calon-mitra.tolak');
+Route::post('/ecommerce/potential-partners/{id}/process', [CalonMitraController::class, 'prosesMitra'])->name('calon-mitra.proses');
 
 // ==================== MITRA ====================
 Route::get('/ecommerce/customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
