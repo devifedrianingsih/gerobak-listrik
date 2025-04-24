@@ -15,6 +15,10 @@ use App\Http\Controllers\MapsController;
 
 Auth::routes();
 
+Route::get('/', function() {
+    return redirect()->to('dashboard');
+});
+
 /// ==================== PETA ====================
 Route::get('/maps', [MapsController::class, 'index'])->name('peta-mitra');
 

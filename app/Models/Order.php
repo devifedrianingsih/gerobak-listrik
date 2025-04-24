@@ -25,6 +25,11 @@ class Order extends Model
         return $this->belongsTo(Pembayaran::class, 'payment_id', 'id');
     }
 
+    public function mitra()
+    {
+        return $this->hasOne(Mitra::class, 'id', 'mitra_id');
+    }
+
     public function produkPembayaran()
     {
         return $this->hasMany(PembayaranProduk::class, 'pembayaran_id', 'id');
