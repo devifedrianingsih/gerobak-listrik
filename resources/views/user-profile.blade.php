@@ -11,7 +11,7 @@
             <div class="position-relative mb-5">
                 <img src="https://placehold.co/1920x500/png" class="img-fluid rounded-4 shadow" alt="">
                 <div class="profile-avatar position-absolute top-100 start-50 translate-middle">
-                    <img src="https://placehold.co/110x110/png" class="img-fluid rounded-circle p-1 bg-grd-danger shadow"
+                    <img src="{{ URL::asset('assets/images/profile.png') }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow"
                         width="170" height="170" alt="">
                 </div>
             </div>

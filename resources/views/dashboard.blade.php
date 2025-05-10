@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-7">
                             <div class="d-flex align-items-center gap-3 mb-5">
-                                <img src="https://placehold.co/110x110/png" class="rounded-circle bg-grd-info p-1"
+                                <img src="{{ URL::asset('assets/images/profile.png') }}" class="rounded-circle bg-grd-info p-1"
                                     width="60" height="60" alt="user">
                                 <div class="">
                                     <p class="mb-0 fw-semibold">Selamat datang kembali</p>
@@ -55,36 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-6 col-xxl-2 d-flex align-items-stretch">
-            <div class="card w-100 rounded-4">
-                <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between mb-4">
-                        <div class="">
-                            <p class="mb-0">Total Artikel</p>
-                            <h5 class="mb-0">{{ number_format($secondCard['article_count']) }}</h5>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-start justify-content-between mb-4">
-                        <div class="w-100">
-                            <p class="mb-0">Artikel Paling Banyak Dilihat</p>
-                            <h5 class="mb-0 text-truncate" style="max-width: 100%;">
-                                {{ $secondCard['most_viewed_article']?->title ?? '-' }}
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-start justify-content-between mb-4">
-                        <div class="w-100">
-                            <p class="mb-0">Artikel Terbaru</p>
-                            <h5 class="mb-0 text-truncate" style="max-width: 100%;">
-                                {{ $secondCard['newest_article']?->title ?? '-' }}
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-xl-6 col-xxl-2 d-flex align-items-stretch">
+        <div class="col-md-6 col-xl-6 col-xxl-4 d-flex align-items-stretch">
             <div class="card w-100 rounded-4">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between mb-1">
@@ -174,17 +145,21 @@
         var options = {
             series: [{
                 name: "Total Mitra",
-                data: @json($secondCard['mitra_per_month']) // << inject dari backend
+                data: @json($secondCard['mitra_per_month'])
             }],
             chart: {
                 height: 120,
                 type: 'bar',
+                toolbar: {
+                    show: false
+                },
                 sparkline: {
-                    enabled: true
+                    enabled: false // ini penting supaya xaxis muncul
                 },
                 zoom: {
                     enabled: false
-                }
+                },
+                foreColor: "#9ba7b2"
             },
             dataLabels: {
                 enabled: false
@@ -213,24 +188,27 @@
                     columnWidth: '40%'
                 }
             },
+            grid: {
+                show: true,
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+            },
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            },
             tooltip: {
                 theme: "dark",
-                x: {
-                    show: true
-                },
                 y: {
                     formatter: function(val) {
                         return val + " mitra";
                     }
                 }
-            },
-            xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             }
         };
 
         new ApexCharts(document.querySelector("#chart3"), options).render();
     </script>
+
 
     {{-- Chart Order --}}
     <script>

@@ -15,11 +15,12 @@
                 <a href="/beranda">Gerobak Listrik</a>
             </div>
             <nav>
-                <a href="/beranda">Home</a>
+                <a href="/beranda">Beranda</a>
                 <a href="/sejarah">Sejarah</a>
                 <a href="/paketfranchise">Produk</a>
+                <a href="/kemitraan">Kemitraan</a>
                 <a href="/artikel">Artikel</a>
-                <a href="/hubungi">Hubungi Kami</a>
+                <a href="/hubungikami">Hubungi Kami</a>
             </nav>
         </div>
     </header>
@@ -28,41 +29,37 @@
         <div class="container-home">
             <div class="text">
                 <p>Apa itu gerobak listrik? Gerobak listrik adalah<br> suatu perusahaan franchise yang menawarkan<br> produk usaha berupa gerobak listrik dan<br> produk hasil jadi serta bahan baku<br> yang tersedia dalam tiap paket berbeda.</p>
-                <a href="/paketfranchise" class="join-mitra">Beli Paket Franchise</a>
-                <a href="/hasiljadi" class="join-mitra">Beli Produk Jadi</a>
+                <a href="/kemitraan" class="join-mitra">Gabung Kemitraan</a>
+                <a href="/paketfranchise" class="join-mitra">Menu Paket Frachise</a>
             </div>
             <div class="container-image">
-                <img src="{{ asset('img/gerobak.png') }}" alt="Gerobak Listrik">
+                <img src="{{ asset('img/gerobakdash.png') }}" alt="Gerobak Listrik Angkringan">
             </div>
         </div>
 
         <div class="menu">
             <div class="title-menu">
-                <h1>Menu Produk Jadi</h1>
+                <h1>Menu Praktis</h1>
             </div>
             <div class="container-menu">
-                <div class="menu1">
-                    <img src="{{ asset('img/ekado.jpg') }}" alt="Ekado Puyuh">
-                    <h3>Ekado Crispy</h3>
-                    <p>Olahan telur puyuh yang dibalut daging cincang dan kulit lumpia</p>
+                <div class="menu-item">
+                    <img src="{{ asset('img/nasi.png') }}" alt="Paket Nasi dan Pelengkap">
+                    <h3>Paket Nasi dan Pelengkap</h3>
+                    <p>Paket nasi dan pelengkap berisi nasi kucing frozen, orek tempe, dan sambal khas, siap saji untuk cita rasa angkringan rumahan.</p>
                 </div>
-                <div class="menu2">
-                    <img src="{{ asset('img/pangsit.jpg') }}" alt="Pangsit Telur Puyuh">
-                    <h3>Ekado Crispy</h3>
-                    <p>Olahan telur puyuh yang dibalut daging cincang dan kulit lumpia</p>
+                <div class="menu-item">
+                    <img src="{{ asset('img/camilan.png') }}" alt="Camilan Beku Goreng">
+                    <h3>Camilan Beku Goreng</h3>
+                    <p>Camilan beku siap goreng seperti tempe mendoan, tahu isi, dan cireng, cocok untuk sajian praktis dan renyah setiap saat.</p>
                 </div>
-                <div class="menu3">
-                    <img src="{{ asset('img/sate.jpg') }}" alt="Sate Telur Puyuh">
-                    <h3>Ekado Crispy</h3>
-                    <p>Olahan telur puyuh yang dibalut daging cincang dan kulit lumpia</p>
-                </div>
-                <div class="menu4">
-                    <img src="{{ asset('img/telur.jpg') }}" alt="Telur Puyuh">
-                    <h3>Ekado Crispy</h3>
-                    <p>Olahan telur puyuh yang dibalut daging cincang dan kulit lumpia</p>
+                <div class="menu-item">
+                    <img src="{{ asset('img/sate.png') }}" alt="Sate dan Lauk Pauk">
+                    <h3>Sate dan Lauk Pauk</h3>
+                    <p>Hidangan tusuk siap goreng dengan cita rasa khas Jawa, praktis untuk lauk atau camilan.</p>
                 </div>
             </div>
         </div>
+        
 
         <div class="polaroid-paket">
             <div class="judul">
@@ -71,35 +68,35 @@
             </div>
 
             <div class="polaroid">
-                <a href="/pakethemata">
+                <a href="/paketfranchise">
                     <img src="{{ asset('img/paket b.jpg') }}" alt="Paket A" style="width:100%" class="img-pol">
                 </a>
                 <div class="container">
-                    <h4>Paket A</h4>
+                    <h4>Paket Super A</h4>
                     <p>Gerobak Listrik, Bahan Baku, dan Modal Pendaftaran.</p>
-                    <p>Rp. 23.670.000,-</p>
+                    <p>Rp. 19.000.000,-</p>
                 </div>
             </div>
 
             <div class="polaroid">
-                <a href="/pakethematb">
+                <a href="/paketfranchise">
                     <img src="{{ asset('img/paket c.jpg') }}" alt="Paket B" style="width:100%" class="img-pol">
                 </a>
                 <div class="container">
-                    <h4>Paket B</h4>
+                    <h4>Paket Super B</h4>
                     <p>Gerobak Listrik, Bahan Baku, dan Modal Pendaftaran.</p>
-                    <p>Rp. 23.670.000,-</p>
+                    <p>Rp. 14.000.000,-</p>
                 </div>
             </div>
 
             <div class="polaroid">
-                <a href="/pakethematc">
+                <a href="/paketfranchise">
                     <img src="{{ asset('img/paket a.jpg') }}" alt="Paket C" style="width:100%" class="img-pol">
                 </a>
                 <div class="container">
-                    <h4>Paket C</h4>
+                    <h4>Paket Super C</h4>
                     <p>Gerobak Listrik, Bahan Baku, dan Modal Pendaftaran.</p>
-                    <p>Rp. 23.670.000,-</p>
+                    <p>Rp. 9.000.000,-</p>
                 </div>
             </div>
         </div>

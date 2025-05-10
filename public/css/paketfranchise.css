@@ -1,9 +1,21 @@
-/* navbar */
+/* General Styles */
+body {
+    background-color: #ffffff;
+    color: #987540;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navbar */
 header {
     background-color: #ffffff;
-    color:#987540;
+    color: #987540;
     padding: 20px 0;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header .container {
@@ -12,11 +24,17 @@ header .container {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px 20px;
 }
 
-header h3 {
-    margin: 0;
+header .logo {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+header a {
+    text-decoration: none;
+    color: #604723;
 }
 
 header nav {
@@ -25,165 +43,240 @@ header nav {
 }
 
 header nav a {
-    color:#987540;
+    color: #987540;
     text-decoration: none;
     font-size: 13px;
-    font-weight: 400;
-}
-
-header .login-button {
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    border: rgb(255, 255, 255) solid 2px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: small;
-}
-.container .icons .fa-cart-shopping {
-    padding: 14px;
-    color: #909090
-}
-
-.container .icons .fa-user {
-    padding: 14px;
-    color: #909090;
-}
-.container .icons{
-    text-decoration: none;
-}
-
-/*  */
-
-/* Paket */
-main .package {
-    color: #987540;
+    font-weight: 600;
     text-align: center;
-    padding: 100px;
+    padding: 5px 10px;
 }
 
-main .package .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+header nav a:hover {
+    background-color: #987540;
+    color: white;
+    transition-duration: 0.3s;
 }
 
-main .package .package-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.package .package-image {
-    border-radius: 50%;
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
-}
-
-
-main .package .package-details {
-    text-align: left;
-    margin-left: 20px;
-}
-
-main .package .package-details h2 {
-    font-size: 36px;
-}
-
-main .package .package-details p {
-    font-size: 18px;
-    font-weight: 300;
-}
-
-main .package .package-details ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-main .package .package-details ul li {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-main .package .package-details .price {
-    font-size: 24px;
+/* Title */
+.title {
+    text-align: center;
+    color: #3e2723;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 40px;
     font-weight: bold;
-    color: #987540;
+    font-size: 24px;
+    letter-spacing: 1px;
 }
 
-main .package .buy-button {
-    display: inline-block;
-    background-color: #8B5E34;
+.title p {
+    font-weight: lighter;
+    font-size: 16px;
+    color: #6d4c41;
+    margin-top: 10; /* Hilangkan jarak atas paragraf */
+}
+
+/* Dropdown Styles */
+.dropdown-wrapper {
+    padding: 0px; /* mengikuti padding produk */
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+.dropdown-toggle {
+    background-color: #745A34;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
     border-radius: 5px;
+    padding: 0px 0;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content li a {
+    padding: 10px 20px;
+    display: block;
+    color: #8e674d;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
-main .package .buy-button:hover{
-    background-color:#987540;
-}
-
-/* footer */
-footer {
-    background-color:#745A34;
+.dropdown-content li a:hover {
+    background-color: #8e674d;
     color: white;
-    padding: 20px 0;
+    border-radius: 5px;
 }
 
-footer .container {
-    display: flex;
-    justify-content: center;
+/* Produk Styling */
+.products-cart-container {
+    display: block;
+    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin: 30px auto;
     padding: 0 20px;
 }
 
-footer h3 {
-    margin-top: 0;
+.product {
+    flex: 0 0 calc(33.33% - 30px);
+    box-sizing: border-box;
+    text-align: center;
+    color: #3e2723;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
 }
 
-footer ul {
-    list-style-type: none;
-    padding: 0;
+.product:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-footer ul li {
+.product img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
     margin-bottom: 10px;
+    transition: transform 0.3s ease;
 }
 
-footer ul li a {
+.product img:hover {
+    transform: scale(1.05);
+}
+
+.product h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #5d4037;
+    font-weight: bold;
+}
+
+.product p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    margin-bottom: 10px;
+    color: #6d4c41;
+}
+
+.product h4 {
+    color: red;
+    font-size: 14px;
+}
+
+/* Tombol Tambah ke Keranjang */
+.add-to-cart {
+    background-color: #af9a92;
     color: white;
-    text-decoration: none;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
-footer .footer-info {
-    display: flex;
-    justify-content: center;
-    gap: 150px;
+.add-to-cart:hover {
+    background-color: #6d4c41;
 }
 
-footer .footer-set{
-    gap: 50px;
+/* Keranjang Styling */
+.cart {
+    max-width: 350px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
 }
 
-footer .footer-info img {
-    max-width: 100%;
+.remove-btn {
+    font-size: 12px;
+    cursor: pointer;
 }
 
-footer .footer-info div {
-    flex: 1;
+.cart h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #5d4037;
 }
 
-footer .footer-info a {
-    margin-right: 10px;
+.cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-footer .footer-sosial{
-    display: flex;
+.cart-items li {
+    margin: 10px 0;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #5d4037;
+    font-weight: medium;
+    border-bottom: 1px solid #e0e0e0;
 }
-/*  */
+
+.cart-total {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #4e342e;
+}
+
+/* Tombol Checkout */
+.checkout-btn {
+    background-color: #5d4037;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #4e342e;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px 0;
+    background-color: #a1887f;
+    color: white;
+    font-size: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+footer p {
+    margin: 0;
+    padding: 5px;
+    font-size: 0.9rem;
+}

@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CalonMitraController;
 use App\Http\Controllers\AdminPaymentController;
 use App\Http\Controllers\MapsController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Auth::routes();
 
@@ -58,7 +59,7 @@ Route::get('/ecommerce/orders/{id}/invoice', [OrderController::class, 'showInvoi
 
 // ==================== DASHBOARD ====================
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-
+Route::get('{any}', [DashboardController::class, 'root'])->where('any', '.*');
 
 // Halaman statis
 Route::get('/beranda', function () {
@@ -163,4 +164,3 @@ Route::get('/hasiljadi', function () {
 });
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
-Route::get('{any}', [HomeController::class, 'root'])->where('any', '.*');

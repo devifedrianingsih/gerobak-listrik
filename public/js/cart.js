@@ -137,3 +137,18 @@ document.querySelector('.checkout-btn').addEventListener('click', handleCheckout
 document.addEventListener('DOMContentLoaded', () => {
     updateCart(); // Panggil fungsi untuk memperbarui tampilan keranjang
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("button");
+    const dropdown = document.getElementById("dropdown-menu");
+
+    button.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", function () {
+        dropdown.style.display = "none";
+    });
+});
+

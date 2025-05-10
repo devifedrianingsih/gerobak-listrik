@@ -8,90 +8,163 @@
     <h5 class="fw-bold mb-4">Peta Sebaran Mitra</h5>
 
     <!-- Container untuk Peta -->
-    <div class="card">
-        <div class="card-body">
-            <div id="map" style="height: 80vh;"></div>
+    <div class="card" style="overflow: visible">
+        <div class="card-body p-0" style="overflow: visible">
+            <div id="map" style="height: 70vh; width: 100%;"></div>
         </div>
     </div>
+@endsection
 
-    @push('script')
-        <!-- Tambahkan CSS Leaflet & MarkerCluster -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+@push('script')
+    <!-- CSS Leaflet & Plugin -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css" />
 
-        <!-- Tambahkan JS Leaflet & MarkerCluster -->
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-        <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-        <script>
-            // Inisialisasi peta
-            var map = L.map('map').setView([-6.2, 106.816666], 11); // Default: Jakarta
+    <!-- JS Leaflet & Plugin -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+    <script src="https://unpkg.com/leaflet-easyprint@2.1.9/dist/bundle.js"></script>
 
-            // Tambahkan tile layer OpenStreetMap
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
+    <style>
+        .leaflet-container:fullscreen {
+            height: 100% !important;
+        }
 
-            // Coba pakai lokasi pengguna
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var userLat = position.coords.latitude;
-                    var userLng = position.coords.longitude;
-                    map.setView([userLat, userLng], 13);
+        .total-mitra-box {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 6px 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+            font-size: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+            white-space: nowrap;
+        }
 
-                    // Optional: Tambahkan marker lokasi pengguna
-                    L.marker([userLat, userLng]).addTo(map)
-                        .bindPopup("Lokasi Kamu Sekarang")
-                        .openPopup();
-                });
-            }
+        #map {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
 
-            // Custom icon untuk mitra
-            var mitraIcon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-                iconSize: [30, 30],
-                iconAnchor: [15, 30],
-                popupAnchor: [0, -28]
-            });
+        .leaflet-control-locate {
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
 
-            // Data Mitra
-            var mitraData = @json($calonMitra);
-            var markers = L.markerClusterGroup();
+        .leaflet-control-locate:hover {
+            background-color: #f4f4f4;
+        }
 
-            // Loop untuk menambahkan marker mitra
-            mitraData.forEach(function(item) {
-                if (item.latitude && item.longitude) {
-                    var marker = L.marker([item.latitude, item.longitude], {
-                        icon: mitraIcon
-                    }).bindPopup(`
-                        <b>${item.nama}</b><br>
-                        <small><b>Alamat:</b> ${item.alamat}<br>
-                        <b>Kota:</b> ${item.kota}<br>
-                        <b>Kontak:</b> ${item.no_hp}</small>
-                    `);
+        .leaflet-control-locate::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #007bff;
+        }
+    </style>
 
-                    marker.on('click', function() {
-                        map.setView(marker.getLatLng(), 15);
+    <script>
+        var map = L.map('map', {
+            center: [-6.2, 106.816666],
+            zoom: 11,
+            zoomControl: false
+        });
+
+        // Tambahkan tombol zoom di kanan bawah
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        // Tambahkan tombol fullscreen di kanan atas
+        L.control.fullscreen({ position: 'topright' }).addTo(map);
+
+        // Tombol ke Lokasi Saya (di bawah fullscreen)
+        var locateControl = L.control({ position: 'topright' });
+        locateControl.onAdd = function(map) {
+            var container = L.DomUtil.create('div', 'leaflet-bar');
+            var button = L.DomUtil.create('a', '', container);
+            button.href = '#';
+            button.title = 'Ke Lokasi Saya';
+            button.classList.add('leaflet-control-locate');
+
+            button.onclick = function (e) {
+                e.preventDefault();
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        map.setView([lat, lng], 14);
+
+                        L.marker([lat, lng], {
+                            icon: L.divIcon({
+                                html: '<div style="width:12px;height:12px;border-radius:50%;background:#007bff;border:2px solid white"></div>',
+                                className: '',
+                                iconSize: [16, 16]
+                            })
+                        }).addTo(map).bindPopup('Lokasi Kamu Sekarang').openPopup();
                     });
-
-                    markers.addLayer(marker);
                 }
-            });
-
-            map.addLayer(markers);
-
-            // Menambahkan Label untuk Total Mitra
-            var totalMitra = mitraData.length; // Menghitung total mitra
-            var mitraLabel = L.control({ position: 'topleft' }); // Kontrol di pojok kiri atas
-
-            mitraLabel.onAdd = function(map) {
-                var div = L.DomUtil.create('div', 'info legend');
-                div.innerHTML = `<div style="background-color: white; border-radius: 5px; padding: 10px; font-size: 24px;"><b>Total Mitra:</b> ${totalMitra}</div>`; // Menampilkan total mitra
-                return div;
             };
 
-            mitraLabel.addTo(map);
-        </script>
+            return container;
+        };
+        locateControl.addTo(map);
 
-    @endpush
-@endsection
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Icon khusus untuk mitra (pakai gambar gerobak)
+        var mitraIcon = L.icon({
+            iconUrl: '{{ asset("storage/icons/gerobak.png") }}',
+            iconSize: [90, 90],
+            iconAnchor: [30, 60],
+            popupAnchor: [0, -55]
+        });
+
+        var mitraData = @json($calonMitra);
+        var markers = L.markerClusterGroup();
+
+        mitraData.forEach(function(item) {
+            if (item.latitude && item.longitude) {
+                var marker = L.marker([item.latitude, item.longitude], {
+                    icon: mitraIcon
+                }).bindPopup(`
+                    <b>${item.nama}</b><br>
+                    <small><b>Alamat:</b> ${item.alamat}<br>
+                    <b>Kota:</b> ${item.kota}<br>
+                    <b>Kontak:</b> ${item.no_hp}</small>
+                `);
+
+                marker.on('click', function() {
+                    map.setView(marker.getLatLng(), 15);
+                });
+
+                markers.addLayer(marker);
+            }
+        });
+
+        map.addLayer(markers);
+
+        var totalMitra = mitraData.length;
+        var mitraLabel = L.control({ position: 'topleft' });
+
+        mitraLabel.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'leaflet-bar total-mitra-box');
+            div.innerHTML = `<b>Total Mitra:</b> ${totalMitra}`;
+            return div;
+        };
+
+        mitraLabel.addTo(map);
+    </script>
+@endpush

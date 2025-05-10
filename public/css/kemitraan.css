@@ -1,87 +1,274 @@
-/* navbar */
+/* Reset & Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  color: #5e4631;
+}
+
+/* Header */
 header {
-    background-color: #ffffff;
-    color:#987540;
-    padding: 20px 0;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  color: #987540;
+  padding: 20px 0;
 }
 
 header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header h3 {
-    margin: 0;
+header .logo a {
+  font-size: 22px;
+  font-weight: bold;
+  color: #604723;
+  text-decoration: none;
 }
 
 header nav {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 header nav a {
-    color:#987540;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 400;
+  color: #987540;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
-header .login-button {
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 10px;
-    border: rgb(255, 255, 255) solid 2px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: small;
-}
-.container .icons .fa-cart-shopping {
-    padding: 14px;
-    color: #909090
+header nav a:hover {
+  background-color: #987540;
+  color: white;
 }
 
-.container .icons .fa-user {
-    padding: 14px;
-    color: #909090;
-}
-.container .icons{
-    text-decoration: none;
-}
-
-/*  */
-
-/* Isi Kemitraan */
-.kemitraan{
-    display: flex;
-    padding: 80px;
-    background-color:#debf9179;
-}
-.content-left{
-   color: #5A3D25;
-   font-size: 20px;
-   font-weight: 500;
-   text-align: justify;
-   margin: 80px ;
-}
-.kemitraan-img{
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-.struktur{
-    display: flex;
-    justify-content: center; /* Memusatkan secara horizontal */
-    align-items: center; /* Memusatkan secara vertikal */
-    height: 100vh; /* Kontainer harus memiliki tinggi yang cukup */
+/* HERO Section */
+.hero-section {
+  width: 100%;
+  background-color: #fff8f0;
+  padding: 50px 20px 40px;
+  text-align: center;
 }
 
-.struktur-img {
-    width: auto;
-    height: 700px;
+.hero-section .title h2 {
+  font-size: 22px;
+  color: #4e342e;
+  margin-bottom: 10px;
+}
+
+.hero-section .title p {
+  font-size: 15px;
+  color: #6d4c41;
+  margin: 0 0 16px;
+}
+
+.gerobak-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.gerobak-img {
+  width: 450px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  background-color: #fff8f0;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Wrapper konten utama */
+.products-cart-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Section Kemitraan (infografis) */
+.section-kemitraan {
+  margin-top: 30px;
+}
+
+.section-kemitraan .card-putih {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.paket-kemitraan-section {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.paket-kemitraan-section h2 {
+  font-size: 22px;
+  color: #4e342e;
+  margin-bottom: 8px;
+}
+
+.paket-kemitraan-section p {
+  font-size: 15px;
+  color: #6d4c41;
+  margin: 0 0 16px;
+}
+
+.infografis-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.infografis-wrapper img {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  display: block;
+}
+
+/* Produk + Background krem full */
+.produk-krem-wrapper {
+  width: 100%;
+  background-color: #fff8f0;
+  padding: 40px 20px;
+}
+
+.produk-krem-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.judul-produk {
+  text-align: center;
+  font-size: 20px;
+  color: #4e342e;
+  margin-bottom: 30px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.product-link:hover {
+  opacity: 0.95;
+}
+
+.product {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 4px;
+}
+
+.product h2 {
+  font-size: 18px;
+  color: #4e342e;
+  margin-bottom: 10px;
+}
+
+.product p {
+  font-size: 14px;
+  color: #6d4c41;
+  min-height: 60px;
+  margin-bottom: 12px;
+}
+
+.product h4 {
+  font-size: 16px;
+  color: #745A34;
+  margin-bottom: 0;
+}
+
+.cta-kemitraan {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.btn-gabung {
+  display: inline-block;
+  padding: 20px 48px;
+  background-color: #745A34;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.btn-gabung:hover {
+  background-color: #5d4037;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gerobak-img {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  header nav {
+    font-size: 12px;
+  }
+
+  .cta-kemitraan {
+    padding: 0 10px;
+  }
+
+  .accordion {
+    width: 100%;
+  }
 }

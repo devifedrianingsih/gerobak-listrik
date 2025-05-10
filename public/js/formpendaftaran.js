@@ -1,3 +1,9 @@
+// formpendaftaran.js
+
+// --- Setup Axios ---
+// (Sudah include di Blade dengan <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>)
+
+// --- Submit Validation ---
 document.getElementById("submit-btn").addEventListener("click", function(e) {
     e.preventDefault();
 
@@ -21,204 +27,101 @@ document.getElementById("submit-btn").addEventListener("click", function(e) {
         }
     });
 
-    // Fungsi buat ubah "tgl_lahir" -> "Tgl Lahir"
-    const formatLabel = (str) => {
-        return str
-            .split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    };
+    const formatLabel = (str) => str.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
-    if (!allFilled) {
-        const formatted = emptyFields.map(formatLabel).join(', ');
-        alert("Harap lengkapi seluruh form pendaftaran!\nYang belum diisi: " + formatted);
-    } else {
-        document.getElementById('modalBtn').click();
-    }
+    // if (!allFilled) {
+    //     const formatted = emptyFields.map(formatLabel).join(', ');
+    //     alert("Harap lengkapi seluruh form pendaftaran!\nYang belum diisi: " + formatted);
+    // } else {
+    //     document.getElementById('modalBtn').click();
+    // }
 });
 
-let copy = false;
-const dataJKT = {
-    provinsi: ['DKI Jakarta'],
-    kota: {
-        'DKI Jakarta': [
-            'Jakarta Pusat', 'Jakarta Utara', 'Jakarta Selatan', 'Jakarta Timur', 'Jakarta Barat'
-        ]
-    },
-    kecamatan: {
-        'Jakarta Pusat': [
-            'Menteng', 'Cikini', 'Gondangdia', 'Kebon Sirih', 'Tanah Abang'
-        ],
-        'Jakarta Utara': [
-            'Kelapa Gading', 'Tanjung Priok', 'Pademangan', 'Kecamatan Koja', 'Cilincing'
-        ],
-        'Jakarta Selatan': [
-            'Kebayoran Baru', 'Pancoran', 'Jagakarsa', 'Mampang Prapatan', 'Cilandak'
-        ],
-        'Jakarta Timur': [
-            'Cipayung', 'Duren Sawit', 'Makassar', 'Jatinegara', 'Kramat Jati'
-        ],
-        'Jakarta Barat': [
-            'Cengkareng', 'Kalideres', 'Grogol Petamburan', 'Kembangan', 'Taman Sari'
-        ]
-    },
-    kelurahan: {
-        'Menteng': [
-            'Menteng', 'Gondangdia', 'Cikini', 'Kebon Sirih', 'Tanah Abang'
-        ],
-        'Kelapa Gading': [
-            'Kelapa Gading Timur', 'Kelapa Gading Barat', 'Pegangsaan Dua'
-        ],
-        'Kebayoran Baru': [
-            'Selong', 'Gandaria', 'Kebayoran Lama', 'Kebayoran Baru'
-        ],
-        'Cipayung': [
-            'Pondok Bambu', 'Bambu Apus', 'Cipayung', 'Kampung Melayu'
-        ],
-        'Tanjung Priok': [
-            'Sungai Bambu', 'Papanggo', 'Kepulauan Seribu', 'Tanjung Priok'
-        ],
-        'Jagakarsa': [
-            'Jagakarsa', 'Kebagusan', 'Cipete Utara'
-        ],
-        'Grogol Petamburan': [
-            'Grogol', 'Slipi', 'Kebon Jeruk'
-        ],
-        'Cengkareng': [
-            'Cengkareng Timur', 'Cengkareng Barat', 'Duri Kosambi'
-        ],
-        'Cilincing': [
-            'Cilincing', 'Marunda', 'Kalibaru'
-        ],
-        // Kelurahan lainnya sesuai kebutuhan
-    }
-};
-
-// Function untuk update options dropdown
-const updateDropdown = (element, options) => {
-    element.innerHTML = '<option value="">Pilih</option>';
-    options.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.value = option;
-        optionElement.textContent = option;
-        element.appendChild(optionElement);
-    });
-};
-
-// Event listener untuk memilih provinsi
-document.getElementById('provinsi').addEventListener('change', (e) => {
-    const provinsi = e.target.value;
-    const kotaDropdown = document.getElementById('kota');
-    const kecamatanDropdown = document.getElementById('kecamatan');
-    const kelurahanDropdown = document.getElementById('kelurahan');
-
-    // Update Kota berdasarkan Provinsi
-    if (provinsi) {
-        updateDropdown(kotaDropdown, dataJKT.kota[provinsi] || []);
-        kecamatanDropdown.innerHTML = '<option value="">Pilih Kecamatan</option>';
-        kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-    } else {
-        updateDropdown(kotaDropdown, []);
-        kecamatanDropdown.innerHTML = '<option value="">Pilih Kecamatan</option>';
-        kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-    }
-});
-
-// Event listener untuk memilih Kota
-document.getElementById('kota').addEventListener('change', (e) => {
-    const kota = e.target.value;
-    const kecamatanDropdown = document.getElementById('kecamatan');
-    const kelurahanDropdown = document.getElementById('kelurahan');
-
-    // Update Kecamatan berdasarkan Kota
-    if (kota) {
-        updateDropdown(kecamatanDropdown, dataJKT.kecamatan[kota] || []);
-        kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-    } else {
-        kecamatanDropdown.innerHTML = '<option value="">Pilih Kecamatan</option>';
-        kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-    }
-});
-
-// Event listener untuk memilih Kecamatan
-document.getElementById('kecamatan').addEventListener('change', (e) => {
-    const kecamatan = e.target.value;
-    const kelurahanDropdown = document.getElementById('kelurahan');
-
-    // Update Kelurahan berdasarkan Kecamatan
-    if (kecamatan) {
-        updateDropdown(kelurahanDropdown, dataJKT.kelurahan[kecamatan] || []);
-    } else {
-        kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-    }
-});
-
-// Pre-load Provinsi ketika halaman dimuat
+// --- Load Wilayah Indonesia Dynamic ---
 document.addEventListener('DOMContentLoaded', () => {
-    const provinsiDropdown = document.getElementById('provinsi');
-    updateDropdown(provinsiDropdown, dataJKT.provinsi);
+    loadProvinces('provinsi');
+    loadProvinces('provinsi_mitra');
 });
 
-if (!copy) {
-    // Event listener untuk memilih provinsi
-    document.getElementById('provinsi_mitra').addEventListener('change', (e) => {
-        const provinsi = e.target.value;
-        const kotaDropdown = document.getElementById('kota_mitra');
-        const kecamatanDropdown = document.getElementById('kecamatan_mitra');
-        const kelurahanDropdown = document.getElementById('kelurahan_mitra');
+function loadProvinces(elementId) {
+    axios.get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json')
+        .then(response => {
+            const provinsiDropdown = document.getElementById(elementId);
+            updateDropdown(provinsiDropdown, response.data, 'id', 'name');
+        });
+}
 
-        // Update Kota berdasarkan Provinsi
-        if (provinsi) {
-            updateDropdown(kotaDropdown, dataJKT.kota[provinsi] || []);
-            kecamatanDropdown.innerHTML = '<option value="">Pilih Kecamatan</option>';
-            kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-        } else {
-            updateDropdown(kotaDropdown, []);
-            kecamatanDropdown.innerHTML = '<option value="">Pilih Kecamatan</option>';
-            kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-        }
-    });
+function loadRegencies(provinceId, elementId) {
+    axios.get(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`)
+        .then(response => {
+            const kotaDropdown = document.getElementById(elementId);
+            updateDropdown(kotaDropdown, response.data, 'id', 'name');
+            clearDropdown(elementId.includes('mitra') ? 'kecamatan_mitra' : 'kecamatan');
+            clearDropdown(elementId.includes('mitra') ? 'kelurahan_mitra' : 'kelurahan');
+        });
+}
 
-    // Event listener untuk memilih Kota
-    document.getElementById('kota_mitra').addEventListener('change', (e) => {
-        const kota = e.target.value;
-        const kecamatanDropdown = document.getElementById('kecamatan_mitra');
-        const kelurahanDropdown = document.getElementById('kelurahan_mitra');
+function loadDistricts(regencyId, elementId) {
+    axios.get(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regencyId}.json`)
+        .then(response => {
+            const kecamatanDropdown = document.getElementById(elementId);
+            updateDropdown(kecamatanDropdown, response.data, 'id', 'name');
+            clearDropdown(elementId.includes('mitra') ? 'kelurahan_mitra' : 'kelurahan');
+        });
+}
 
-        // Update Kecamatan berdasarkan Kota
-        if (kota) {
-            updateDropdown(kecamatanDropdown, dataJKT.kecamatan[kota] || []);
-            kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-        } else {
-            kecamatanDropdown.innerHTML = '<option value="">Pilih Kecamatan</option>';
-            kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-        }
-    });
+function loadVillages(districtId, elementId) {
+    axios.get(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${districtId}.json`)
+        .then(response => {
+            const kelurahanDropdown = document.getElementById(elementId);
+            updateDropdown(kelurahanDropdown, response.data, 'id', 'name');
+        });
+}
 
-    // Event listener untuk memilih Kecamatan
-    document.getElementById('kecamatan_mitra').addEventListener('change', (e) => {
-        const kecamatan = e.target.value;
-        const kelurahanDropdown = document.getElementById('kelurahan_mitra');
-
-        // Update Kelurahan berdasarkan Kecamatan
-        if (kecamatan) {
-            updateDropdown(kelurahanDropdown, dataJKT.kelurahan[kecamatan] || []);
-        } else {
-            kelurahanDropdown.innerHTML = '<option value="">Pilih Kelurahan</option>';
-        }
+function updateDropdown(dropdown, items, valueField, textField) {
+    dropdown.innerHTML = '<option value="">Pilih</option>';
+    items.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item[valueField];
+        option.textContent = item[textField];
+        dropdown.appendChild(option);
     });
 }
 
-// Pre-load Provinsi ketika halaman dimuat
-document.addEventListener('DOMContentLoaded', () => {
-    const provinsiDropdown = document.getElementById('provinsi_mitra');
-    updateDropdown(provinsiDropdown, dataJKT.provinsi);
+function clearDropdown(elementId) {
+    const dropdown = document.getElementById(elementId);
+    dropdown.innerHTML = '<option value="">Pilih</option>';
+}
+
+// --- Cascading Selection ---
+
+// Provinsi -> Kota
+['provinsi', 'provinsi_mitra'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function() {
+        const provId = this.value;
+        loadRegencies(provId, id === 'provinsi' ? 'kota' : 'kota_mitra');
+    });
 });
 
-document.getElementById('copyLocation').addEventListener('change', function() {
-    copy = true
-    const isChecked = this.checked;
+// Kota -> Kecamatan
+['kota', 'kota_mitra'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function() {
+        const regencyId = this.value;
+        loadDistricts(regencyId, id === 'kota' ? 'kecamatan' : 'kecamatan_mitra');
+    });
+});
 
+// Kecamatan -> Kelurahan
+['kecamatan', 'kecamatan_mitra'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function() {
+        const districtId = this.value;
+        loadVillages(districtId, id === 'kecamatan' ? 'kelurahan' : 'kelurahan_mitra');
+    });
+});
+
+// --- Copy Data Lokasi ---
+document.getElementById('copyLocation').addEventListener('change', function() {
+    const isChecked = this.checked;
     const fields = ['provinsi', 'kota', 'kecamatan', 'kelurahan'];
 
     fields.forEach(function(field) {
@@ -226,45 +129,21 @@ document.getElementById('copyLocation').addEventListener('change', function() {
         const target = document.getElementById(field + '_mitra');
 
         if (isChecked) {
-            // Kalau target belum punya opsi yang sama, tambahin dulu
             if (target.tagName === 'SELECT') {
-                const existingOption = Array.from(target.options).find(opt => opt.value === source
-                    .value);
-                if (!existingOption && source.value !== '') {
-                    const newOption = new Option(source.value, source.value);
+                const exists = Array.from(target.options).find(opt => opt.value === source.value);
+                if (!exists && source.value !== '') {
+                    const newOption = new Option(source.options[source.selectedIndex].text, source.value);
                     target.add(newOption);
                 }
             }
-
             target.value = source.value;
-
-            // Biar ikut update terus kalau user ubah field utama
-            if (!source.dataset.listenerAttached) {
-                source.addEventListener('input', function() {
-                    if (document.getElementById('copyLocation').checked) {
-                        // Tambah opsi baru juga kalau value-nya belum ada di target
-                        if (target.tagName === 'SELECT') {
-                            const exists = Array.from(target.options).find(opt => opt
-                                .value === source.value);
-                            if (!exists && source.value !== '') {
-                                const newOption = new Option(source.value, source.value);
-                                target.add(newOption);
-                            }
-                        }
-
-                        target.value = source.value;
-                    }
-                });
-                source.dataset.listenerAttached = "true";
-            }
         } else {
             target.value = '';
         }
     });
-
-    copy = false
 });
 
+// --- Toggle Button Modal ---
 function toggleSubmitButton(checkbox) {
     const submitButton = document.getElementById('submitButton');
     submitButton.disabled = !checkbox.checked;

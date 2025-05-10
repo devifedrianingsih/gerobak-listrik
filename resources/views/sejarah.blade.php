@@ -16,11 +16,12 @@
                 <a href="/beranda">Gerobak Listrik</a>
             </div>
             <nav>
-                <a href="/beranda">Home</a>
+                <a href="/beranda">Beranda</a>
                 <a href="/sejarah">Sejarah</a>
                 <a href="/paketfranchise">Produk</a>
+                <a href="/kemitraan">Kemitraan</a>
                 <a href="/artikel">Artikel</a>
-                <a href="/hubungi">Hubungi Kami</a>
+                <a href="/hubungikami">Hubungi Kami</a>
             </nav>
         </div>
     </header>

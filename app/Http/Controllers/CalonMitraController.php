@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 
 class CalonMitraController extends Controller
 {
-    private $phoneNumber = '6281918999460';
-
     public function index()
     {
-        $calonMitra = Mitra::whereIn('status', ['belum diproses', 'ditolak'])->get();
+        $calonMitra = Mitra::whereIn('status', ['belum diproses', 'ditolak'])
+                   ->orderBy('created_at', 'desc')
+                   ->paginate(10);  
         $fields = [
             'kode_mitra' => 'Kode Mitra',
             'nama' => 'Nama Lengkap',
@@ -42,18 +42,27 @@ class CalonMitraController extends Controller
     public function prosesMitra(Request $request, $id)
     {
         $calonMitra = Mitra::findOrFail($id);
+
         if ($calonMitra->status === 'terima') {
             return redirect()->route('calon-mitra.index')->with('error', 'Mitra ini sudah terdaftar.');
         }
 
         $calonMitra->update([
-            'catatan_approver' => $request->catatan_approver,
+            'catatan_approver' => $request->catatan,
             'status' => $request->action,
         ]);
 
         if ($request->whatsapp == 1) {
-            $message = $this->buildWaMessage($calonMitra->nama, $request->action, $request->catatan_approver);
-            $waUrl = "https://wa.me/{$this->phoneNumber}?text=" . urlencode($message);
+            $message = $this->buildWaMessage($calonMitra->nama, $request->action, $request->catatan);
+
+            // Ubah nomor HP ke format internasional (62)
+            $targetNumber = preg_replace('/[^0-9]/', '', $calonMitra->no_hp);
+            $targetNumber = ltrim($targetNumber, '0');
+            if (!str_starts_with($targetNumber, '62')) {
+                $targetNumber = '62' . $targetNumber;
+            }
+
+            $waUrl = "https://wa.me/{$targetNumber}?text=" . urlencode($message);
 
             return view('redirect-whatsapp', [
                 'waUrl' => $waUrl,
@@ -70,9 +79,9 @@ class CalonMitraController extends Controller
         $fotoPath = $request->file('upload_foto')->store('foto', 'public');
 
         $inisialKota = strtoupper(substr($request->kota_mitra, 0, 3));
-        $lastMitra   = Mitra::where('kode_mitra', 'LIKE', "{$inisialKota}%")->orderBy('id', 'desc')->first();
-        $nextNumber  = $lastMitra ? (int) substr($lastMitra->kode_mitra, 3) + 1 : 1;
-        $kodeMitra   = sprintf("%s%03d", $inisialKota, $nextNumber);
+        $lastMitra = Mitra::where('kode_mitra', 'LIKE', "{$inisialKota}%")->orderBy('id', 'desc')->first();
+        $nextNumber = $lastMitra ? (int) substr($lastMitra->kode_mitra, 3) + 1 : 1;
+        $kodeMitra = sprintf("%s%03d", $inisialKota, $nextNumber);
 
         $data = [
             'nama' => $request->nama,
@@ -107,7 +116,6 @@ class CalonMitraController extends Controller
 
     public function petaMitra()
     {
-        // Ambil data calon mitra dengan status "diterima"
         $calonMitra = Mitra::where('status', 'diterima')->get();
 
         return view('map-google-maps', compact('calonMitra'));
@@ -117,49 +125,41 @@ class CalonMitraController extends Controller
     {
         if ($status == 'diterima') {
             $message = <<<TEXT
-                *===============*
-                *HUBUNGI KAMI*
-                *===============*
+            Subjek: Konfirmasi Penerimaan Sebagai Mitra Gerobak Listrik Angkringan
 
-                Subjek: Konfirmasi Penerimaan Sebagai Mitra Gerobak Listrik Angkringan
+            Pesan:
+            Kepada Yth.
+            Bapak/Ibu *{$calonMitra}*
 
-                Pesan:
-                Kepada Yth.
-                Bapak/Ibu {$calonMitra}
+            Dengan hormat,
+            Kami dengan senang hati menginformasikan bahwa *pendaftaran Anda telah berhasil kami terima* dan Anda resmi menjadi *mitra Gerobak Listrik Angkringan*.
 
-                Dengan hormat,
-                Kami dengan senang hati menginformasikan bahwa pendaftaran Anda telah berhasil kami terima dan Anda resmi menjadi mitra *Gerobak Listrik Angkringan*.
+            Kami sangat menghargai komitmen dan minat Anda untuk bergabung bersama kami. Kami percaya bahwa kerjasama ini akan memberikan kontribusi positif yang saling menguntungkan. Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
 
-                Kami sangat menghargai komitmen dan minat Anda untuk bergabung bersama kami. Kami percaya bahwa kerjasama ini akan memberikan kontribusi positif yang saling menguntungkan. Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
+            Selamat bergabung dan mari mulai perjalanan sukses bersama!
 
-                Selamat bergabung dan mari mulai perjalanan sukses bersama!
-
-                Hormat kami,
-                *Gerobak Listrik Angkringan*
+            Hormat kami,
+            *Gerobak Listrik Angkringan*
             TEXT;
-        } else {
-            $message = <<<TEXT
-                *===============*
-                *HUBUNGI KAMI*
-                *===============*
+                    } else {
+                        $message = <<<TEXT
+            Subjek: Hasil Evaluasi Pendaftaran Mitra Gerobak Listrik Angkringan
 
-                Subjek: Konfirmasi Penerimaan Sebagai Mitra Gerobak Listrik Angkringan
+            Pesan:
+            Kepada Yth.
+            Bapak/Ibu *{$calonMitra}*
 
-                Pesan:
-                Kepada Yth.
-                Bapak/Ibu {$calonMitra}
+            Terima kasih atas minat dan perhatian yang telah Anda berikan kepada Gerobak Listrik Angkringan. Setelah melalui proses evaluasi, kami sangat menyesal untuk memberitahukan bahwa *pendaftaran Anda untuk menjadi mitra kami belum dapat kami terima* pada saat ini.
 
-                Terima kasih atas minat dan perhatian yang telah Anda berikan kepada Gerobak Listrik Angkringan. Setelah melalui proses evaluasi, kami sangat menyesal untuk memberitahukan bahwa pendaftaran Anda untuk menjadi mitra kami belum dapat kami terima pada saat ini.
+            Alasan penolakan kami adalah sebagai berikut:
+            *{$catatan}*
 
-                Alasan penolakan kami adalah sebagai berikut:
-                {$catatan}
+            Kami menghargai minat Anda untuk bergabung dengan kami dan berharap dapat bekerjasama di kesempatan yang akan datang. Anda dapat mengajukan ulang pendaftaran setelah melakukan revisi atau pembaruan sesuai dengan alasan penolakan yang kami sampaikan. Kami akan mempertimbangkan kembali pendaftaran Anda setelah perbaikan dilakukan.
 
-                Kami menghargai minat Anda untuk bergabung dengan kami dan berharap dapat bekerjasama di kesempatan yang akan datang. Anda dapat mengajukan ulang pendaftaran setelah melakukan revisi atau pembaruan sesuai dengan alasan penolakan yang kami sampaikan. Kami akan mempertimbangkan kembali pendaftaran Anda setelah perbaikan dilakukan.
+            Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
 
-                Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
-
-                Terima kasih atas pengertian Anda,
-                *Gerobak Listrik Angkringan*
+            Terima kasih atas pengertian Anda,
+            *Gerobak Listrik Angkringan*
             TEXT;
         }
 

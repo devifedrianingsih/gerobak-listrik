@@ -15,9 +15,8 @@
                         <thead class="table-light">
                             <tr>
                                 <th>No</th>
-                                <th>Kode Mitra</th>
+                                <th>Waktu Daftar</th>
                                 <th>Nama</th>
-                                <th>Email</th>
                                 <th>No Hp</th>
                                 <th>Kota</th>
                                 <th>Alamat</th>
@@ -34,9 +33,8 @@
                                 @foreach ($calonMitra as $key => $calon)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $calon->kode_mitra }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($calon->created_at)->format('d-m-Y') }}</td>
                                         <td>{{ $calon->nama }}</td>
-                                        <td>{{ $calon->email }}</td>
                                         <td>{{ $calon->no_hp }}</td>
                                         <td>{{ $calon->kota }}</td>
                                         <td>{{ $calon->alamat }}</td>
@@ -177,87 +175,4 @@
             });
         });
     </script>
-
-    <!-- JavaScript untuk fitur pencarian, sort, dan show entries -->
-    {{-- <script>
-        document.getElementById('searchInput').addEventListener('keyup', function() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById('searchInput');
-            filter = input.value.toLowerCase();
-            table = document.getElementById('calon_mitraTable');
-            tr = table.getElementsByTagName('tr');
-
-            for (i = 1; i < tr.length; i++) {
-                tr[i].style.display = 'none';
-
-                td = tr[i].getElementsByTagName('td');
-                for (var j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                            tr[i].style.display = '';
-                            break;
-                        }
-                    }
-                }
-            }
-        });
-
-        function sortTable(columnIndex) {
-            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("calon_mitraTable");
-            switching = true;
-            dir = "asc";
-
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    x = rows[i].getElementsByTagName("TD")[columnIndex];
-                    y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
-
-                    if (dir == "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (dir == "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchcount++;
-                } else {
-                    if (switchcount == 0 && dir == "asc") {
-                        dir = "desc";
-                        switching = true;
-                    }
-                }
-            }
-        }
-
-        document.getElementById('entriesCount').addEventListener('change', function() {
-            var selectedValue, table, tr, i;
-            selectedValue = parseInt(this.value);
-            table = document.getElementById('calon_mitraTable');
-            tr = table.getElementsByTagName('tr');
-
-            for (i = 1; i < tr.length; i++) {
-                tr[i].style.display = '';
-            }
-
-            for (i = selectedValue + 1; i < tr.length; i++) {
-                tr[i].style.display = 'none';
-            }
-        });
-
-        document.getElementById('entriesCount').dispatchEvent(new Event('change'));
-    </script> --}}
 @endpush

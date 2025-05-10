@@ -10,7 +10,7 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-/* navbar */
+/* Navbar */
 header {
     background-color: #ffffff;
     color: #987540;
@@ -21,15 +21,17 @@ header {
 header .container {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Agar elemen di dalam container berada di tengah secara vertikal */
+    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px 20px;
 }
-header .logo{
+
+header .logo {
     font-weight: bold;
-    font-size:22px;
+    font-size: 22px;
 }
+
 header a {
     text-decoration: none;
     color: #604723;
@@ -37,7 +39,7 @@ header a {
 
 header nav {
     display: flex;
-    gap: 15px; /* Memberikan jarak antar link */
+    gap: 15px;
 }
 
 header nav a {
@@ -46,7 +48,7 @@ header nav a {
     font-size: 13px;
     font-weight: 600;
     text-align: center;
-    padding: 5px 10px; /* Tambahkan padding agar terlihat lebih rapi */
+    padding: 5px 10px;
 }
 
 header nav a:hover {
@@ -55,91 +57,105 @@ header nav a:hover {
     transition-duration: 0.3s;
 }
 
-/*  */
-/* Dropdown Menu Styles */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffffffa5;
-    min-width: 120px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    border-radius: 2px;
-    padding: 10px 0;
-    top: 100%; /* Posisi dropdown di bawah trigger menu */
-    left: 0; /* Tetap berada sejajar dengan elemen dropdown */
-}
-
-.dropdown-content li {
-    display: block;
-    margin: 0; /* Hilangkan margin agar list item tidak berdempetan */
-    padding: 5px 0; /* Tambahkan padding antar item */
-}
-
-.dropdown-content li a {
-    padding: 10px 20px; /* Menambah jarak agar lebih nyaman di-klik */
-    color: #8e674d;
-    text-decoration: none;
-    font-size: 14px;
-    white-space: nowrap;
-    display: block; /* Memastikan seluruh area a bisa di-hover */
-    transition: background-color 0.3s ease;
-}
-
-.dropdown-content li a:hover {
-    background-color: #8e674d; /* Warna hover */
-    border-radius: 5px; /* Tambah sudut melingkar untuk hover */
-    color: white;
-}
-
-/* General styles */
+/* Title */
 .title {
     text-align: center;
-    color: #3e2723; /* Warna teks coklat tua untuk kontras */
+    color: #3e2723;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 60px;
+    padding: 40px;
     font-weight: bold;
-    font-size: 30px;
-    letter-spacing: 1px; /* Menambah spasi huruf untuk estetika */
+    font-size: 24px;
+    letter-spacing: 1px;
 }
 
 .title p {
     font-weight: lighter;
-    font-size: 1.2rem; /* Ukuran lebih kecil untuk subteks */
-    color: #6d4c41; /* Warna coklat muda */
+    font-size: 16px;
+    color: #6d4c41;
+    margin-top: 10; /* Hilangkan jarak atas paragraf */
+}
+
+/* Dropdown Styles */
+.dropdown-wrapper {
+    padding: 0px; /* mengikuti padding produk */
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+.dropdown-toggle {
+    background-color: #745A34;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 5px;
+    padding: 0px 0;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content li a {
+    padding: 10px 20px;
+    display: block;
+    color: #8e674d;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content li a:hover {
+    background-color: #8e674d;
+    color: white;
+    border-radius: 5px;
 }
 
 /* Produk Styling */
 .products-cart-container {
     display: block;
-    justify-content: space-between; /* Jarak antara produk dan cart */
+    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
+
 .products {
     display: flex;
-    min-width: 0;
-    flex-wrap: wrap; /* Produk membungkus ke baris berikutnya */
-    justify-content: space-between; /* Penyebaran antar produk */
-    gap: 30px; /* Jarak antar produk lebih seimbang */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
     margin: 30px auto;
     padding: 0 20px;
 }
 
 .product {
-    flex: 0 0 calc(33.33% - 30px); /* Agar tiga produk tampil per baris */
-    box-sizing: border-box; /* Mencegah elemen lebih besar */
+    flex: 0 0 calc(33.33% - 30px);
+    box-sizing: border-box;
     text-align: center;
     color: #3e2723;
-    background-color: #f9f9f9; /* Warna background produk */
+    background-color: #f9f9f9;
     padding: 20px;
-    border-radius: 10px; /* Menambah sudut melingkar */
-    transition: box-shadow 0.3s ease; /* Efek hover */
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
 }
 
 .product:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Efek bayangan saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .product img {
@@ -152,10 +168,10 @@ header nav a:hover {
 }
 
 .product img:hover {
-    transform: scale(1.05); /* Efek hover memperbesar gambar */
+    transform: scale(1.05);
 }
 
-h2 {
+.product h2 {
     font-size: 1.5rem;
     margin: 10px 0;
     color: #5d4037;
@@ -163,31 +179,31 @@ h2 {
 }
 
 .product p {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: small;
     margin-bottom: 10px;
     color: #6d4c41;
 }
 
-h4 {
+.product h4 {
     color: red;
-    font-size: 14px; /* Memperbaiki ukuran */
+    font-size: 14px;
 }
 
 /* Tombol Tambah ke Keranjang */
 .add-to-cart {
-    background-color: #af9a92; /* Warna coklat medium */
+    background-color: #af9a92;
     color: white;
     border: none;
     padding: 12px 20px;
     cursor: pointer;
-    border-radius: 30px; /* Sudut melingkar */
+    border-radius: 30px;
     font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
 .add-to-cart:hover {
-    background-color: #6d4c41; /* Warna lebih gelap saat hover */
+    background-color: #6d4c41;
 }
 
 /* Keranjang Styling */
@@ -199,7 +215,7 @@ h4 {
     border-radius: 10px;
 }
 
-.remove-btn{
+.remove-btn {
     font-size: 12px;
     cursor: pointer;
 }
@@ -245,7 +261,7 @@ h4 {
 }
 
 .checkout-btn:hover {
-    background-color: #4e342e; /* Warna lebih gelap saat hover */
+    background-color: #4e342e;
 }
 
 /* Footer Styling */
@@ -253,7 +269,7 @@ footer {
     text-align: center;
     margin-top: 40px;
     padding: 15px 0;
-    background-color: #a1887f; /* Warna coklat terang */
+    background-color: #a1887f;
     color: white;
     font-size: 1rem;
     border-top: 1px solid #e0e0e0;
@@ -264,4 +280,3 @@ footer p {
     padding: 5px;
     font-size: 0.9rem;
 }
-

@@ -65,10 +65,10 @@
 
     &:hover,
     &:focus {
-      color: #ffffff;
+      color: #4c3929;
       background-color: var(--bs-body-bg-2);
     }
-
+  }
   }
 
 
@@ -105,13 +105,12 @@
             &:hover {
               color: var(--bs-body-color);
               background-color: var(--bs-body-bg-2);
-
-            }
+              }
           }
           .search-list-item {
             &:hover {
-              color: var(--bs-body-color);
-              background-color: var(--bs-body-bg-2)
+            color: var(--bs-body-color);
+            background-color: var(--bs-body-bg-2);
             }
 
             .list-icon {
@@ -132,12 +131,10 @@
           }
 
           .card {
-
             &:hover {
-              background-color: var(--bs-body-bg-2);
+            background-color: var(--bs-body-bg-2);
             }
-          }
-
+        }
         }
 
         .dropdown-apps {
@@ -147,9 +144,9 @@
 
             &:hover {
               background-color: var(--bs-body-bg-2);
-            }
+              }
           }
-        }
+          }
 
         .dropdown-notify {
 
@@ -160,7 +157,7 @@
 
             &:hover {
               background-color: var(--bs-body-bg-2);
-            }
+              }
           }
 
           .notify-title {
@@ -816,7 +813,7 @@
 				font-size: 23px;
 			}
 			&:hover {
-				background: #008cff;
+				background: #a47148;
 			}
 		}
 	}

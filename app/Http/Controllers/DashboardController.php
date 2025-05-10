@@ -6,10 +6,27 @@ use App\Models\Mitra;
 use App\Models\Order;
 use App\Models\Article;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+
     public function index()
     {
         // 1. 📈 Statistik Ringkasan (Card di atas)
@@ -45,6 +62,15 @@ class DashboardController extends Controller
         return view('dashboard', compact('topCard', 'secondCard', 'thirdCard', 'fourthCard', 'fifthCard', 'labels'));
     }
 
+    public function root(Request $request)
+    {
+        if(view()->exists($request->path())) {
+            return view($request->path());
+        } else {
+            return abort(404);
+        }
+    }
+    
     private function topCard()
     {
         return [
