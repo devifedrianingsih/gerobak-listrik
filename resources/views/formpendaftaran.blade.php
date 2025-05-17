@@ -51,14 +51,16 @@
               <label>Nomor HP (WhatsApp) <small class="text-danger">*</small></label>
               <input type="tel" name="no_hp" placeholder="Masukkan Nomor HP" />
             </div>
+
             <div class="form-group">
-                <label>Jenis Kelamin <small class="text-danger">*</small></label>
-                <select name="jenis_kelamin" class="form-select" required>
-                  <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                  <option value="Wanita">Wanita</option>
-                  <option value="Laki-laki">Laki-laki</option>
-                </select>
-              </div>
+              <label>Jenis Kelamin <small class="text-danger">*</small></label>
+              <select name="jenis_kelamin" class="form-select" required>
+                <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+            </div>
+
             <div class="form-group">
               <label>Upload KTP (jpeg, jpg, png; max 2MB)</label>
               <input type="file" name="upload_ktp" accept=".jpg,.jpeg,.png" />
@@ -84,13 +86,13 @@
             </div>
             <div class="form-group">
               <label>Kecamatan <small class="text-danger">*</small></label>
-              <select name="kecamatan" id="kecamatan" class="form-select">
+              <select name="kecamatan" id="kecamatan" class="form-select" required>
                 <option value="">Pilih Kecamatan</option>
               </select>
             </div>
             <div class="form-group">
               <label>Kelurahan <small class="text-danger">*</small></label>
-              <select name="kelurahan" id="kelurahan" class="form-select">
+              <select name="kelurahan" id="kelurahan" class="form-select" required>
                 <option value="">Pilih Kelurahan</option>
               </select>
             </div>
@@ -126,19 +128,19 @@
             </div>
             <div class="form-group">
               <label>Provinsi <small class="text-danger">*</small></label>
-              <select name="provinsi_mitra" id="provinsi_mitra" class="form-select">
+              <select name="provinsi_mitra" id="provinsi_mitra" class="form-select" required>
                 <option value="">Pilih Provinsi</option>
               </select>
             </div>
             <div class="form-group">
               <label>Kota <small class="text-danger">*</small></label>
-              <select name="kota_mitra" id="kota_mitra" class="form-select">
+              <select name="kota_mitra" id="kota_mitra" class="form-select" required>
                 <option value="">Pilih Kota</option>
               </select>
             </div>
             <div class="form-group">
               <label>Kecamatan <small class="text-danger">*</small></label>
-              <select name="kecamatan_mitra" id="kecamatan_mitra" class="form-select">
+              <select name="kecamatan_mitra" id="kecamatan_mitra" class="form-select" required>
                 <option value="">Pilih Kecamatan</option>
               </select>
             </div>
@@ -147,7 +149,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Kelurahan <small class="text-danger">*</small></label>
-              <select name="kelurahan_mitra" id="kelurahan_mitra" class="form-select">
+              <select name="kelurahan_mitra" id="kelurahan_mitra" class="form-select" required>
                 <option value="">Pilih Kelurahan</option>
               </select>
             </div>
@@ -164,7 +166,6 @@
                   </button>
                 </div>
               </div>
-              
               <div class="form-group">
                 <label>Longitude <small class="text-danger">*</small></label>
                 <div class="input-group">
@@ -209,7 +210,6 @@
               <label class="form-check-label" for="agreeTerms">Saya menyatakan bahwa data yang saya masukkan telah sesuai dan benar.</label>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
               <button type="submit" class="btn btn-primary" id="submitButton" disabled>Kirim</button>
             </div>
           </div>

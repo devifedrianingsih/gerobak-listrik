@@ -56,7 +56,7 @@
                                                     @csrf
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="uploadModal{{ $calon->id }}Label">
-                                                            KTP dan Pas Foto</h1>
+                                                            Detail Mitra</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>

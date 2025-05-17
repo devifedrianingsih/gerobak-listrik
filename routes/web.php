@@ -39,6 +39,7 @@ Route::post('/ecommerce/potential-partners/{id}/process', [CalonMitraController:
 // ==================== MITRA ====================
 Route::get('/ecommerce/customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
 Route::post('/ecommerce/customers/{id}/update', [MitraController::class, 'updateCalonMitra'])->name('mitra.update');
+Route::delete('/ecommerce/customers/{id}/delete', [MitraController::class, 'deleteCalonMitra'])->name('mitra.delete');
 
 // ==================== CHECKOUT ====================
 Route::post('/ecommerce/checkout', [CheckoutController::class, 'store'])->name('checkout.store');

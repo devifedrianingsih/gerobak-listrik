@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-7">
                             <div class="d-flex align-items-center gap-3 mb-5">
-                                <img src="{{ URL::asset('assets/images/profile.png') }}" class="rounded-circle bg-grd-info p-1"
+                                <img src="{{ URL::asset('assets/images/profile.png') }}" class="rounded-circle bg-grd-primary p-1"
                                     width="60" height="60" alt="user">
                                 <div class="">
                                     <p class="mb-0 fw-semibold">Selamat datang kembali</p>

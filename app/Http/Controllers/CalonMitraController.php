@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CalonMitraController extends Controller
 {
     public function index()
     {
         $calonMitra = Mitra::whereIn('status', ['belum diproses', 'ditolak'])
-                   ->orderBy('created_at', 'desc')
-                   ->paginate(10);  
+                           ->orderBy('created_at', 'desc')
+                           ->paginate(10);
+
         $fields = [
             'kode_mitra' => 'Kode Mitra',
             'nama' => 'Nama Lengkap',
@@ -39,6 +41,42 @@ class CalonMitraController extends Controller
         return view('ecommerce-potential-partners', compact('calonMitra', 'fields'));
     }
 
+    public function post(Request $request)
+    {
+        $ktpPath = $request->file('upload_ktp')->store('ktp', 'public');
+        $fotoPath = $request->file('upload_foto')->store('foto', 'public');
+        
+        $data = [
+            'nama' => Str::title($request->nama),
+            'no_ktp' => $request->no_ktp,
+            'tanggal_lahir' => $request->tgl_lahir,
+            'email' => strtolower($request->email),
+            'no_hp' => $request->no_hp,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => Str::title($request->alamat),
+            'alamat_ktp' => Str::title($request->alamat_ktp),
+            'domisili' => Str::title($request->domisili),
+            'provinsi' => Str::title($request->provinsi),
+            'kota' => Str::title($request->kota),
+            'kecamatan' => Str::title($request->kecamatan),
+            'kelurahan' => Str::title($request->kelurahan),
+            'provinsi_mitra' => Str::title($request->provinsi_mitra),
+            'kota_mitra' => Str::title($request->kota_mitra),
+            'kecamatan_mitra' => Str::title($request->kecamatan_mitra),
+            'kelurahan_mitra' => Str::title($request->kelurahan_mitra),
+            'kode_pos' => $request->kode_pos,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'upload_ktp' => $ktpPath,
+            'upload_foto' => $fotoPath,
+            'kode_mitra' => null,
+        ];
+
+        Mitra::create($data);
+
+        return view('post-mitra');
+    }
+
     public function prosesMitra(Request $request, $id)
     {
         $calonMitra = Mitra::findOrFail($id);
@@ -47,10 +85,24 @@ class CalonMitraController extends Controller
             return redirect()->route('calon-mitra.index')->with('error', 'Mitra ini sudah terdaftar.');
         }
 
-        $calonMitra->update([
+        $updateData = [
             'catatan_approver' => $request->catatan,
             'status' => $request->action,
-        ]);
+        ];
+
+        if ($request->action === 'diterima' && !$calonMitra->kode_mitra) {
+            $kodePrefix = $this->generateKodePrefix($calonMitra->kota_mitra);
+
+            $lastKode = Mitra::where('kode_mitra', 'LIKE', "{$kodePrefix}%")
+                            ->orderBy('id', 'desc')
+                            ->value('kode_mitra');
+
+            $nextNumber = $lastKode ? (int) substr($lastKode, strlen($kodePrefix)) + 1 : 1;
+            $kodeBaru = sprintf('%s%03d', $kodePrefix, $nextNumber);
+            $updateData['kode_mitra'] = strtoupper($kodeBaru);
+        }
+
+        $calonMitra->update($updateData);
 
         if ($request->whatsapp == 1) {
             $message = $this->buildWaMessage($calonMitra->nama, $request->action, $request->catatan);
@@ -68,50 +120,9 @@ class CalonMitraController extends Controller
                 'waUrl' => $waUrl,
                 'redirectUrl' => url('ecommerce/potential-partners'),
             ]);
-        } else {
-            return redirect()->route('calon-mitra.index')->with('success', "Calon Mitra {$request->action}.");
         }
-    }
 
-    public function post(Request $request)
-    {
-        $ktpPath = $request->file('upload_ktp')->store('ktp', 'public');
-        $fotoPath = $request->file('upload_foto')->store('foto', 'public');
-
-        $inisialKota = strtoupper(substr($request->kota_mitra, 0, 3));
-        $lastMitra = Mitra::where('kode_mitra', 'LIKE', "{$inisialKota}%")->orderBy('id', 'desc')->first();
-        $nextNumber = $lastMitra ? (int) substr($lastMitra->kode_mitra, 3) + 1 : 1;
-        $kodeMitra = sprintf("%s%03d", $inisialKota, $nextNumber);
-
-        $data = [
-            'nama' => $request->nama,
-            'no_ktp' => $request->no_ktp,
-            'tanggal_lahir' => $request->tgl_lahir,
-            'email' => $request->email,
-            'no_hp' => $request->no_hp,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat' => $request->alamat,
-            'alamat_ktp' => $request->alamat_ktp,
-            'domisili' => $request->domisili,
-            'provinsi' => $request->provinsi,
-            'kota' => $request->kota,
-            'kecamatan' => $request->kecamatan,
-            'kelurahan' => $request->kelurahan,
-            'provinsi_mitra' => $request->provinsi_mitra,
-            'kota_mitra' => $request->kota_mitra,
-            'kecamatan_mitra' => $request->kecamatan_mitra,
-            'kelurahan_mitra' => $request->kelurahan_mitra,
-            'kode_pos' => $request->kode_pos,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'upload_ktp' => $ktpPath,
-            'upload_foto' => $fotoPath,
-            'kode_mitra' => $kodeMitra,
-        ];
-
-        Mitra::create($data);
-
-        return view('post-mitra');
+        return redirect()->route('calon-mitra.index')->with('success', "Calon Mitra {$request->action}.");
     }
 
     public function petaMitra()
@@ -125,44 +136,53 @@ class CalonMitraController extends Controller
     {
         if ($status == 'diterima') {
             $message = <<<TEXT
-            Subjek: Konfirmasi Penerimaan Sebagai Mitra Gerobak Listrik Angkringan
+            Subjek: Penerimaan Mitra Gerobak Listrik Angkringan
 
-            Pesan:
             Kepada Yth.
             Bapak/Ibu *{$calonMitra}*
 
             Dengan hormat,
-            Kami dengan senang hati menginformasikan bahwa *pendaftaran Anda telah berhasil kami terima* dan Anda resmi menjadi *mitra Gerobak Listrik Angkringan*.
+            Kami dengan senang hati menginformasikan bahwa Anda resmi menjadi *Mitra Gerobak Listrik Angkringan*.
 
-            Kami sangat menghargai komitmen dan minat Anda untuk bergabung bersama kami. Kami percaya bahwa kerjasama ini akan memberikan kontribusi positif yang saling menguntungkan. Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
+            Terima kasih atas kepercayaan dan komitmen Anda. Jika ada pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami.
 
-            Selamat bergabung dan mari mulai perjalanan sukses bersama!
-
-            Hormat kami,
-            *Gerobak Listrik Angkringan*
+            Selamat bergabung!
+            Gerobak Listrik Angkringan
             TEXT;
                     } else {
                         $message = <<<TEXT
-            Subjek: Hasil Evaluasi Pendaftaran Mitra Gerobak Listrik Angkringan
+            Subjek: Evaluasi Pendaftaran Mitra
 
-            Pesan:
             Kepada Yth.
             Bapak/Ibu *{$calonMitra}*
 
-            Terima kasih atas minat dan perhatian yang telah Anda berikan kepada Gerobak Listrik Angkringan. Setelah melalui proses evaluasi, kami sangat menyesal untuk memberitahukan bahwa *pendaftaran Anda untuk menjadi mitra kami belum dapat kami terima* pada saat ini.
+            Terima kasih atas minat Anda pada Gerobak Listrik Angkringan.
+            Setelah evaluasi, kami informasikan bahwa pendaftaran Anda belum dapat kami terima saat ini.
 
-            Alasan penolakan kami adalah sebagai berikut:
+            Alasan: 
             *{$catatan}*
 
-            Kami menghargai minat Anda untuk bergabung dengan kami dan berharap dapat bekerjasama di kesempatan yang akan datang. Anda dapat mengajukan ulang pendaftaran setelah melakukan revisi atau pembaruan sesuai dengan alasan penolakan yang kami sampaikan. Kami akan mempertimbangkan kembali pendaftaran Anda setelah perbaikan dilakukan.
+            Silakan ajukan ulang setelah revisi sesuai alasan di atas.
+            Jika ada pertanyaan, hubungi kami kapan saja.
 
-            Jika ada pertanyaan atau kebutuhan lebih lanjut, jangan ragu untuk menghubungi kami.
-
-            Terima kasih atas pengertian Anda,
-            *Gerobak Listrik Angkringan*
+            Terima kasih atas pengertian Anda.
+            Gerobak Listrik Angkringan
             TEXT;
         }
 
         return $message;
+    }
+
+    private function generateKodePrefix($namaKota)
+    {
+        $namaKota = Str::of($namaKota)->replace(['Kota ', 'Kabupaten '], '')->title();
+        $kata = explode(' ', $namaKota);
+        $kode = '';
+
+        foreach (array_slice($kata, 0, 2) as $k) {
+            $kode .= strtoupper(substr($k, 0, 3));
+        }
+
+        return $kode;
     }
 }

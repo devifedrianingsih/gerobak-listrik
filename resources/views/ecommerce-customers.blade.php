@@ -37,12 +37,13 @@
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Aktif</th>
                                 <th class="text-center">Lihat Detail dan Edit</th>
+                                <th class="text-center">Hapus</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ($mitra->isEmpty())
                                 <tr>
-                                    <td colspan="25" class="text-center">Tidak ada data mitra.</td>
+                                    <td colspan="27" class="text-center">Tidak ada data mitra.</td>
                                 </tr>
                             @else
                                 @foreach ($mitra as $key => $mitr)
@@ -79,12 +80,25 @@
                                                 style="cursor: pointer">
                                             </i>
                                         </td>
+                                        <td class="text-center fs-3">
+                                            <form method="POST" action="{{ route('mitra.delete', ['id' => $mitr->id]) }}" onsubmit="return confirm('Yakin ingin menghapus?');">
+                                                @csrf @method('DELETE')
+                                                <input type="hidden" name="id" value="<?= $mitr->id; ?>">
+                                                <button type="submit" class="btn btn-link p-0 border-0">
+                                                    <i class="lni lni-trash text-secondary fs-3"
+                                                        onmouseover="this.classList.replace('text-secondary', 'text-primary')"
+                                                        onmouseout="this.classList.replace('text-primary', 'text-secondary')"
+                                                        style="cursor: pointer">
+                                                    </i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
 
                                     <div class="modal fade" id="uploadModal{{ $mitr->id }}" tabindex="-1"
                                         aria-labelledby="uploadModal{{ $mitr->id }}Label" aria-hidden="true">
                                         <div class="modal-dialog modal-xl modal-dialog-centered">
-                                            <form action="{{ route('mitra.update', ['id' => $mitr->id]) }}" method="POST">
+                                            <form action="{{ route('mitra.update', ['id' => $mitr->id]) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf @method('POST')
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -137,14 +151,30 @@
 
                                                         <div class="row text-center my-5">
                                                             <div class="col-lg-6 col-md-12">
-                                                                <label for="KTP" class="d-block fs-5">KTP</label>
-                                                                <img src="{{ asset('storage/' . $mitr->upload_ktp) }}"
-                                                                    alt="KTP" width="200">
+                                                                <label for="ktp" class="d-block fs-5">
+                                                                    KTP <br>
+                                                                    <div class="position-relative d-inline-block upload-wrapper">
+                                                                        <img src="{{ asset('storage/' . $mitr->upload_ktp) }}" alt="KTP"
+                                                                            id="ktp-preview" width="200" class="rounded" style="cursor: pointer;">
+                                                                        <div class="edit-icon">
+                                                                            <i class="lni lni-pencil-alt"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                                <input type="file" name="ktp" class="d-none" id="ktp" accept="image/*">
                                                             </div>
                                                             <div class="col-lg-6 col-md-12">
-                                                                <label for="Pas Photo" class="d-block fs-5">Pas Foto</label>
-                                                                <img src="{{ asset('storage/' . $mitr->upload_foto) }}"
-                                                                    alt="Pas foto" width="200">
+                                                                <label for="pas" class="d-block fs-5">
+                                                                    Pas Foto <br>
+                                                                    <div class="position-relative d-inline-block upload-wrapper">
+                                                                        <img src="{{ asset('storage/' . $mitr->upload_foto) }}" alt="Pas foto"
+                                                                            id="pas-preview" width="200" class="rounded" style="cursor: pointer;">
+                                                                        <div class="edit-icon">
+                                                                            <i class="lni lni-pencil-alt"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                                <input type="file" name="pas" class="d-none" id="pas" accept="image/*">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -167,6 +197,33 @@
     </div>
 
 @endsection
+<style>
+    .upload-wrapper {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .edit-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        display: none;
+        z-index: 10;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .upload-wrapper:hover .edit-icon {
+        display: block;
+        cursor: pointer;
+    }
+</style>
 
 @push('script')
     <!--plugins-->
@@ -242,94 +299,23 @@
                 }
             });
         });
-    </script>
 
-    <!-- JavaScript -->
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let isEditing = false;
-
-            // Tombol Edit
-            document.getElementById("editButton").addEventListener("click", function() {
-                isEditing = !isEditing;
-                const inputs = document.querySelectorAll(
-                    "#mitraForm input, #mitraForm textarea, #mitraForm select");
-                inputs.forEach(input => input.readOnly = !isEditing);
-
-                document.getElementById("jenisKelamin").disabled = !isEditing;
-                document.getElementById("saveButton").disabled = !isEditing;
-            });
-
-            // Tombol Simpan
-            document.getElementById("mitraForm").addEventListener("submit", function(e) {
-                e.preventDefault();
-
-                const formData = new FormData(this);
-                const mitraNomor = document.querySelector(".view-mitra[data-nomor]").getAttribute(
-                    "data-nomor");
-
-                fetch(`/ecommerce-potential-partners/update/${mitraNomor}`, {
-                        method: "POST",
-                        headers: {
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                        },
-                        body: formData
-                    })
-                    .then(response => {
-                        if (!response.ok) throw new Error("Gagal menyimpan data.");
-                        return response.json();
-                    })
-                    .then(data => {
-                        alert("Data berhasil disimpan.");
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("Terjadi kesalahan saat menyimpan data.");
-                    });
-            });
-
-            // Tombol View Mitra
-            document.querySelectorAll(".view-mitra").forEach(element => {
-                element.addEventListener("click", function() {
-                    const mitraNomor = this.getAttribute("data-nomor");
-
-                    fetch(`/ecommerce-potential-partners/${mitraNomor}`)
-                        .then(response => {
-                            if (!response.ok) throw new Error("Gagal mengambil data mitra");
-                            return response.json();
-                        })
-                        .then(data => {
-                            document.getElementById("namaLengkap").value = data
-                                .nama_calon_mitra || "";
-                            document.getElementById("tanggalLahir").value = data
-                                .tanggal_lahir || "";
-                            document.getElementById("email").value = data.email_calon_mitra ||
-                                "";
-                            document.getElementById("nomorHandphone").value = data
-                                .no_hp_calon_mitra || "";
-                            document.getElementById("jenisKelamin").value = data
-                                .jenis_kelamin || "Wanita";
-                            document.getElementById("domisili").value = data.domisili || "";
-                            document.getElementById("alamatLengkap").value = data
-                                .alamat_calon_mitra || "";
-                            document.getElementById("kota").value = data.kota_calon_mitra || "";
-                            document.getElementById("provinsi").value = data.provinsi || "";
-                            document.getElementById("kodePos").value = data.kode_pos || "";
-                            document.getElementById("negara").value = data.negara || "";
-                            document.getElementById("latitude").value = data.latitude || "";
-                            document.getElementById("longitude").value = data.longitude || "";
-
-                            const formModal = new bootstrap.Modal(document.getElementById(
-                                "FormModal"));
-                            formModal.show();
-                        })
-                        .catch(error => {
-                            console.error("Error fetching mitra data:", error);
-                            alert("Gagal mengambil data mitra.");
-                        });
-                });
-            });
+        document.getElementById('ktp').addEventListener('change', function (e) {
+            previewImage(e, 'ktp-preview');
         });
-    </script> --}}
+        document.getElementById('pas').addEventListener('change', function (e) {
+            previewImage(e, 'pas-preview');
+        });
+
+        function previewImage(event, targetId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById(targetId).src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 @endpush
