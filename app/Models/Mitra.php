@@ -11,4 +11,9 @@ class Mitra extends Model
 
     protected $table = 'mitra';
     protected $guarded = [];
+    
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'kode_mitra', 'kode_mitra');
+    }
 }

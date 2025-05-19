@@ -45,7 +45,33 @@ class CalonMitraController extends Controller
     {
         $ktpPath = $request->file('upload_ktp')->store('ktp', 'public');
         $fotoPath = $request->file('upload_foto')->store('foto', 'public');
-        
+
+        // Cek apakah lokasi sudah digunakan
+        $existingLocation = Mitra::where('latitude', $request->latitude)
+                                ->where('longitude', $request->longitude)
+                                ->exists();
+
+        if ($existingLocation) {
+            return back()->withErrors([
+                'latitude' => 'Lokasi ini sudah digunakan oleh mitra lain. Silakan pilih titik lokasi yang berbeda.',
+            ])->withInput();
+        }
+
+        // Cek apakah pendaftar sudah pernah mendaftar ke lokasi itu juga (identitas + lokasi)
+        $duplicateBySamePerson = Mitra::where('no_ktp', $request->no_ktp)
+            ->where('tanggal_lahir', $request->tgl_lahir)
+            ->where('email', strtolower($request->email))
+            ->where('no_hp', $request->no_hp)
+            ->where('latitude', $request->latitude)
+            ->where('longitude', $request->longitude)
+            ->exists();
+
+        if ($duplicateBySamePerson) {
+            return back()->withErrors([
+                'no_ktp' => 'Anda sudah pernah mendaftar dengan titik lokasi ini. Silakan pilih lokasi lain.',
+            ])->withInput();
+        }
+
         $data = [
             'nama' => Str::title($request->nama),
             'no_ktp' => $request->no_ktp,
@@ -184,5 +210,14 @@ class CalonMitraController extends Controller
         }
 
         return $kode;
+    }
+
+    public function cekLokasi(Request $request)
+    {
+        $exists = Mitra::where('latitude', $request->latitude)
+                    ->where('longitude', $request->longitude)
+                    ->exists();
+
+        return response()->json(['exists' => $exists]);
     }
 }

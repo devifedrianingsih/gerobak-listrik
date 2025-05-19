@@ -173,14 +173,14 @@ document.addEventListener('DOMContentLoaded', function () {
             valid = false;
         }
 
-        if (valid) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Mengirim...`;
-            clearFormStorage();
-            setTimeout(() => {
-                document.getElementById('modalBtn').click();
-            }, 300);
-        }
+        // if (valid) {
+        //     submitBtn.disabled = true;
+        //     submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Mengirim...`;
+        //     clearFormStorage();
+        //     setTimeout(() => {
+        //         document.getElementById('modalBtn').click();
+        //     }, 300);
+        // }
     });
 
     // === LOCAL STORAGE ===

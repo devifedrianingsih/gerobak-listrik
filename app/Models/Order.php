@@ -13,21 +13,22 @@ class Order extends Model
         'order_id',
         'name',
         'category',
+        'kode_mitra', // ← ini WAJIB masuk fillable
         'total',
         'pickup_method',
         'status',
         'tanggal',
-        'payment_id', // Jika menggunakan kolom relasi ke pembayaran
+        'payment_id',
     ];
 
     public function pembayaran()
     {
-        return $this->belongsTo(Pembayaran::class, 'payment_id', 'id');
+        return $this->belongsTo(Pembayaran::class, 'payment_id');
     }
 
     public function mitra()
     {
-        return $this->hasOne(Mitra::class, 'id', 'mitra_id');
+        return $this->belongsTo(Mitra::class, 'kode_mitra', 'kode_mitra');
     }
 
     public function produkPembayaran()

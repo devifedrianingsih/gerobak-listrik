@@ -36,6 +36,9 @@ Route::post('/ecommerce/partners', [CalonMitraController::class, 'post'])->name(
 Route::get('/ecommerce/potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
 Route::post('/ecommerce/potential-partners/{id}/process', [CalonMitraController::class, 'prosesMitra'])->name('calon-mitra.proses');
 
+// ==================== CEK LOKASI CALON MITRA ====================
+Route::post('/cek-lokasi', [CalonMitraController::class, 'cekLokasi'])->name('cek-lokasi');
+
 // ==================== MITRA ====================
 Route::get('/ecommerce/customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
 Route::post('/ecommerce/customers/{id}/update', [MitraController::class, 'updateCalonMitra'])->name('mitra.update');

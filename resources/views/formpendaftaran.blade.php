@@ -21,6 +21,16 @@
     </div>
     <form action="{{ route('post.mitra') }}" method="POST" enctype="multipart/form-data">
       @csrf
+      {{-- Alert Summary Error --}}
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul class="mb-0 small">
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
 
       <!-- SECTION 1 -->
       <div class="section">
@@ -39,18 +49,29 @@
               <label>No KTP <small class="text-danger">*</small></label>
               <input type="number" name="no_ktp" placeholder="Masukkan Nomor KTP" maxlength="16" />
             </div>
+            @if ($errors->has('no_ktp'))
+                <div class="text-danger small mt-1">{{ $errors->first('no_ktp') }}</div>
+            @endif
             <div class="form-group">
               <label>Tanggal Lahir <small class="text-danger">*</small></label>
               <input type="date" name="tgl_lahir" />
             </div>
+
             <div class="form-group">
               <label>Email <small class="text-danger">*</small></label>
               <input type="email" name="email" placeholder="Masukkan Email" />
             </div>
+            @if ($errors->has('email'))
+                <div class="text-danger small mt-1">{{ $errors->first('email') }}</div>
+            @endif
             <div class="form-group">
               <label>Nomor HP (WhatsApp) <small class="text-danger">*</small></label>
               <input type="tel" name="no_hp" placeholder="Masukkan Nomor HP" />
             </div>
+            @if ($errors->has('no_hp'))
+                <div class="text-danger small mt-1">{{ $errors->first('no_hp') }}</div>
+            @endif
+
 
             <div class="form-group">
               <label>Jenis Kelamin <small class="text-danger">*</small></label>
@@ -166,6 +187,9 @@
                   </button>
                 </div>
               </div>
+                @if ($errors->has('latitude'))
+                    <div class="text-danger small mt-1">{{ $errors->first('latitude') }}</div>
+                @endif
               <div class="form-group">
                 <label>Longitude <small class="text-danger">*</small></label>
                 <div class="input-group">
@@ -175,6 +199,9 @@
                   </button>
                 </div>
               </div>
+                @if ($errors->has('longitude'))
+                    <div class="text-danger small mt-1">{{ $errors->first('longitude') }}</div>
+                @endif
           </div>
         </div>
       </div>

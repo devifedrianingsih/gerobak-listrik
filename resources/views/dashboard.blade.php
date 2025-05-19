@@ -93,7 +93,7 @@
                     <div class="d-flex flex-column gap-3">
                         <div class="d-flex align-items-start justify-content-between">
                             <div class="text-center">
-                                <h5 class="mb-0">Top Persentase Mitra</h5>
+                                <h5 class="mb-0">Top Mitra Persentase Penjualan</h5>
                             </div>
                         </div>
                         <div class="d-flex flex-row gap-4 align-items-center justify-content-between mt-4">

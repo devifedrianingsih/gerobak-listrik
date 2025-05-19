@@ -17,13 +17,18 @@ class OrderController extends Controller
 
     public function createFromPayments()
     {
-        // Ambil data dari pembayaran
+        // Ambil data dari pembayaran yang disetujui
         $payments = Pembayaran::where('status', 'approved')->get();
 
-        foreach ($payments as $payment) {
-            // Tentukan kategori (mitra atau non mitra)
-            $isMitra = Mitra::where('name', $payment->name)->exists();
+    foreach ($payments as $payment) {
+            // Cari mitra dengan nama dan alamat yang sama
+            $mitra = Mitra::where('nama', $payment->name)
+                ->where('alamat', $payment->manual_address)
+                ->first();
+
+            $isMitra = $mitra !== null;
             $category = $isMitra ? 'mitra' : 'non mitra';
+            $kodeMitra = $isMitra ? $mitra->kode_mitra : null;
 
             // Buat ID Pesanan
             // Ambil inisial dari nama (2 huruf pertama)
@@ -59,6 +64,7 @@ class OrderController extends Controller
                 'order_id' => $orderId,
                 'name' => $payment->name,
                 'category' => $category,
+                'kode_mitra' => $kodeMitra, // ← ISI kode mitra langsung dari tabel mitra
                 'total' => $payment->total,
                 'pickup_method' => $payment->pickup_delivery,
                 'status' => 'menunggu',

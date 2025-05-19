@@ -12,28 +12,28 @@
                     <table class="table align-middle" id="mitraTable">
                         <thead class="table-light">
                             <tr>
-                                <th>No</th>
-                                <td>Kode Mitra</td>
-                                <td>Nama</td>
-                                <td>No KTP</td>
-                                <td>Tanggal Lahir</td>
-                                <td>Email</td>
-                                <td>No HP</td>
-                                <td>Jenis Kelamin</td>
-                                <td>Alamat</td>
-                                <td>Alamat KTP</td>
-                                <td>Domisili</td>
-                                <td>Provinsi</td>
-                                <td>Kota</td>
-                                <td>Kecamatan</td>
-                                <td>Kelurahan</td>
-                                <td>Provinsi Mitra</td>
-                                <td>Kota Mitra</td>
-                                <td>Kecamatan Mitra</td>
-                                <td>Kelurahan Mitra</td>
-                                <td>Kode Pos</td>
-                                <td>Latidue</td>
-                                <td>Longitude</td>
+                                <th class="dt-no-sort">No</th>
+                                <th>Kode Mitra</th>
+                                <th>Nama</th>
+                                <th>No KTP</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Email</th>
+                                <th>No HP</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Alamat</th>
+                                <th>Alamat KTP</th>
+                                <th>Domisili</th>
+                                <th>Provinsi</th>
+                                <th>Kota</th>
+                                <th>Kecamatan</th>
+                                <th>Kelurahan</th>
+                                <th>Provinsi Mitra</th>
+                                <th>Kota Mitra</th>
+                                <th>Kecamatan Mitra</th>
+                                <th>Kelurahan Mitra</th>
+                                <th>Kode Pos</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Aktif</th>
                                 <th class="text-center">Lihat Detail dan Edit</th>
@@ -80,16 +80,17 @@
                                                 style="cursor: pointer">
                                             </i>
                                         </td>
-                                        <td class="text-center fs-3">
-                                            <form method="POST" action="{{ route('mitra.delete', ['id' => $mitr->id]) }}" onsubmit="return confirm('Yakin ingin menghapus?');">
-                                                @csrf @method('DELETE')
-                                                <input type="hidden" name="id" value="<?= $mitr->id; ?>">
-                                                <button type="submit" class="btn btn-link p-0 border-0">
-                                                    <i class="lni lni-trash text-secondary fs-3"
-                                                        onmouseover="this.classList.replace('text-secondary', 'text-primary')"
-                                                        onmouseout="this.classList.replace('text-primary', 'text-secondary')"
-                                                        style="cursor: pointer">
-                                                    </i>
+                                        <td class="text-center align-middle">
+                                            <form method="POST" action="{{ route('mitra.delete', ['id' => $mitr->id]) }}"
+                                                onsubmit="return confirm('Yakin ingin menghapus?');"
+                                                class="m-0 p-0 d-flex justify-content-center align-items-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="btn btn-danger d-flex justify-content-center align-items-center"
+                                                        style="width: 38px; height: 38px; padding: 0;"
+                                                        title="Hapus">
+                                                    <i class="bx bx-trash fs-5 text-white m-0 p-0"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -223,7 +224,18 @@
         display: block;
         cursor: pointer;
     }
+
+    table thead th {
+        text-transform: capitalize;
+        font-weight: bold;
+    }
+    
+    table td, table th {
+        white-space: nowrap;
+        font-size: 0.875rem;
+    }
 </style>
+
 
 @push('script')
     <!--plugins-->
@@ -258,16 +270,16 @@
                 dom: "<'row mb-3'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                buttons: [{
+                buttons: [
+                    {
                         extend: 'excelHtml5',
                         text: 'Export ke Excel',
                         className: 'btn btn-success mb-3',
+                        filename: 'Data_Mitra_' + new Date().toLocaleString('sv-SE').replace(/[: ]/g, '-'),
                         exportOptions: {
-                            columns: [
-                                0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                                10, 11, 12, 13, 14, 15, 16, 17,
-                                18, 19, 20, 21, 22, 23
-                            ]
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9,
+                                    10, 11, 12, 13, 14, 15, 16, 17,
+                                    18, 19, 20, 21, 22, 23]
                         }
                     },
                     {
@@ -276,13 +288,14 @@
                         className: 'btn btn-secondary mb-3'
                     }
                 ],
-                columnDefs: [{
-                        targets: [3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-                            23
-                        ],
+                columnDefs: [
+                    { orderable: false, targets: 0 }, // disable sort kolom No
+                    {
+                        targets: [3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                         visible: false
-                    } // kolom disembunyikan
+                    }
                 ],
+                order: [[1, 'asc']], // default urut berdasarkan kolom kedua (Kode Mitra)
                 pageLength: 10,
                 lengthMenu: [5, 10, 15, 20],
                 language: {
@@ -296,6 +309,13 @@
                         previous: "←"
                     },
                     zeroRecords: "Data tidak ditemukan",
+                },
+                drawCallback: function(settings) {
+                    var api = this.api();
+                    var pageInfo = api.page.info();
+                    api.column(0, { search: 'applied', order: 'applied', page: 'current' }).nodes().each(function(cell, i) {
+                        cell.innerHTML = pageInfo.start + i + 1;
+                    });
                 }
             });
         });

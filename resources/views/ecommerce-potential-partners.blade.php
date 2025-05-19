@@ -14,7 +14,7 @@
                     <table class="table align-middle" id="calon_mitraTable">
                         <thead class="table-light">
                             <tr>
-                                <th>No</th>
+                                <th class="dt-no-sort">No</th>
                                 <th>Waktu Daftar</th>
                                 <th>Nama</th>
                                 <th>No Hp</th>
@@ -96,37 +96,47 @@
 
                                                         <div class="form-floating">
                                                             <textarea
-                                                                @if ($calon->status == 'ditolak') disabled @endif
-                                                                class="form-control"
+                                                                class="form-control catatan-field"
                                                                 placeholder="Ketik catatan di sini"
                                                                 id="catatan-{{ $calon->id }}"
                                                                 name="catatan"
                                                                 style="height: 150px"
+                                                                disabled
                                                             >{{ $calon->catatan_approver }}</textarea>
                                                             <label for="catatan-{{ $calon->id }}">Catatan</label>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button
-                                                            @if ($calon->status == 'ditolak') disabled @endif
-                                                            class="btn btn-danger"
-                                                            type="submit"
-                                                            name="action"
-                                                            value="ditolak"
-                                                            form="prosesMitra{{ $calon->id }}"
-                                                            >
-                                                            Tolak
-                                                        </button>
-                                                        <button
-                                                            @if ($calon->status == 'ditolak') disabled @endif
-                                                            class="btn btn-success"
+                                                            class="btn btn-success btn-terima"
                                                             type="submit"
                                                             name="action"
                                                             value="diterima"
+                                                            data-id="{{ $calon->id }}"
                                                             form="prosesMitra{{ $calon->id }}"
-                                                            {{ $calon->status === 'terima' ? 'disabled' : '' }}
                                                         >
                                                             Terima
+                                                        </button>
+                                                        <!-- Tombol Tolak awal -->
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-danger btn-show-konfirmasi"
+                                                            data-id="{{ $calon->id }}"
+                                                            id="btnTolak-{{ $calon->id }}"
+                                                        >
+                                                            Tolak
+                                                        </button>
+
+                                                        <!-- Tombol Konfirmasi Tolak (disembunyikan awalnya) -->
+                                                        <button
+                                                            type="submit"
+                                                            class="btn btn-danger d-none"
+                                                            name="action"
+                                                            value="ditolak"
+                                                            id="btnKonfirmasiTolak-{{ $calon->id }}"
+                                                            form="prosesMitra{{ $calon->id }}"
+                                                        >
+                                                            Konfirmasi Tolak
                                                         </button>
                                                     </div>
                                                 </form>
@@ -143,6 +153,19 @@
     </div>
 @endsection
 
+@push('style')
+    <style>
+        table thead th {
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+        table td, table th {
+            white-space: nowrap;
+            font-size: 0.875rem;
+        }
+    </style>
+@endpush
+
 @push('script')
     <!--plugins-->
     <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
@@ -157,9 +180,12 @@
 
     <script>
         $(document).ready(function() {
-            $('#calon_mitraTable').DataTable({
+            var t = $('#calon_mitraTable').DataTable({
                 pageLength: 10,
                 lengthMenu: [5, 10, 15, 20],
+                columnDefs: [
+                    { orderable: false, targets: 0 } // Disable sorting untuk kolom No
+                ],
                 language: {
                     search: "Cari:",
                     lengthMenu: "Tampilkan _MENU_ data",
@@ -171,7 +197,40 @@
                         previous: "←"
                     },
                     zeroRecords: "Data tidak ditemukan",
+                },
+                drawCallback: function(settings) {
+                    var api = this.api();
+                    api.column(0, { search: 'applied', order: 'applied', page: 'current' })
+                    .nodes()
+                    .each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
                 }
+            });
+
+            // Aktifkan/Nonaktifkan catatan saat tombol diklik
+            $('.btn-tolak').on('click', function(e) {
+                let id = $(this).data('id');
+                $('#catatan-' + id).prop('disabled', false);
+            });
+
+            $('.btn-terima').on('click', function(e) {
+                let id = $(this).data('id');
+                $('#catatan-' + id).prop('disabled', true);
+            });
+
+            // Saat tombol Tolak diklik
+            $('.btn-show-konfirmasi').on('click', function () {
+                const id = $(this).data('id'); // Ambil ID calon
+
+                // 1. Aktifkan textarea catatan
+                $('#catatan-' + id).prop('disabled', false).focus();
+
+                // 2. Sembunyikan tombol "Tolak"
+                $('#btnTolak-' + id).addClass('d-none');
+
+                // 3. Tampilkan tombol "Konfirmasi Tolak"
+                $('#btnKonfirmasiTolak-' + id).removeClass('d-none');
             });
         });
     </script>

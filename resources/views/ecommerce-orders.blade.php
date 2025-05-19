@@ -37,14 +37,14 @@
                     <table class="table align-middle" id="orderTable">
                         <thead class="table-light">
                             <tr>
-                                <th>ID PESANAN</th>
-                                <th>TANGGAL</th>
-                                <th>NAMA</th>
-                                <th>KATEGORI</th>
-                                <th>HARGA</th>
-                                <th class="text-center">INVOICE</th>
-                                <th>METODE PENGAMBILAN</th>
-                                <th>STATUS PESANAN</th>
+                                <th>ID Pesanan</th>
+                                <th>Tanggal</th>
+                                <th>Nama</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th class="text-center">Invoide</th>
+                                <th>Metode Pengambilan</th>
+                                <th>Status Pesanan</th>
                             </tr>
                         </thead>
                         <tbody>

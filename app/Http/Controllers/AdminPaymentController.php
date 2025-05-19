@@ -34,9 +34,14 @@ class AdminPaymentController extends Controller
             // Jika belum ada, buat data baru di tabel orders
             if (!$existingOrder) {
 
-            // Tentukan kategori (Mitra atau Non Mitra)
-            $isMitra = Mitra::where('nama_mitra', $payment->name)->exists();
+            // Cek mitra berdasarkan nama & alamat
+            $mitra = Mitra::where('nama', $payment->name)
+                ->where('alamat', $payment->manual_address)
+                ->first();
+
+            $isMitra = $mitra !== null;
             $category = $isMitra ? 'mitra' : 'non mitra';
+            $kodeMitra = $isMitra ? $mitra->kode_mitra : null;
         
             // Buat ID Pesanan
             // Ambil inisial dari nama (2 huruf pertama)
@@ -72,16 +77,16 @@ class AdminPaymentController extends Controller
                 'order_id' => $orderId,
                 'name' => $payment->name,
                 'category' => $category,
+                'kode_mitra' => $kodeMitra, // ← diisi kalau ketemu
                 'total' => $payment->total,
                 'pickup_method' => $payment->pickup_delivery,
                 'status' => 'menunggu',
-                'tanggal' => $payment->created_at->toDateString(), // Gunakan format ISO-8601 untuk kolom tanggal
-                'payment_id' => $payment->id, // Isi relasi dengan ID pembayaran
-
+                'tanggal' => $payment->created_at->toDateString(),
+                'payment_id' => $payment->id,
             ]);
         }
     
-        return redirect()->route('admin.payments.index')->with('success', 'Pembayaran berhasil diterima dan dipindahkan ke Orders.');
+        return redirect()->route('admin.payments.index')->with('success', 'Pembayaran berhasil diterima.');
     }
     
 

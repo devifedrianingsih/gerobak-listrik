@@ -3,6 +3,7 @@ document.getElementById("submit-btn").addEventListener("click", function (e) {
     e.preventDefault();
 
     const form = document.querySelector("form");
+    const submitBtn = document.getElementById("submit-btn");
     const fields = [
         'nama', 'no_ktp', 'tgl_lahir', 'email', 'no_hp',
         'jenis_kelamin', 'alamat_ktp', 'domisili', 'upload_ktp', 'upload_foto',
@@ -22,19 +23,59 @@ document.getElementById("submit-btn").addEventListener("click", function (e) {
         }
     });
 
-    if (allFilled) {
-        document.getElementById('modalBtn').click(); // tampilkan modal konfirmasi
-    } else {
+    if (!allFilled) {
         const formatted = emptyFields.map(str =>
             str.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
         ).join(', ');
         alert("Harap lengkapi seluruh form!\nYang belum diisi: " + formatted);
+        return;
     }
+
+    const lat = form.latitude.value.trim();
+    const lng = form.longitude.value.trim();
+
+    if (!lat || !lng) {
+        alert("Silakan isi Latitude dan Longitude terlebih dahulu.");
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Mengecek Lokasi...`;
+
+    axios.post("/cek-lokasi", {
+        latitude: lat,
+        longitude: lng,
+    })
+    .then((response) => {
+        if (response.data.exists) {
+            alert("Lokasi ini sudah digunakan. Silakan pilih titik lokasi lain.");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `Kirim`;
+        } else {
+            document.getElementById("modalBtn").click();
+
+            const modal = document.getElementById("termsModal");
+            modal.addEventListener('hidden.bs.modal', function () {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `Kirim`;
+            }, { once: true });
+        }
+    })
+    .catch((error) => {
+        console.error("Error saat cek lokasi:", error);
+        alert("Terjadi kesalahan saat mengecek lokasi.");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `Kirim`;
+    });
 });
 
-
 document.getElementById("submitButton").addEventListener("click", function () {
-    document.querySelector("form").submit(); // langsung submit form
+    const agreed = document.getElementById("agreeTerms").checked;
+    if (!agreed) {
+        alert("Kamu harus menyetujui pernyataan sebelum mengirim.");
+        return;
+    }
+    document.querySelector("form").submit();
 });
 
 

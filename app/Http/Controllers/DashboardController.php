@@ -54,7 +54,7 @@ class DashboardController extends Controller
         $secondCard = $this->secondCard();
         $thirdCard = $this->thirdCard();
         $fourthCard = $this->fourthCard();
-        $fifthCard = $fourthCard->sortByDesc('percentage')->take(10);
+        $fifthCard = $fourthCard->sortByDesc('percentage')->values()->take(5);
         $labels = $fourthCard->map(function($sale) {
             return $sale->mitra->kode_mitra; // Ambil kode_mitra untuk label
         })->toArray();
@@ -101,26 +101,28 @@ class DashboardController extends Controller
         ];
     }
 
-    private function getMitraMonthlyCount()
-    {
-        $year = now()->year;
+private function getMitraMonthlyCount()
+{
+    $year = now()->year;
 
-        $data = Mitra::select(
+    $data = Mitra::select(
             DB::raw('MONTH(created_at) as month'),
             DB::raw('COUNT(*) as total')
         )
-            ->whereYear('created_at', $year)
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->pluck('total', 'month');
+        ->where('status', 'diterima') // ✅ hanya mitra yang diterima
+        ->whereYear('created_at', $year)
+        ->groupBy(DB::raw('MONTH(created_at)'))
+        ->pluck('total', 'month');
 
-        // Isi bulan yang kosong dengan 0
-        $result = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $result[] = $data[$i] ?? 0;
-        }
-
-        return $result;
+    // Lengkapi data jadi 12 bulan
+    $result = [];
+    for ($i = 1; $i <= 12; $i++) {
+        $result[] = $data[$i] ?? 0;
     }
+
+    return $result;
+}
+
 
     private function getMonthlyIncome()
     {
@@ -145,8 +147,8 @@ class DashboardController extends Controller
     {
         // Ambil total penjualan per mitra (status 'sudah diambil')
         $salesData = Order::where('status', 'sudah diambil')
-            ->select(DB::raw('mitra_id, SUM(total) as total_sales'))
-            ->groupBy('mitra_id')
+            ->select(DB::raw('kode_mitra, SUM(total) as total_sales'))
+            ->groupBy('kode_mitra')
             ->get();
 
         $salesData->load('mitra');
