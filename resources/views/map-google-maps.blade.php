@@ -140,10 +140,14 @@
                 var marker = L.marker([item.latitude, item.longitude], {
                     icon: mitraIcon
                 }).bindPopup(`
-                    <b>${item.nama}</b><br>
-                    <small><b>Alamat:</b> ${item.alamat}<br>
-                    <b>Kota:</b> ${item.kota}<br>
-                    <b>Kontak:</b> ${item.no_hp}</small>
+                    <b>${item.kode_mitra}</b><br>
+                    <small>
+                        <b>Nama:</b> ${item.nama}<br>                      
+                        <b>Alamat:</b> ${item.alamat}<br>
+                        <b>Kota:</b> ${item.kota}<br>
+                        <b>Kontak:</b> ${item.no_hp}<br>
+                        <a href="https://www.google.com/maps?q=${item.latitude},${item.longitude}" target="_blank" style="color:blue;text-decoration:underline;">Lihat di Google Maps</a>
+                    </small>
                 `);
 
                 marker.on('click', function() {

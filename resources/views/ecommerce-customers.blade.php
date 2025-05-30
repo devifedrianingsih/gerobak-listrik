@@ -152,30 +152,30 @@
 
                                                         <div class="row text-center my-5">
                                                             <div class="col-lg-6 col-md-12">
-                                                                <label for="ktp" class="d-block fs-5">
+                                                                <label for="ktp-{{ $mitr->id }}" class="d-block fs-5">
                                                                     KTP <br>
                                                                     <div class="position-relative d-inline-block upload-wrapper">
                                                                         <img src="{{ asset('storage/' . $mitr->upload_ktp) }}" alt="KTP"
-                                                                            id="ktp-preview" width="200" class="rounded" style="cursor: pointer;">
+                                                                            id="ktp-preview-{{ $mitr->id }}" width="200" class="rounded" style="cursor: pointer;">
                                                                         <div class="edit-icon">
                                                                             <i class="lni lni-pencil-alt"></i>
                                                                         </div>
                                                                     </div>
                                                                 </label>
-                                                                <input type="file" name="ktp" class="d-none" id="ktp" accept="image/*">
+                                                                <input type="file" name="ktp" class="d-none" id="ktp-{{ $mitr->id }}" accept="image/*">
                                                             </div>
                                                             <div class="col-lg-6 col-md-12">
-                                                                <label for="pas" class="d-block fs-5">
+                                                                <label for="pas-{{ $mitr->id }}" class="d-block fs-5">
                                                                     Pas Foto <br>
                                                                     <div class="position-relative d-inline-block upload-wrapper">
                                                                         <img src="{{ asset('storage/' . $mitr->upload_foto) }}" alt="Pas foto"
-                                                                            id="pas-preview" width="200" class="rounded" style="cursor: pointer;">
+                                                                            id="pas-preview-{{ $mitr->id }}" width="200" class="rounded" style="cursor: pointer;">
                                                                         <div class="edit-icon">
                                                                             <i class="lni lni-pencil-alt"></i>
                                                                         </div>
                                                                     </div>
                                                                 </label>
-                                                                <input type="file" name="pas" class="d-none" id="pas" accept="image/*">
+                                                                <input type="file" name="pas" class="d-none" id="pas-{{ $mitr->id }}" accept="image/*">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -320,11 +320,23 @@
             });
         });
 
-        document.getElementById('ktp').addEventListener('change', function (e) {
-            previewImage(e, 'ktp-preview');
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function (e) {
+                const targetId = this.id.replace('ktp-', 'ktp-preview-').replace('pas-', 'pas-preview-');
+                previewImage(e, targetId);
+            });
         });
-        document.getElementById('pas').addEventListener('change', function (e) {
-            previewImage(e, 'pas-preview');
+
+        document.querySelectorAll('[id^="ktp-preview-"]').forEach(img => {
+            img.addEventListener('click', function () {
+                const id = this.id.split('ktp-preview-')[1];
+            });
+        });
+
+        document.querySelectorAll('[id^="pas-preview-"]').forEach(img => {
+            img.addEventListener('click', function () {
+                const id = this.id.split('pas-preview-')[1];
+            });
         });
 
         function previewImage(event, targetId) {
