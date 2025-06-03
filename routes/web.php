@@ -25,7 +25,7 @@ Route::get('/maps', [MapsController::class, 'index'])->name('peta-mitra');
 
 // ==================== PRODUK ====================
 Route::get('/ecommerce/products', [ProductController::class, 'index'])->name('product.index');
-Route::get('/ecommerce/products/create', [ProductController::class, 'create'])->name('product.create');
+Route::get('/ecommerce/products/create', [ProductController::class, 'create'])->name('ecommerce.products.create');
 Route::post('/ecommerce/products', [ProductController::class, 'store'])->name('product.store');
 Route::get('/ecommerce/products/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/ecommerce/products/{id}', [ProductController::class, 'destroy'])->name('product.destroy');

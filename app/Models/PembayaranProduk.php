@@ -21,6 +21,6 @@ class PembayaranProduk extends Model
 
     public function pembayaran()
     {
-        return $this->belongsTo(Pembayaran::class, 'pembayaran_id', 'id');
+        return $this->belongsTo(Pembayaran::class, 'pembayaran_id');
     }
 }

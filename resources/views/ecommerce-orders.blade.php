@@ -42,7 +42,7 @@
                                 <th>Nama</th>
                                 <th>Kategori</th>
                                 <th>Harga</th>
-                                <th class="text-center">Invoide</th>
+                                <th class="text-center">Invoice</th>
                                 <th>Metode Pengambilan</th>
                                 <th>Status Pesanan</th>
                             </tr>
@@ -89,8 +89,8 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <!-- Styled Header -->
-                <div class="modal-header border-bottom-0 py-3 bg-grd-info text-white">
-                    <h5 class="modal-title" id="orderModalLabel">Detail Pesanan</h5>
+                <div class="modal-header border-bottom-0 py-3 bg-primary text-white">
+                    <h5 class="modal-title text-white" id="orderModalLabel">Detail Pesanan</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -102,7 +102,8 @@
                         <p><strong>Nama:</strong> <span id="nama"></span></p>
                         <p><strong>Alamat:</strong> <span id="alamat"></span></p>
                         <p><strong>No Telepon:</strong> <span id="noTelepon"></span></p>
-                        <p><strong>Kategori:</strong> <span id="kategori"></span></p><hr>
+                        <p><strong>Kategori:</strong> <span id="kategori"></span></p>
+                        <p><strong>Kode Mitra:</strong> <span id="kodeMitra"></span></p><hr>
                     </div>
 
                     <!-- Produk -->
@@ -127,10 +128,11 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- Styled Header -->
-                <div class="modal-header border-bottom-0 py-3 bg-grd-info text-white">
-                    <h5 class="modal-title" id="buktiBayarModalLabel">Bukti Bayar</h5>
+                <div class="modal-header border-bottom-0 py-3 bg-primary text-white">
+                    <h5 class="modal-title text-white" id="buktiBayarModalLabel">Bukti Bayar</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body text-center">
                     <img id="buktiBayarImage" src="" alt="Bukti Bayar" class="img-fluid rounded shadow">
                 </div>
@@ -173,7 +175,7 @@
             element.addEventListener("click", function () {
                 const orderId = this.getAttribute("data-id");
 
-                fetch(`/order-detail/${orderId}`)
+                fetch(`/ecommerce/orders/${orderId}`)
                     .then((response) => response.json())
                     .then((data) => {
                         // Populate basic order information
@@ -183,6 +185,7 @@
                         document.getElementById("alamat").textContent = data.address || "-";
                         document.getElementById("noTelepon").textContent = data.phone || "-";
                         document.getElementById("kategori").textContent = capitalizeFirstLetter(data.category || "-");
+                        document.getElementById("kodeMitra").textContent = data.kode_mitra || "-";
                         document.getElementById("jenisPembayaran").textContent = data.payment_method
                             ? data.payment_method.toUpperCase()
                             : "-";
@@ -254,7 +257,7 @@
             element.addEventListener("click", function () {
                 const orderId = this.getAttribute("data-id");
 
-                fetch(`/order-invoice/${orderId}`)
+                fetch(`/ecommerce/orders/${orderId}/invoice`)
                     .then(response => response.json())
                     .then(data => {
                         const invoiceContent = `
@@ -310,14 +313,51 @@
 
     // Fungsi Print Invoice
     function printInvoice() {
-        const printContents = document.getElementById('invoiceContent').innerHTML;
-        const originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
         window.print();
-        document.body.innerHTML = originalContents;
-        window.location.reload();
     }
 
 </script>
+<style>
+@media print {
+    body {
+        background: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #invoiceModal,
+    #invoiceModal * {
+        visibility: visible;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+
+    #invoiceModal::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    #invoiceModal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: white !important;
+        padding: 2rem;
+        margin: 0 auto;
+        overflow: visible !important;
+        box-sizing: border-box;
+        z-index: 9999;
+    }
+
+    .modal-footer,
+    .modal-header button,
+    .btn-close {
+        display: none !important;
+    }
+}
+</style>
 @endpush

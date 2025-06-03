@@ -39,7 +39,7 @@
         </div>
         <div class="col-auto">
             <div class="d-flex align-items-center gap-2 justify-content-lg-end">
-                <a href="{{ route('product.create') }}" class="btn btn-primary">
+                <a href="{{ route('ecommerce.products.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-lg me-2"></i>Tambah Produk</a>
             </div>
         </div>

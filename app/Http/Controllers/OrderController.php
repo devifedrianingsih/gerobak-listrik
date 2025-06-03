@@ -97,6 +97,22 @@ class OrderController extends Controller
             return response()->json(['error' => 'Data pembayaran tidak ditemukan'], 404);
         }
 
+        // Coba ambil kode_mitra dari tabel mitra berdasarkan nama dan alamat
+        $mitra = Mitra::where('nama', $order->pembayaran->name)
+            ->where('no_ktp', $order->pembayaran->no_ktp)
+            ->where('tanggal_lahir', $order->pembayaran->tanggal_lahir)
+            ->where('email', $order->pembayaran->email)
+            ->where('no_hp', $order->pembayaran->phone)
+            ->where('alamat', $order->pembayaran->manual_address)
+            ->first();
+
+        // Kalau pencocokan lengkap gagal, coba fallback dengan hanya nama dan alamat
+        if (!$mitra) {
+            $mitra = Mitra::where('nama', $order->pembayaran->name)
+                ->where('alamat', $order->pembayaran->manual_address)
+                ->first();
+        }
+
         return response()->json([
             'order_id' => $order->order_id,
             'tanggal' => $order->pembayaran->created_at->format('d-m-Y'),
@@ -104,6 +120,7 @@ class OrderController extends Controller
             'address' => $order->pembayaran->manual_address,
             'phone' => $order->pembayaran->phone,
             'category' => $order->category,
+            'kode_mitra' => $mitra?->kode_mitra ?? '-',
             'produk' => $order->pembayaran->produkPembayaran->map(function ($produk) {
                 return [
                     'nama_produk' => $produk->nama_produk,

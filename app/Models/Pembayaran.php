@@ -32,6 +32,6 @@ class Pembayaran extends Model
 
     public function produkPembayaran()
     {
-        return $this->hasMany(PembayaranProduk::class, 'pembayaran_id', 'id');
+        return $this->hasMany(PembayaranProduk::class, 'pembayaran_id');
     }
 }

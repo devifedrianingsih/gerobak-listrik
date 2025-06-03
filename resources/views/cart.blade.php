@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
-        <title>Shopping Cart</title>
+        <title>Bahan Baku</title>
         <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
     </head>
     <body>
@@ -39,51 +39,57 @@
 
         <div class="products-cart-container">
         <section class="products">
-            <div class="product" data-name="Paket Super A" data-price="19.000.000">
-                <img src="{{ asset('img/paket a.jpg') }}" alt="Product 1">
-                <h2>Paket Super A</h2>
-                <p>Paket Bundling Super A termasuk: Gerobak Listrik + Bahan baku (Semua Varian) + Produk Hasil Jadi (1 Bulan)</p>
-                <h4>Price:Rp.19.000.000,-</h4>
+            <div class="product" data-name="Paket Bundling Nasi dan Pelengkap" data-price="5.000.000">
+                <img src="{{ asset('img/nasi.png') }}" alt="Product 1">
+                <h2>Paket Bundling Nasi dan Pelengkap</h2>
+                <p>Paket bundling nasi dan pelengkap berisi nasi kucing frozen, orek tempe, dan sambal khas, siap saji untuk cita rasa angkringan rumahan.</p>
+                <h5>Isi 100 pax</h5>
+                <h4>Price:Rp.5.000.000,-</h4>
                 <button class="add-to-cart">+ Tambahkan pada Keranjang</button>
             </div>
 
-            <div class="product" data-name="Paket Super B" data-price="14.000.000">
-                <img src="{{ asset('img/paket b.jpg') }}" alt="Product 2">
-                <h2>Paket Super B</h2>
-                <p>Paket Bundling Super B termasuk: Gerobak Listrik + Bahan baku (Semua Varian) + Produk Hasil Jadi (1 Bulan)</p>
-                <h4>Price:Rp.14.000.000,-</h4>
+            <div class="product" data-name="Paket Bundling Camilan Beku Goreng" data-price="7.000.000">
+                <img src="{{ asset('img/camilan.png') }}" alt="Product 2">
+                <h2>Paket Bundling Camilan Beku Goreng</h2>
+                <p>Paket Bundling camilan beku siap goreng seperti tempe mendoan, tahu isi, dan cireng, cocok untuk sajian praktis dan renyah setiap saat</p>
+                <h5>Isi 100 pax</h5>                
+                <h4>Price:Rp.7.000.000,-</h4>
                 <button class="add-to-cart">+ Tambahkan pada Keranjang</button>
             </div>
 
-            <div class="product" data-name="Paket Super C" data-price="9.000.000">
-                <img src="{{ asset('img/paket c.jpg') }}" alt="Product 3">
-                <h2>Paket Super C</h2>
-                <p>Paket Bundling Super C termasuk: Gerobak Listrik + Bahan baku (Semua Varian) + Produk Hasil Jadi (1 Bulan)</p>
-                <h4>Price:Rp.9.000.000,-</h4>
+            <div class="product" data-name="Paket Bundling Sate dan Lauk Pauk" data-price="10.000.000">
+                <img src="{{ asset('img/sate.png') }}" alt="Product 3">
+                <h2>Paket Bundling Sate dan Lauk Pauk</h2>
+                <p>Paket Bundling hidangan tusuk siap goreng dengan cita rasa khas Jawa, praktis untuk lauk atau camilan.</p>
+                <h5>Isi 100 pax</h5>
+                <h4>Price:Rp.10.000.000,-</h4>
                 <button class="add-to-cart">+ Tambahkan pada Keranjang</button>
             </div>
 
-            <div class="product" data-name="Paket Hemat A" data-price="17.000.000">
-                <img src="{{ asset('img/paket a.jpg') }}" alt="Product 4">
-                <h2>Paket Hemat A</h2>
-                <p>Paket Bundling Super A termasuk: Gerobak Listrik + Bahan baku (Semua Varian)</p>
-                <h4>Price:Rp.17.000.000,-</h4>
+            <div class="product" data-name="Telur Puyuh" data-price="4.000.000">
+                <img src="{{ asset('img/telurpuyuh.png') }}" alt="Product 4">
+                <h2>Telur Puyuh</h2>
+                <p>Telur segar siap olah, pas untuk sate bacem. Kulit bersih dan dikirim dalam kondisi terbaik.</p>
+                <h5>Isi 200 pax</h5>
+                <h4>Price:Rp.4.000.000,-</h4>
                 <button class="add-to-cart">+ Tambahkan pada Keranjang</button>
             </div>
 
-            <div class="product" data-name="Paket Hemat B" data-price="12.000.000">
-                <img src="{{ asset('img/paket b.jpg') }}" alt="Product 5">
-                <h2>Paket Hemat B</h2>
-                <p>Paket Bundling Super A termasuk: Gerobak Listrik + Bahan baku (Semua Varian)</p>
-                <h4>Price:Rp.12.000.000,-</h4>
+            <div class="product" data-name="Ikan Teri" data-price="3.000.000">
+                <img src="{{ asset('img/ikanteri.png') }}" alt="Product 5">
+                <h2>Ikan Teri</h2>
+                <p>Teri gurih dan renyah, cocok untuk sambal atau tumisan nasi kucing. Dikemas higienis, tahan lama. </p>
+                <h5>Isi 200 pax</h5>
+                <h4>Price:Rp.3.000.000,-</h4>
                 <button class="add-to-cart">+ Tambahkan pada Keranjang</button>
             </div>
 
-            <div class="product" data-name="Paket Hemat C" data-price="8.000.000">
-                <img src="{{ asset('img/paket c.jpg') }}" alt="Product 6">
-                <h2>Paket Hemat C</h2>
-                <p>Paket Bundling Super C termasuk: Gerobak Listrik + Bahan baku (Semua Varian)</p>
-                <h4>Price:Rp.8.000.000,-</h4>
+            <div class="product" data-name="Bandeng Presto Mini" data-price="10.000.000">
+                <img src="{{ asset('img/bandengpresto.png') }}" alt="Product 6">
+                <h2>Bandeng Presto Mini</h2>
+                <p>Bandeng presto lunak dan gurih, tinggal goreng atau panaskan. Praktis untuk lauk nasi kucing.</p>
+                <h5>Isi 200 pax</h5>
+                <h4>Price:Rp.10.000.000,-</h4>
                 <button class="add-to-cart">+ Tambahkan pada Keranjang</button>
             </div>
         </section>
