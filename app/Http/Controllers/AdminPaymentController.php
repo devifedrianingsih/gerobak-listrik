@@ -14,7 +14,7 @@ class AdminPaymentController extends Controller
     public function index()
     {
         $payments = Pembayaran::all(); // Ambil semua data dari tabel pembayaran
-        return view('ecommerce-payment', compact('payments'));
+        return view('gerobaklistrik-pembayaran', compact('payments'));
     }
 
     // Terima pembayaran

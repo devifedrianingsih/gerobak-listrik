@@ -17,11 +17,24 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Auth::routes();
 
 Route::get('/', function() {
-    return redirect()->to('dashboard');
+    return redirect()->to('gerobaklistrik/dashboard');
 });
 
+// ==================== CALON MITRA ====================
+Route::post('/gerobaklistrik/mitra', [CalonMitraController::class, 'post'])->name('post.mitra');
+Route::get('/gerobaklistrik/calon-mitra', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
+Route::post('/gerobaklistrik/calon-mitra/{id}/process', [CalonMitraController::class, 'prosesMitra'])->name('calon-mitra.proses');
+
+// ==================== CEK LOKASI CALON MITRA ====================
+Route::post('/cek-lokasi', [CalonMitraController::class, 'cekLokasi'])->name('cek-lokasi');
+
+// ==================== MITRA ====================
+Route::get('/gerobaklistrik/mitra', [MitraController::class, 'indexMitra'])->name('mitra.index');
+Route::post('/gerobaklistrik/mitra/{id}/update', [MitraController::class, 'updateCalonMitra'])->name('mitra.update');
+Route::delete('/gerobaklistrik/mitra/{id}/delete', [MitraController::class, 'deleteCalonMitra'])->name('mitra.delete');
+
 /// ==================== PETA ====================
-Route::get('/maps', [MapsController::class, 'index'])->name('peta-mitra');
+Route::get('/gerobaklistrik/peta-sebaran', [MapsController::class, 'index'])->name('peta-mitra');
 
 // ==================== PRODUK ====================
 Route::get('/ecommerce/products', [ProductController::class, 'index'])->name('product.index');
@@ -30,19 +43,6 @@ Route::post('/ecommerce/products', [ProductController::class, 'store'])->name('p
 Route::get('/ecommerce/products/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/ecommerce/products/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::post('/ecommerce/products/upload-image', [ProductController::class, 'uploadImage'])->name('upload.product.image');
-
-// ==================== CALON MITRA ====================
-Route::post('/ecommerce/partners', [CalonMitraController::class, 'post'])->name('post.mitra');
-Route::get('/ecommerce/potential-partners', [CalonMitraController::class, 'index'])->name('calon-mitra.index');
-Route::post('/ecommerce/potential-partners/{id}/process', [CalonMitraController::class, 'prosesMitra'])->name('calon-mitra.proses');
-
-// ==================== CEK LOKASI CALON MITRA ====================
-Route::post('/cek-lokasi', [CalonMitraController::class, 'cekLokasi'])->name('cek-lokasi');
-
-// ==================== MITRA ====================
-Route::get('/ecommerce/customers', [MitraController::class, 'indexMitra'])->name('mitra.index');
-Route::post('/ecommerce/customers/{id}/update', [MitraController::class, 'updateCalonMitra'])->name('mitra.update');
-Route::delete('/ecommerce/customers/{id}/delete', [MitraController::class, 'deleteCalonMitra'])->name('mitra.delete');
 
 // ==================== CHECKOUT ====================
 Route::post('/ecommerce/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
@@ -62,7 +62,7 @@ Route::patch('/ecommerce/orders/{id}/status', [OrderController::class, 'updateSt
 Route::get('/ecommerce/orders/{id}/invoice', [OrderController::class, 'showInvoice'])->name('order.invoice');
 
 // ==================== DASHBOARD ====================
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/gerobaklistrik/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('{any}', [DashboardController::class, 'root'])->where('any', '.*');
 
 // Halaman statis
@@ -159,7 +159,7 @@ Route::get('/isiartikel3', function () {
 });
 
 Route::get('/formpendaftaran', function () {
-    return view('formpendaftaran');
+    return view('gerobaklistrik-formpendaftaran');
 });
 
 Route::get('/hasiljadi', function () {
@@ -167,4 +167,4 @@ Route::get('/hasiljadi', function () {
     return view('hasiljadi', compact('product'));
 });
 
-Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');

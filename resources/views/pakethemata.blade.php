@@ -43,7 +43,7 @@
                             <li>Modal Pendaftaran</li>
                         </ul>
                         <p class="price">Rp. 23.670.000,-</p>
-                        <a href="/formpendaftaran" class="buy-button">Beli Paket!</a>
+                        <a href="/gerobaklistrik-formpendaftaran" class="buy-button">Beli Paket!</a>
                     </div>
                 </div>
             </div>

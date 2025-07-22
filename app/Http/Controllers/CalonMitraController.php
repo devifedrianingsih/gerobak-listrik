@@ -38,7 +38,7 @@ class CalonMitraController extends Controller
             'longitude' => 'Longitude',
         ];
 
-        return view('ecommerce-potential-partners', compact('calonMitra', 'fields'));
+        return view('gerobaklistrik-calon-mitra', compact('calonMitra', 'fields'));
     }
 
     public function post(Request $request)
@@ -114,6 +114,7 @@ class CalonMitraController extends Controller
         $updateData = [
             'catatan_approver' => $request->catatan,
             'status' => $request->action,
+            'approved_by' => auth()->id(), // ambil ID admin yang lagi login
         ];
 
         if ($request->action === 'diterima' && !$calonMitra->kode_mitra) {
@@ -144,7 +145,7 @@ class CalonMitraController extends Controller
 
             return view('redirect-whatsapp', [
                 'waUrl' => $waUrl,
-                'redirectUrl' => url('ecommerce/potential-partners'),
+                'redirectUrl' => url('gerobaklistrik/calon-mitra'),
             ]);
         }
 
@@ -155,7 +156,7 @@ class CalonMitraController extends Controller
     {
         $calonMitra = Mitra::where('status', 'diterima')->get();
 
-        return view('map-google-maps', compact('calonMitra'));
+        return view('gerobaklistrik/peta-sebaran', compact('calonMitra'));
     }
 
     private function buildWaMessage($calonMitra, $status, $catatan)

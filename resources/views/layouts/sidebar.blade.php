@@ -31,7 +31,7 @@
             <!-- Navigation -->
             <ul class="metismenu" id="sidenav">
                 <li>
-                    <a href="{{ url('/dashboard') }}">
+                    <a href="{{ url('/gerobaklistrik/dashboard') }}">
                         <div class="parent-icon"><i class="material-icons-outlined">home</i>
                         </div>
                         <div class="menu-title">Beranda</div>
@@ -39,7 +39,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('/maps') }}">
+                    <a href="{{ url('/gerobaklistrik/peta-sebaran') }}">
                         <div class="parent-icon"><i class="material-icons-outlined">map</i>
                         </div>
                         <div class="menu-title">Peta Sebaran Mitra</div>
@@ -53,9 +53,9 @@
                         <div class="menu-title">Artikel</div>
                     </a>
                     <ul>
-                        <li><a href="{{ url('/ecommerce-article') }}"><i class="material-icons-outlined">arrow_right</i>Artikel</a>
+                        <li><a href="{{ url('/gerobaklistrik-artikel') }}"><i class="material-icons-outlined">arrow_right</i>Artikel</a>
                         </li>
-                        <li><a href="{{ url('/ecommerce-add-article') }}"><i class="material-icons-outlined">arrow_right</i>Tambah Artikel</a>
+                        <li><a href="{{ url('/gerobaklistrik-tambah-artikel') }}"><i class="material-icons-outlined">arrow_right</i>Tambah Artikel</a>
                         </li>
                     </ul>
                 </li> --}}
@@ -67,9 +67,9 @@
                         <div class="menu-title">Mitra</div>
                     </a>
                     <ul>
-                        <li><a href="{{ url('/ecommerce/potential-partners') }}"><i class="material-icons-outlined">arrow_right</i>Calon Mitra</a>
+                        <li><a href="{{ url('/gerobaklistrik/calon-mitra') }}"><i class="material-icons-outlined">arrow_right</i>Calon Mitra</a>
                         </li>
-                        <li><a href="{{ url('/ecommerce/customers') }}"><i class="material-icons-outlined">arrow_right</i>Mitra</a>
+                        <li><a href="{{ url('/gerobaklistrik/mitra') }}"><i class="material-icons-outlined">arrow_right</i>Mitra</a>
                         </li>
                     </ul>
                 </li>

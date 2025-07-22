@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+    public function approvedMitra()
+    {
+        return $this->hasMany(Mitra::class, 'approved_by');
+    }
 }

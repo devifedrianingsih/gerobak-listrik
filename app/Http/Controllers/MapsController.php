@@ -11,6 +11,6 @@ class MapsController extends Controller
         // Ambil data calon mitra dengan status "diterima"
         $calonMitra = Mitra::where('status', 'diterima')->get();
 
-        return view('map-google-maps', compact('calonMitra'));
+        return view('gerobaklistrik-peta-sebaran', compact('calonMitra'));
     }
 }

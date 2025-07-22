@@ -31,7 +31,7 @@
                 </div>
                 <a href="/beranda" button type="submit"> <div class="login-button">  LOGIN  </div> </a> 
                 <div class="text-bottom">
-                   <a href="/formpendaftaran" class="preregister">Belum punya akun?</a>
+                   <a href="/gerobaklistrik-formpendaftaran" class="preregister">Belum punya akun?</a>
                 </div>
             </form>
         </div>

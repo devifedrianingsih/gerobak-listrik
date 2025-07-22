@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use App\Models\Order;
-use App\Models\Article;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,13 +32,11 @@ class DashboardController extends Controller
         // Tampilkan dalam bentuk kotak kecil (stat box/card), misal 4–6 card:
         // 🔢 Total Produk (products)
         // 👥 Total Mitra Aktif (mitra)
-        // 📝 Total Artikel (articles)
         // 📦 Total Pesanan (orders)
         // 💸 Total Pembayaran Berhasil (pembayaran)
         // 📊 Total Pendapatan Hari Ini / Bulan Ini (pembayaran_produk atau orders)
 
         // 2. 🕐 Aktivitas Terbaru
-        // ✏️ Artikel terbaru (dari articles)
         // 🛒 Pesanan terbaru (dari orders)
         // 👤 Mitra yang baru daftar / baru di-approve (dari mitra)
 
@@ -59,7 +56,7 @@ class DashboardController extends Controller
             return $sale->mitra->kode_mitra; // Ambil kode_mitra untuk label
         })->toArray();
 
-        return view('dashboard', compact('topCard', 'secondCard', 'thirdCard', 'fourthCard', 'fifthCard', 'labels'));
+        return view('gerobaklistrik-dashboard', compact('topCard', 'secondCard', 'thirdCard', 'fourthCard', 'fifthCard', 'labels'));
     }
 
     public function root(Request $request)
@@ -76,7 +73,6 @@ class DashboardController extends Controller
         return [
             'product_count' => Product::count(),
             'mitra_count' => Mitra::count(),
-            'article_count' => Article::count(),
             'monthly_order_count' => Order::whereMonth('created_at', date('m'))->count(),
             'monthly_success_order_count' => Order::where('status', 'sudah diambil')->whereMonth('created_at', date('m'))->count(),
             'monthly_revenue_sum' => Order::whereMonth('created_at', date('m'))->sum('total'),
@@ -86,9 +82,6 @@ class DashboardController extends Controller
     private function secondCard()
     {
         return [
-            'article_count' => Article::count(),
-            'most_viewed_article' => Article::orderByDesc('views')->first(),
-            'newest_article' => Article::orderByDesc('date_time_of_publication')->first(),
             'mitra_per_month' => $this->getMitraMonthlyCount(),
         ];
     }

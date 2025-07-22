@@ -84,7 +84,7 @@
             @endforeach
         </section> 
         <div class="cta-kemitraan">
-            <a href="/formpendaftaran" class="btn-gabung">Gabung Kemitraan</a>
+            <a href="/gerobaklistrik-formpendaftaran" class="btn-gabung">Gabung Kemitraan</a>
         </div>
     </div>
 </div>

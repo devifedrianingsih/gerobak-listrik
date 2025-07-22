@@ -97,7 +97,7 @@
                             </div>
                             <div class="info-list-item d-flex align-items-center gap-3"><span
                                     class="material-icons-outlined">send</span>
-                                <p class="mb-0">Email: devifedrianingsih@gmail.com</p>
+                                <p class="mb-0">Email: {{ Auth::user()->email }}</p>
                             </div>
                             <div class="info-list-item d-flex align-items-center gap-3"><span
                                     class="material-icons-outlined">call</span>

@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
-use App\Models\CalonMitra;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MitraController extends Controller
 {
     public function indexMitra()
     {
-        // Ambil data mitra beserta relasi calonMitra
-        $mitra = Mitra::where('status', 'diterima')->get();
+        $mitra = Mitra::with('approvedBy') // <-- ambil data admin approval
+                    ->where('status', 'diterima')
+                    ->get();
 
         // Kirim data ke view
-        return view('ecommerce-customers', compact('mitra'));
+        return view('gerobaklistrik-mitra', compact('mitra'));
     }
 
     public function updateCalonMitra(Request $request, $nomor)
@@ -45,5 +46,10 @@ class MitraController extends Controller
         }
 
         return redirect()->route('mitra.index')->with('error', 'Data mitra tidak ditemukan.');
+    }
+
+    public function approvedBy()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
     }
 }

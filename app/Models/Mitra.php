@@ -16,4 +16,8 @@ class Mitra extends Model
     {
         return $this->hasMany(Order::class, 'kode_mitra', 'kode_mitra');
     }
+    public function approvedBy()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
 }

@@ -21,7 +21,7 @@ class ProductController extends Controller
         $categories = Category::all(); // Ambil semua data kategori
 
         // Kirim data ke view
-        return view('ecommerce-products', compact('products', 'categories', 'publishedCount', 'draftCount'));
+        return view('gerobaklistrik-produk', compact('products', 'categories', 'publishedCount', 'draftCount'));
     }
 
     // 2. Form tambah produk
@@ -30,7 +30,7 @@ class ProductController extends Controller
         // Ambil semua kategori
         $categories = Category::all();
 
-        return view('ecommerce-add-product', compact('categories'));
+        return view('gerobaklistrik-tambah-produk', compact('categories'));
     }
 
     // 3. Simpan data produk baru

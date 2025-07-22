@@ -12,7 +12,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all(); // Ambil semua data orders
-        return view('ecommerce-orders', compact('orders'));
+        return view('gerobaklistrik-pesanan', compact('orders'));
     }
 
     public function createFromPayments()
