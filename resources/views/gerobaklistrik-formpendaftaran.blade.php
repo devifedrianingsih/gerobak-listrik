@@ -17,7 +17,7 @@
   <div class="container my-5">
     <div class="text-center my-4">
         <img src="{{ asset('build/images/login1.png') }}" alt="Logo" style="max-height: 100px;" class="mb-3">
-        <h5 class="fw-bold">Form Pendaftaran Calon Mitra</h5>
+        <h5 class="fw-bold">Formulir Pendaftaran Calon Mitra</h5>
     </div>
     <form action="{{ route('post.mitra') }}" method="POST" enctype="multipart/form-data">
       @csrf
