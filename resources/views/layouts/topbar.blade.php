@@ -66,12 +66,21 @@
                <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="user-profile">
                   <i class="material-icons-outlined">person_outline</i>Profil
                </a>
-               <hr class="dropdown-divider">
+               {{-- <hr class="dropdown-divider">
                <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:void(0);" 
                   onclick="document.getElementById('logout-form').submit()">
                   <i class="material-icons-outlined">power_settings_new</i>Keluar
                </a>
                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                  @csrf
+               </form> --}}               
+               
+               <hr class="dropdown-divider">
+               <!-- LOGOUT WITH CONFIRM -->
+               <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="javascript:void(0);" onclick="confirmLogout()">
+                  <i class="material-icons-outlined">power_settings_new</i>Keluar
+               </a>
+               <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display: none;">
                   @csrf
                </form>
             </div>
@@ -81,3 +90,26 @@
  </header>
  <!--end top header-->
  
+ @push('script')
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+function confirmLogout() {
+    Swal.fire({
+        title: 'Yakin ingin keluar?',
+        text: 'Kamu akan keluar dari akun.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ffc107', // kuning (bisa diganti #3085d6 untuk biru)
+        cancelButtonColor: '#d33',     // merah
+        confirmButtonText: 'Keluar',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('logout-form').submit();
+        }
+    });
+}
+</script>
+@endpush
